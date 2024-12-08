@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajustes</title>
+    <link rel="stylesheet" href="../styles/ajustes.css">
+</head>
+<header>
+    <div class="titulo-ajustes">
+        <h1>Ajustes</h1>
+    </div>
+</header>
+<body>
+<div class="barra-ajustes">
+    <div class="boton-cuenta" onclick="cargarContenido('cuenta.html', this)">
+        <h2>Cuenta</h2>
+    </div>
+    <div class="boton-categoria" onclick="cargarContenido('categoria.html', this)">
+        <h2>Categoría</h2>
+    </div>
+</div>
+<div id="contenedor-dinamico" class="contenedor-dinamico">
+    <!-- Contenido dinámico -->
+</div>
+<div id="contenedor-regresar" class="contenedor-regresar">
+    <div class="boton-regresar" onclick="location.href='tablero.html'">
+        Regresar
+    </div>
+</div>
+
+<script>
+    function cargarContenido(url, boton) {
+        const contenidoDinamico = document.getElementById('contenedor-dinamico');
+        const contenedorRegresar = document.getElementById('contenedor-regresar');
+        const botones = document.querySelectorAll('.barra-ajustes .boton-cuenta, .barra-ajustes .boton-categoria');
+
+        botones.forEach(b => b.classList.remove('active'));
+
+        boton.classList.add('active');
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                contenidoDinamico.innerHTML = xhr.responseText;
+                contenedorRegresar.style.display = 'none';
+            }
+        };
+        xhr.send();
+    }
+</script>
+
+</body>
+</html>

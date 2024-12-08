@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    margin: 0px;
+    padding: 0px;
+}
+
+.titulo-cuenta {
+    margin: 10px;
+    font-size: 25px;
+    font-family: "Angel Club";
+}
+
+.contenedor-botones {
+    width: calc(100% - 20px); /* Ajusta el ancho para incluir el margen */
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto del elemento */
+}
+
+.boton-regresar {
+    background-color: #FFC000;
+    color: black;
+
+    height: 100%;
+    width: 140px;
+
+    border: 1px solid black;
+
+    font-size: 25px;
+    font-weight: bold;
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+}
+
+.boton-regresar:hover {
+    background-color: #f5a500;
+    cursor: pointer;
+}
+
+.boton-crear {
+    background-color: #59C241;
+    color: black;
+
+    height: 100%;
+    width: 140px;
+
+    border: 1px solid black;
+
+    font-size: 25px;
+    font-weight: bold;
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+}
+
+.boton-crear:hover {
+    background-color: #4aae3f;
+    cursor: pointer;
+}
+
+.subtitulo-cuentas-actuales {
+    margin: 10px;
+    font-size: 28px;
+    font-family: "Angel Club";
+}
+
+.contenedor-tabla-cuentas {
+    width: calc(100% - 20px); /* Ajusta el ancho para incluir el margen */
+    margin: 10px;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto del elemento */
+}
+
+.contenedor-tabla-cuentas table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.contenedor-tabla-cuentas th {
+    border: 1px solid black;
+    background-color: #2977BD;
+    color: black;
+    font-size: 25px;
+    padding: 0;
+}
+
+.contenedor-tabla-cuentas td {
+    border: 1px solid black;
+    background-color: #ffffff;
+    color: black;
+    font-size: 22px;
+    padding: 0;
+}
+
+.acciones {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.boton-actualizar, .boton-eliminar {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    font-size: 25px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.boton-actualizar {
+    background-color: #F6F88E;
+    color: black;
+}
+
+.boton-actualizar:hover {
+    background-color: #eef100;
+    cursor: pointer;
+}
+
+.boton-eliminar {
+    background-color: #FF0000;
+    color: black;
+}
+
+.boton-eliminar:hover {
+    background-color: #930404;
+    cursor: pointer;
+}
