@@ -1,0 +1,116 @@
+/* General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url('../img/Fondo.png');
+    background-size: cover; 
+    background-position: center;
+    color: #000;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #1f65b7;
+    height: 60px;
+    align-items: center;
+}
+
+.titulo-ChW {
+    padding: 15px 0px 0px 0px ;
+}
+.titulo-ChW img{
+    width: 400px;
+    height: 100%;
+}
+
+.opciones-header {
+    display: flex;
+    gap: 10px;
+}
+.cerrarSesion {
+    background-color: #ffc107;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #364dd1;
+}
+
+.logoConfiguracion {
+    font-size: 30px;
+    background-color: #ffc107;
+    height: 38px;
+    width: 42px;
+    border-radius: 50%;
+    color: #000;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.container {
+    width: 80%;
+    margin: 80px auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 10px;
+    
+}
+
+th {
+    background-color: #1f65b7;
+    color: #fff;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.actions button {
+    background-color: #ffc107;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #e0a800;
+}
+
+.medio {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.titulo-MisGastos img{
+    width: 300px;
+    height: 100%;
+}
+.filtrar-Fecha {
+    background-color: #ffc107;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+}
