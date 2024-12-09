@@ -27,7 +27,7 @@
 
         <!-- Formulario -->
         <div class="formulario">
-            <form>
+            <form id="loginForm">
                 <div class="campo">
                     <input type="text" id="usuario" placeholder="Usuario:" required>
                 </div>
@@ -38,5 +38,12 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = 'web/tablero.html';
+        });
+    </script>
 </body>
 </html>
