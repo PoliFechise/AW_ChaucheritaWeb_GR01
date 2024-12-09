@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Cuentas y Gastos</title>
+    <link rel="stylesheet" href="../styles/tablero.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header">
+            <div class="titulo-ChW">
+                <img src="../img/Título ChW.png" alt="">
+            </div>
+            <div class="opciones-header">
+                <div>
+                    <button class="cerrarSesion">Cerrar Sesión</button>
+                </div>
+                <div class="logoConfiguracion"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Tabla de Cuentas -->
+        <div class="section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Cuenta</th>
+                        <th>Número de Cuenta</th>
+                        <th>Balance</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Banco Pichincha - Ahorros</td>
+                        <td>1234567890</td>
+                        <td>$ 100.00</td>
+                        <td class="actions">
+                            <button onclick="window.location.href='ingreso.html'">Registrar ingreso</button>
+                            <button onclick="window.location.href='egreso.html'">Registrar egreso</button>
+                            <button onclick="window.location.href='transferencia.html'">Registrar transferencia</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Banco Pichincha - Corriente</td>
+                        <td>0987654321</td>
+                        <td>$ 100.00</td>
+                        <td class="actions">
+                            <button onclick="window.location.href='ingreso.html'">Registrar ingreso</button>
+                            <button onclick="window.location.href='egreso.html'">Registrar egreso</button>
+                            <button onclick="window.location.href='transferencia.html'">Registrar transferencia</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="medio">
+            <div class="titulo-MisGastos">
+                <img src="../img/MisGastos.png" alt="Mis gastos">
+            </div>
+            <div>
+                <button class="filtrar-Fecha" onclick="window.location.href=''">Filtrar por fechas</button>
+            </div>
+        </div>
+
+        <!-- Tabla de Gastos -->
+        <div class="section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Categoría</th>
+                        <th>Dinero Gastado por Fecha</th>
+                        <th>Dinero Gastado en Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Alimentación</td>
+                        <td>$ 200.00</td>
+                        <td>$ 1000.00</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Gimnasio</td>
+                        <td>$ 100.00</td>
+                        <td>$ 2000.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">TOTAL</td>
+                        <td>$ 300.00</td>
+                        <td>$ 3000.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+    </footer>
+
+</body>
+
+</html>
