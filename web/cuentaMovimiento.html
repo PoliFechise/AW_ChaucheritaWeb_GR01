@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta y Movimiento</title>
+    <link rel="stylesheet" href="../styles/cuentaMovimiento.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>CHAUCHERITA WEB</h1>
+        <div class="btn-regresar" onclick="location.href='tablero.html'">
+            Regresar
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Información de la Cuenta -->
+        <div class="container-info">
+            <div class="cuenta">Cuenta: Banco Pichincha - Ahorros</div>
+            <div class="saldo">$ 100.00</div>
+        </div>
+
+        <div class="numero-cuenta">Número: 1234567890</div>
+
+        <div class="registro-txt">Registro de movimientos</div>
+
+        <!-- Botones -->
+        <div class="container-botones">
+            <div class="boton" onclick="window.location.href='ingreso.html'">
+                Registrar ingreso
+            </div>
+            <div class="boton" onclick="window.location.href='egreso.html'">
+                Registrar egreso
+            </div>
+            <div class="boton" onclick="window.location.href='transferencia.html'">
+                Registrar transferencia
+            </div>
+        </div>
+
+        <!-- Filtro -->
+        <div class="container-filtro">
+            <h2>Lista de movimientos</h2>
+            <div class="boton">Filtrar por categoría</div>
+        </div>
+
+        <!-- Tabla con Divs -->
+        <div class="container-tabla" id="container-tabla">
+            <!-- Encabezado -->
+            <div class="row header">
+                <div class="cell-1">No.</div>
+                <div class="cell-2">Movimiento</div>
+                <div class="cell-3">Concepto</div>
+                <div class="cell-2">Origen</div>
+                <div class="cell-2">Destino</div>
+                <div class="cell-2">Categoría</div>
+                <div class="cell-1">Valor</div>
+            </div>
+            <!-- Las Filas dinámicas se generan aquí -->
+        </div>
+    </div>
+
+    <script>
+        // Datos simulados
+        const movimientos = [
+            { movimiento: "Ingreso", concepto: "Paga por horas extras", origen: "Trabajo", destino: "Bco. Pichincha - Ahorros", categoria: "Trabajo", valor: "$ 50" },
+            { movimiento: "Egreso", concepto: "...", origen: "...", destino: "...", categoria: "...", valor: "..." },
+            { movimiento: "Transferencia", concepto: "...", origen: "...", destino: "...", categoria: "...", valor: "..." }
+        ];
+
+        // Función para generar las filas dinámicamente
+        function generarFilas(datos) {
+            const containerTabla = document.getElementById('container-tabla');
+
+            datos.forEach((item, index) => {
+                const row = document.createElement('div');
+                row.className = 'row';
+
+                row.innerHTML = `
+                    <div class="cell-1">${index + 1}</div>
+                    <div class="cell-2">${item.movimiento}</div>
+                    <div class="cell-3">${item.concepto}</div>
+                    <div class="cell-2">${item.origen}</div>
+                    <div class="cell-2">${item.destino}</div>
+                    <div class="cell-2">${item.categoria}</div>
+                    <div class="cell-1">${item.valor}</div>
+                `;
+
+                tableContainer.appendChild(row);
+            });
+        }
+
+        // Llamar a la función con los datos simulados
+        generarFilas(movimientos);
+    </script>
+</body>
+
+</html>
