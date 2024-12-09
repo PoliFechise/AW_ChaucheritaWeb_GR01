@@ -1,0 +1,106 @@
+/* General */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #443322;
+    background-image: url('../img/Fondo.png');
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+/* Contenedor principal */
+.contenedor {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro translúcido */
+    padding: 50px; 
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 550px; 
+}
+
+/* Logo */
+.logo img {
+    width: 250px; 
+    margin-bottom: 30px;
+}
+
+/* Titulo */
+.titulo img {
+    width: 100%; /* Ajustar al contenedor */
+    max-width: 350px; /* Limitar tamaño */
+    margin-bottom: 15px;
+}
+
+/* Frase */
+.frase img {
+    width: 100%; /* Ajustar al contenedor */
+    max-width: 400px; /* Limitar tamaño */
+    margin-bottom: 25px;
+}
+
+/* Formulario */
+.formulario {
+    margin-top: 20px;
+}
+
+.campo {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.campo label {
+    display: block;
+    font-size: 18px; /* Tamaño de etiqueta */
+    margin-bottom: 5px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.campo input {
+    width: 100%;
+    padding: 15px; /* Espaciado interno */
+    font-size: 16px; /* Texto del input */
+    font-family: 'Poppins', sans-serif; /* Fuente principal */
+    color: black; /* Texto del input */
+    border: none;
+    border-radius: 5px;
+    background-color: #d9d9d9; /* Fondo gris claro */
+}
+
+/* Placeholder */
+.campo input::placeholder {
+    font-family: 'Poppins', sans-serif; /* Fuente del placeholder */
+    font-size: 14px; /* Tamaño del texto del placeholder */
+    color: #555555; /* Color gris para el placeholder */
+    font-weight: normal; /* Estilo normal */
+}
+
+/* Botón */
+.boton {
+    width: 60%;
+    padding: 10px;
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: 'Poppins', sans-serif;
+}
+
+.boton:hover {
+    background-color: #f0f0f0;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
