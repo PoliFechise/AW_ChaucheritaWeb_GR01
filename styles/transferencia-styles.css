@@ -20,7 +20,7 @@
     opacity: 50%;
 }
 
-.main .ingreso {
+.main .transferencia {
     position: absolute;
     background-color: #ffffff;
     display: flex;
@@ -30,50 +30,50 @@
     flex-direction: column;
 }
 
-.main .ingreso .titulo img {
+.main .transferencia .titulo img {
     width: 50%;
     padding: 60px 0px 0px 60px;
 }
 
-.main .ingreso .content {
+.main .transferencia .content {
     display: flex;
     height: 100%;
     margin-top: 30px;
 }
 
-.main .ingreso .left-side {
+.main .transferencia .left-side {
     display: flex;
     flex: 0.75;
 }
 
-.main .ingreso .left-side .ls-content {
+.main .transferencia .left-side .ls-content {
     margin-left: 60px;
 }
 
-.main .ingreso .left-side .ls-content .cuenta {
+.main .transferencia .left-side .ls-content .cuenta {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 35px;
 }
 
-.main .ingreso .left-side .ls-content .formulario {
+.main .transferencia .left-side .ls-content .formulario {
     display: flex;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 27px;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 0px;
 }
 
-.main .ingreso .left-side .ls-content .formulario div {
+.main .transferencia .left-side .ls-content .formulario div {
     display: flex;
     padding-top: 20px;
     align-items: center;
 }
 
-.main .ingreso .left-side .ls-content .formulario label {
+.main .transferencia .left-side .ls-content .formulario label {
     padding-right: 10px;
 }
 
-.main .ingreso .left-side .ls-content .formulario input, .main .ingreso .left-side .ls-content .formulario select {
+.main .transferencia .left-side .ls-content .formulario input, .main .transferencia .left-side .ls-content .formulario select {
     display: flex;
     padding: 10px 8px 10px 10px;
     width: 300px;
@@ -81,17 +81,17 @@
     background-color: #BEBBBB;
     border: 1px solid black;
 }
-.main .ingreso .left-side .ls-content .formulario input:hover, .main .ingreso .left-side .ls-content .formulario select:hover {
+.main .transferencia .left-side .ls-content .formulario input:hover, .main .transferencia .left-side .ls-content .formulario select:hover {
     background-color: #bebbbbbb;
 }
 
-.main .ingreso .right-side {
+.main .transferencia .right-side {
     display: flex;
     flex: 0.25;
     justify-content: center;
 }
 
-.main .ingreso .saldo {
+.main .transferencia .saldo {
     height: max-content;
     background-color: #ffcc00;
     padding: 20px 30px;
@@ -100,13 +100,14 @@
     font-size: 30px;
 }
 
-.main .ingreso .botones {
+.main .transferencia .botones {
     display: flex;
     justify-content: center;
+    padding-top: 50px;
     padding-bottom: 60px;
 }
 
-.main .ingreso .btn-guardar {
+.main .transferencia .btn-guardar {
     display: flex;
     align-items: center;
     padding: 0px;
@@ -117,11 +118,11 @@
     border-radius: 15px;
     font-size: 25px;
 }
-.main .ingreso .btn-guardar:hover {
+.main .transferencia .btn-guardar:hover {
     background-color: #48a034;
     cursor: pointer;
 }
-.main .ingreso .btn-cancelar {
+.main .transferencia .btn-cancelar {
     display: flex;
     align-items: center;
     background-color: #F83737;
@@ -131,7 +132,7 @@
     border-radius: 15px;
     font-size: 25px;
 }
-.main .ingreso .btn-cancelar:hover {
+.main .transferencia .btn-cancelar:hover {
     background-color: #db3232;
     cursor: pointer;
 }
