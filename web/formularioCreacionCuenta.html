@@ -24,7 +24,7 @@
                     <div class="ItemFormulario1"></div>
                 </div>
                 <div>
-                    <spanc class="negrita-negra">Número:</span>
+                    <span class="negrita-negra">Número:</span>
                     <div class="ItemFormulario1"></div>
                 </div>
                 <div>
@@ -32,11 +32,19 @@
                     <div class="ItemFormulario1"></div>
                 </div>
             </div>
-            <div class="BtnCrear">
+            <div class="BtnCrear" id="btnCrear">
                 <button type="submit">Crear</button>
             </div>
         </div>
     </div>
+
+    <script>
+        // Redirigir a ajustes.html con el parámetro 'section=cuenta' al presionar "Crear"
+        const btnCrear = document.getElementById('btnCrear');
+        btnCrear.addEventListener('click', () => {
+            window.location.href = 'ajustes.html?section=cuenta';
+        });
+    </script>
 </body>
 
 </html>

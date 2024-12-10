@@ -119,6 +119,7 @@
 }
 .main .ingreso .btn-guardar:hover {
     background-color: #48a034;
+    cursor: pointer;
 }
 .main .ingreso .btn-cancelar {
     display: flex;
@@ -132,4 +133,5 @@
 }
 .main .ingreso .btn-cancelar:hover {
     background-color: #db3232;
+    cursor: pointer;
 }

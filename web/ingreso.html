@@ -66,11 +66,11 @@
                     </div>
                 </div>
                 <div class="botones">
-                    <div class="btn-guardar" onclick="location.href='tablero.html'">
+                    <div class="btn-guardar" id="btnGuardar">
                         <p>Guardar</p>
                     </div>
                     <!--  TODO: Navegación entre tablero y cuenta, según de cuál viene -->
-                    <div class="btn-cancelar" onclick="location.href='tablero.html'">
+                    <div class="btn-cancelar" id="btnCancelar">
                         <p>Cancelar</p>
                     </div>
                 </div>
@@ -80,6 +80,36 @@
     <footer>
 
     </footer>
+
+    <script>
+        // Get the 'from' parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const from = urlParams.get('from');
+
+        // Set up the cancel button
+        const btnCancelar = document.getElementById('btnCancelar');
+        btnCancelar.addEventListener('click', () => {
+            if (from === 'tablero') {
+                window.location.href = 'tablero.html';
+            } else if (from === 'cuentaMovimiento') {
+                window.location.href = 'cuentaMovimiento.html';
+            } else {
+                window.history.back(); // Default to going back if no parameter is found
+            }
+        });
+
+        // Set up the guardar button
+        const btnGuardar = document.getElementById('btnGuardar');
+        btnGuardar.addEventListener('click', () => {
+            if (from === 'tablero') {
+                window.location.href = 'tablero.html';
+            } else if (from === 'cuentaMovimiento') {
+                window.location.href = 'cuentaMovimiento.html';
+            } else {
+                window.history.back(); // Default to going back if no parameter is found
+            }
+        });
+    </script>
 </body>
 
 </html>

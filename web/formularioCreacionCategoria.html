@@ -25,7 +25,7 @@
                     <label class="negrita-negra">Nombre:</label>
                     <input type="text" class="ItemFormulario1" />
                  </div>
-                <div class="BtnCrear">
+                <div class="BtnCrear" id="btnCrear">
                     <button>Crear</button>
                 </div>
             </div>
@@ -33,6 +33,14 @@
         
         
     </div>
+
+    <script>
+        // Redirigir a ajustes.html con el parámetro 'section=cuenta' al presionar "Crear"
+        const btnCrear = document.getElementById('btnCrear');
+        btnCrear.addEventListener('click', () => {
+            window.location.href = 'ajustes.html?section=categoria';
+        });
+    </script>
 </body>
 
 </html>
