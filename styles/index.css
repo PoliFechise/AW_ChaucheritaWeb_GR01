@@ -1,121 +1,111 @@
 /* Declarar las fuentes locales */
+/* Importar Fuentes */
 @font-face {
     font-family: 'Angel Club';
-    src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+    src: url('../fonts/Angel\ Club\ -\ \(Demo\)\ hanscostudio.com.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Smothy Bubble';
-    src: url('../fonts/Smothy Bubble - (Demo) hanscostudio.com.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
+    src: url('../fonts/Smothy\ Bubble\ -\ \(Demo\)\ hanscostudio.com.otf') format('opentype');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* General */
 body {
-    margin: 0;
-    font-family: 'Angel Club', sans-serif; /* Fuente principal */
-    background-color: #443322;
-    background-image: url('../img/Fondo.png');
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+        url('../img/Fondo.png');
     background-size: cover;
     background-repeat: repeat;
     background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
     height: 100vh;
-    color: white;
 }
 
 /* Contenedor principal */
 .contenedor {
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro translúcido */
-    padding: 50px;
-    border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
 }
 
 /* Logo */
+.logo {
+    margin-top: 30px;
+    height: 230px; 
+}
+
 .logo img {
-    width: 300px;
-    padding-bottom: 15px;
+    height: 100%;
 }
 
-/* Titulo */
-.titulo img {
-    width: 100%;
-    padding-bottom: 15px;
+/* Titulo y Frase */
+.titulo {
+    font-size: 70px;
+    color: #ffc000;
+    font-family: 'Smothy Bubble', sans-serif;
+    font-weight: 200;
+    letter-spacing: 2px;
 }
 
-/* Frase */
-.frase img {
-    width: 100%;
-    padding-bottom: 25px;
-}
-
-/* Formulario */
-.formulario {
-    padding-top: 15px;
-    
+.frase {
+    font-size: 20px;
+    font-family: 'Angel Club', sans-serif; 
+    color: #2977bd;
+    font-weight: 100;
+    margin-bottom: 30px;
 }
 
 /* Campo de entrada */
 .campo {
-    padding-bottom: 20px;
+    margin-bottom: 10px;
     text-align: left;
-}
-
-.campo label {
-    display: block;
-    font-size: 24px;
-    padding-bottom: 5px;
-    color: #ffffff;
-    font-family: 'Smothy Bubble', sans-serif; /* Fuente personalizada */
+    width: 350px;
 }
 
 .campo input {
-    width: 97%;
-    padding: 15px;
-    font-size: 16px;
-    font-family: 'Smothy Bubble', sans-serif; /* Fuente personalizada */
-    color: #000000;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
     border: none;
-    border-radius: 5px;
-    background-color: #d9d9d9;  
+    border-radius: 15px;
+    background-color: #d9d9d9;
+    color: #333333;
 }
 
-/* Placeholder */
 .campo input::placeholder {
-    font-family: 'Smothy Bubble', sans-serif;
-    font-size: 22px;
     color: #555555;
-    font-weight: normal;
+    font-family: 'Angel Club', sans-serif; 
 }
 
 /* Botón */
+.boton-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .boton {
-    width: 60%;
-    padding: 10px;
-    background-color: #FFFFFF;
+    width: 200px;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #ffffff;
     color: #000000;
     border: 2px solid #000000;
-    border-radius: 5px;
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
+    border-radius: 15px;
+    font-size: 20px;
+    font-family: 'Angel Club', sans-serif;
     cursor: pointer;
-    margin: 10px auto;
-    display: block;
-    box-shadow: 2px 2px 4px #00000080;
-    font-family: 'Angel Club', sans-serif; /* Fuente personalizada */
 }
 
 .boton:hover {
-    background-color: #f0f0f0;
-    box-shadow: 2px 2px 6px #000000b3;
+    background-color: #f1f1f1;
 }

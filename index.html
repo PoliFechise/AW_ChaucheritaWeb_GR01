@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chaucherita Web</title>
     <link rel="stylesheet" href="styles/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
+
 <body>
     <div class="contenedor">
         <!-- Logo -->
@@ -15,35 +15,32 @@
             <img src="img/Logo Chaucherita Web.png" alt="Logo">
         </div>
 
-        <!-- Titulo -->
-        <div class="titulo">
-            <img src="img/Titulo ChW.png" alt="Titulo">
-        </div>
+        <!-- Título -->
+        <div class="titulo">CHAUCHERITA WEB</div>
 
         <!-- Frase -->
-        <div class="frase">
-            <img src="img/Frase ChW.png" alt="Frase">
-        </div>
+        <div class="frase">Registra tu billete y que no te coja el chuchaqui financiero</div>
 
         <!-- Formulario -->
-        <div class="formulario">
-            <form id="loginForm">
-                <div class="campo">
-                    <input type="text" id="usuario" placeholder="Usuario:" required>
-                </div>
-                <div class="campo">
-                    <input type="password" id="contrasena" placeholder="Contraseña:" required>
-                </div>
+        <form id="loginForm">
+            <div class="campo">
+                <input type="text" id="usuario" placeholder="Usuario:" required>
+            </div>
+            <div class="campo">
+                <input type="password" id="contrasena" placeholder="Contraseña:" required>
+            </div>
+            <div class="boton-container">
                 <button type="submit" class="boton">Iniciar Sesión</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
             event.preventDefault();
             window.location.href = 'web/tablero.html';
         });
     </script>
 </body>
+
 </html>

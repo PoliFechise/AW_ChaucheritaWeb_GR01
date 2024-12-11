@@ -30,7 +30,7 @@ header h1 {
     color: #ffc000;
     padding: 10px;
     text-align: start;
-    font-family: 'Smothy Bubble';
+    font-family: 'Smothy Bubble', sans-serif;
     font-weight: 200;
     letter-spacing: 1.5px;
 }
@@ -67,7 +67,7 @@ header h1 {
 
 .cuenta {
     font-size: 30px;
-    font-family: 'Angel Club'; 
+    font-family: 'Angel Club', sans-serif; 
 }
 
 .numero-cuenta {
