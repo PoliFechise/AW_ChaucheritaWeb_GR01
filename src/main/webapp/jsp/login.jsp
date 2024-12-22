@@ -6,13 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Chaucherita Web</title>
-<link rel="stylesheet" href="styles/index.css">
+<link rel="stylesheet" href="../styles/index.css">
 </head>
 <body>
 	<div class="contenedor">
 		<!-- Logo -->
 		<div class="logo">
-			<img src="img/Logo Chaucherita Web.png" alt="Logo">
+			<img src="${pageContext.request.contextPath}/img/Logo Chaucherita Web.png" alt="Logo">
 		</div>
 
 		<!-- Título -->
@@ -24,12 +24,12 @@
 
 		<!-- Formulario -->
 		<form id="loginForm" method="POST"
-			action="../loginController?ruta=login">
+			action="../LoginController?ruta=login">
 			<div class="campo">
-				<input type="text" id="usuario" placeholder="Usuario:" required>
+				<input type="text" id="usuario" name="usuario" placeholder="Usuario:" required>
 			</div>
 			<div class="campo">
-				<input type="password" id="contrasena" placeholder="Contraseña:"
+				<input type="password" id="contrasena" name="contrasena" placeholder="Contraseña:"
 					required>
 			</div>
 			<div class="boton-container">

@@ -10,8 +10,8 @@ public class Usuario implements Serializable {
 
 	private Integer id;
 	private String nombre;
-	private String clave;
-	private String username;
+	private String contrasena;
+	private String usuario;
 	
 	private static List<Usuario> listaUsuarios = null;
 
@@ -20,12 +20,12 @@ public class Usuario implements Serializable {
 	
 	
 
-	public Usuario(Integer id, String nombre, String clave, String username) {
+	public Usuario(Integer id, String nombre, String contrasena, String usuario) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.clave = clave;
-		this.username = username;
+		this.contrasena = contrasena;
+		this.usuario = usuario;
 	}
 
 
@@ -46,20 +46,20 @@ public class Usuario implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getClave() {
-		return clave;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setClave(String clave) {
-		this.clave = clave;
+	public void setContrasena(String clave) {
+		this.contrasena = clave;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	/********** Métodos de negocio **********/
@@ -75,10 +75,10 @@ public class Usuario implements Serializable {
 		return listaUsuarios;
 	}
 
-	public static Usuario autenticarPersona(String usuario, String clave) {
+	public static Usuario autenticarPersona(String usuario, String contrasena) {
 		
 		for (Usuario usr : getUsuarios()) {
-			if (usr.getUsername().equals(usuario) && usr.getClave().equals(clave)) {
+			if (usr.getUsuario().equals(usuario) && usr.getContrasena().equals(contrasena)) {
 				return usr;
 			}
 		}
