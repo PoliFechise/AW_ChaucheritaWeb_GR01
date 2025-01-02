@@ -6,8 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Usuario;
+import model.dao.UsuarioDAO;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
@@ -48,15 +50,22 @@ public class LoginController extends HttpServlet {
 		String usuario = request.getParameter("usuario");
 		String contrasena = request.getParameter("contrasena");
 		// 2.- Hablar con el modelo
-		Usuario u = Usuario.autenticarPersona(usuario, contrasena);
-		if (u != null) {
-			// 3.- Redireccionar al controlador
-			// Le permito ir al CU gestionarUsuariosControlles
-			// response.sendRedirect("GestionarUsuariosController?ruta=listar");
-			System.out.println("Entro al tablero");
-		} else {
-			// 3.- Redireccionar a la vista
-			response.sendRedirect("jsp/login.jsp");
+		Usuario u;
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		try {
+			u = usuarioDAO.autenticarPersona(usuario, contrasena);
+			if (u != null) {
+				// 3.- Redireccionar al controlador
+				// Le permito ir al CU gestionarUsuariosControlles
+				// response.sendRedirect("GestionarUsuariosController?ruta=listar");
+				System.out.println("Entro al tablero");
+			} else {
+				// 3.- Redireccionar a la vista
+				response.sendRedirect("jsp/login.jsp");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

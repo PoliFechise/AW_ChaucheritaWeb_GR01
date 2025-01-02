@@ -61,29 +61,5 @@ public class Usuario implements Serializable {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-
-	/********** Métodos de negocio **********/
-
-	public static List<Usuario> getUsuarios() {
-		if(listaUsuarios==null) {
-			listaUsuarios = new ArrayList<Usuario>();
-			listaUsuarios.add(new Usuario(1, "Carlos", "Carlos123", "ciniguez"));
-			listaUsuarios.add(new Usuario(2, "Pedro", "pedro123", "pedrouser"));
-			listaUsuarios.add(new Usuario(3, "Maria", "maria123", "mariauser"));
-		}
-		
-		return listaUsuarios;
-	}
-
-	public static Usuario autenticarPersona(String usuario, String contrasena) {
-		
-		for (Usuario usr : getUsuarios()) {
-			if (usr.getUsuario().equals(usuario) && usr.getContrasena().equals(contrasena)) {
-				return usr;
-			}
-		}
-		
-		return null;
-	}
 	
 }
