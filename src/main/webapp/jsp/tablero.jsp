@@ -23,7 +23,7 @@
 						onclick="location.href='../index.html'">Cerrar Sesión</button>
 				</div>
 				<div class="logoConfiguracion"
-					onclick="location.href='ajustes.html'">
+					onclick="location.href='VerTableroController?ruta=ajustes'">
 					<img src="${pageContext.request.contextPath}/img/IconoEngranaje.png" alt="">
 				</div>
 			</div>

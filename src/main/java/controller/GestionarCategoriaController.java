@@ -20,18 +20,32 @@ public class GestionarCategoriaController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		super.doGet(request, response);
+		this.ruteador(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		super.doPost(request, response);
+		this.ruteador(request, response);
+	}
+	
+	private void ruteador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String ruta = (request.getParameter("ruta") == null) ? "listar" : request.getParameter("ruta");
+
+		switch (ruta) {
+			case "listar":
+				this.listarCategorias(request, response);
+				break;
+			default:
+				response.sendRedirect("ajustes.jsp");
+				break;
+		}
 	}
 	
 	private void listarCategorias (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1.- Obtener parámetros
 		// 2.- Hablar con el modelo
 		// 3.- Hablar con la vista
+		getServletContext().getRequestDispatcher("/jsp/categoria.jsp").forward(request, response);
 	}
 	
 

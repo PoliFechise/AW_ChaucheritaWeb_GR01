@@ -40,6 +40,10 @@ public class VerTableroController extends HttpServlet {
 		case "ver":
 			this.ver(request, response);
 			break;
+			
+		case "ajustes":
+            this.ajustes(request, response);
+            break;
 		}
 	}
 
@@ -57,6 +61,10 @@ public class VerTableroController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+	}
+	
+	private void ajustes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    getServletContext().getRequestDispatcher("/jsp/ajustes.jsp").forward(request, response);
 	}
 
 }
