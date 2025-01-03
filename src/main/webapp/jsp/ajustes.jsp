@@ -9,6 +9,11 @@
 <title>Ajustes</title>
 <link rel="stylesheet" href="styles/ajustes.css">
 </head>
+<header>
+    <div class="titulo-ajustes">
+        <h1>Ajustes</h1>
+    </div>
+</header>
 <body>
 
 	<div class="barra-ajustes">

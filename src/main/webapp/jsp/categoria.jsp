@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-    
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,150 +10,168 @@
 <link rel="stylesheet" href="styles/categoria.css">
 </head>
 <body>
-<div class="titulo-categoria">
-    <h2>Configuración de Categorías</h2>
-</div>
+	<div class="titulo-categoria">
+		<h2>Configuración de Categorías</h2>
+	</div>
 
-<div class="contenedor-regresar">
-    <div class="boton-regresar" onclick="limpiarSeccion()">
-        Regresar
-    </div>
-</div>
+	<div class="contenedor-regresar">
+		<div class="boton-regresar" onclick="limpiarSeccion()">Regresar
+		</div>
+	</div>
 
-    <div class="contenedor-recuadros">
-    <div class="recuadro-movimiento">
-        <div class="titulo-movimiento">
-            <h3>Ingresos</h3>
-        </div>
+	<div class="contenedor-recuadros">
+		<div class="recuadro-movimiento">
+			<div class="titulo-movimiento">
+				<h3>Ingresos</h3>
+			</div>
 
-        <div class="contenedor-crear">
-            <div class="boton-crear" onclick="location.href='formularioCreacionCategoria.html'">
-                Crear
-            </div>
-        </div>
+			<div class="contenedor-crear">
+				<div class="boton-crear"
+					onclick="location.href='formularioCreacionCategoria.html'">
+					Crear</div>
+			</div>
 
-        <div class="subtitulo-categorias-actuales">
-            Categorías actuales
-        </div>
+			<div class="subtitulo-categorias-actuales">Categorías actuales
+			</div>
 
-        <div class="contenedor-tabla-categorias">
-            <table>
-                <tr>
-                    <th>No.</th>
-                    <th>Nombre</th>
-                    <th>Acciones</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Salario</td>
-                    <td>
-                        <div class="acciones">
-                            <div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.html'">
-                                <img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
-                            </div>
-                            <div class="boton-eliminar">
-                                <img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+			<div class="contenedor-tabla-categorias">
+				<table>
+					<tr>
+						<th>No.</th>
+						<th>Nombre</th>
+						<th>Acciones</th>
+					</tr>
+					<c:forEach items="${categoriasIngreso}" var="categoria">
+						<tr>
+							<td>${categoria.id}</td>
+							<td>${categoria.nombre}</td>
+							<td>
+								<div class="acciones">
+									<div class="boton-actualizar"
+										onclick="location.href='formularioActualizacionCategoria.html'">
+										<img
+											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
+											alt="">
+									</div>
+									<div class="boton-eliminar">
+										<img
+											src="${pageContext.request.contextPath}/img/IconoBasurero.png"
+											alt="">
+									</div>
+								</div>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
 
-    <div class="recuadro-movimiento">
-        <div class="titulo-movimiento">
-            <h3>Egresos</h3>
-        </div>
+			</div>
+		</div>
 
-        <div class="contenedor-crear">
-            <div class="boton-crear" onclick="location.href='formularioCreacionCategoria.html'">
-                Crear
-            </div>
-        </div>
+		<div class="recuadro-movimiento">
+			<div class="titulo-movimiento">
+				<h3>Egresos</h3>
+			</div>
 
-        <div class="subtitulo-categorias-actuales">
-            Categorías actuales
-        </div>
+			<div class="contenedor-crear">
+				<div class="boton-crear"
+					onclick="location.href='formularioCreacionCategoria.html'">
+					Crear</div>
+			</div>
 
-        <div class="contenedor-tabla-categorias">
-            <table>
-                <tr>
-                    <th>No.</th>
-                    <th>Nombre</th>
-                    <th>Acciones</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Salario</td>
-                    <td>
-                        <div class="acciones">
-                            <div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.html'">
-                                <img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
-                            </div>
-                            <div class="boton-eliminar">
-                                <img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+			<div class="subtitulo-categorias-actuales">Categorías actuales
+			</div>
 
-    <div class="recuadro-movimiento">
-        <div class="titulo-movimiento">
-            <h3>Transferencias</h3>
-        </div>
+			<div class="contenedor-tabla-categorias">
+				<table>
+					<tr>
+						<th>No.</th>
+						<th>Nombre</th>
+						<th>Acciones</th>
+					</tr>
+					<c:forEach items="${categorias}" var="categoria">
+						<tr>
+							<td>${categoria.id}</td>
+							<td>${categoria.nombre}</td>
+							<td>
+								<div class="acciones">
+									<div class="boton-actualizar"
+										onclick="location.href='formularioActualizacionCategoria.html'">
+										<img
+											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
+											alt="">
+									</div>
+									<div class="boton-eliminar">
+										<img
+											src="${pageContext.request.contextPath}/img/IconoBasurero.png"
+											alt="">
+									</div>
+								</div>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</div>
 
-        <div class="contenedor-crear">
-            <div class="boton-crear" onclick="location.href='formularioCreacionCategoria.html'">
-                Crear
-            </div>
-        </div>
+		<div class="recuadro-movimiento">
+			<div class="titulo-movimiento">
+				<h3>Transferencias</h3>
+			</div>
 
-        <div class="subtitulo-categorias-actuales">
-            Categorías actuales
-        </div>
+			<div class="contenedor-crear">
+				<div class="boton-crear"
+					onclick="location.href='formularioCreacionCategoria.html'">
+					Crear</div>
+			</div>
 
-        <div class="contenedor-tabla-categorias">
-            <table>
-                <tr>
-                    <th>No.</th>
-                    <th>Nombre</th>
-                    <th>Acciones</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Salario</td>
-                    <td>
-                        <div class="acciones">
-                            <div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.html'">
-                                <img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
-                            </div>
-                            <div class="boton-eliminar">
-                                <img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
+			<div class="subtitulo-categorias-actuales">Categorías actuales
+			</div>
 
-<div id="modalEliminar" class="modal">
-    <div class="modal-contenido">
-        <span class="cerrar">&times;</span>
-        <p>¿Estás seguro de que deseas eliminar?</p>
-        <div class="modal-botones">
-            <button id="btnSi">Sí</button>
-            <button id="btnNo">No</button>
-        </div>
-    </div>
-</div>
+			<div class="contenedor-tabla-categorias">
+				<table>
+					<tr>
+						<th>No.</th>
+						<th>Nombre</th>
+						<th>Acciones</th>
+					</tr>
+					<c:forEach items="${categoriasTransferencia}" var="categoria">
+						<tr>
+							<td>${categoria.id}</td>
+							<td>${categoria.nombre}</td>
+							<td>
+								<div class="acciones">
+									<div class="boton-actualizar"
+										onclick="location.href='formularioActualizacionCategoria.html'">
+										<img
+											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
+											alt="">
+									</div>
+									<div class="boton-eliminar">
+										<img
+											src="${pageContext.request.contextPath}/img/IconoBasurero.png"
+											alt="">
+									</div>
+								</div>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</div>
+	</div>
 
-<script>
+	<div id="modalEliminar" class="modal">
+		<div class="modal-contenido">
+			<span class="cerrar">&times;</span>
+			<p>¿Estás seguro de que deseas eliminar?</p>
+			<div class="modal-botones">
+				<button id="btnSi">Sí</button>
+				<button id="btnNo">No</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
     document.addEventListener('DOMContentLoaded', () => {
         const modal = document.getElementById('modalEliminar');
         const btnEliminar = document.querySelectorAll('.boton-eliminar');

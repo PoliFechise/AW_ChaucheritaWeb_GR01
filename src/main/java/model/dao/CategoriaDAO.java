@@ -17,6 +17,7 @@ public class CategoriaDAO {
 		
 	}
 	
+	// Metodo para obtener datos de tabla categoria_egreso
 	public static List<Categoria> getCategorias() throws SQLException {
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		String _SQL_GET_ALL = "SELECT * FROM categoria_egreso";
@@ -38,6 +39,54 @@ public class CategoriaDAO {
 
 		return categorias;
 	}
+	
+	// Metodo para obtener datos de tabla categoria_ingreso
+	public static List<Categoria> getCategoriasIngreso() throws SQLException {
+	    List<Categoria> categoriasIngreso = new ArrayList<Categoria>();
+	    String sqlGetCategoriasIngreso = "SELECT * FROM categoria_ingreso";
+
+	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasIngreso);
+	    ResultSet rs = pstmt.executeQuery();
+
+	    // Iterar el result set para leer los datos
+	    while (rs.next()) {
+	        Categoria categoriaIngreso = new Categoria();
+	        categoriaIngreso.setId(rs.getInt("id"));
+	        categoriaIngreso.setNombre(rs.getString("nombre"));
+
+	        categoriasIngreso.add(categoriaIngreso);
+	    }
+
+	    BddConnection.cerrar(pstmt);
+	    BddConnection.cerrar(rs);
+	    BddConnection.cerrar();
+
+	    return categoriasIngreso;
+	}
+
+	
+	// Metodo para obtener datos de tabla categoria_transferencia
+	public static List<Categoria> getCategoriasTransferencia() throws SQLException {
+	    List<Categoria> categoriasTransferencia = new ArrayList<Categoria>();
+	    String sqlGetCategoriasTransferencia = "SELECT * FROM categoria_transferencia";
+
+	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasTransferencia);
+	    ResultSet rs = pstmt.executeQuery();
+
+	    while (rs.next()) {
+	        Categoria categoriaTransferencia = new Categoria();
+	        categoriaTransferencia.setId(rs.getInt("id"));
+	        categoriaTransferencia.setNombre(rs.getString("nombre"));
+
+	        categoriasTransferencia.add(categoriaTransferencia);
+	    }
+	    BddConnection.cerrar(pstmt);
+	    BddConnection.cerrar(rs);
+	    BddConnection.cerrar();
+
+	    return categoriasTransferencia;
+	}
+
 	
 	public static List<CategoriaEgresoDTO> obtenerCategoriasEgreso() throws SQLException {
 	    List<CategoriaEgresoDTO> categoriasEgreso = new ArrayList<>();
