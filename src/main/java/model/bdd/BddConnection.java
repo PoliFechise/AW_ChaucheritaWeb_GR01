@@ -11,7 +11,7 @@ public class BddConnection {
 	private static Connection conn = null;
 
 	public BddConnection() {
-		String servidor = "localhost:3307";
+		String servidor = "localhost:3306";
 		String database = "chaucherita_web";
 		String usuario = "root";
 		String password = "";
