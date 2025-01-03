@@ -58,7 +58,7 @@ public class LoginController extends HttpServlet {
 				// 3.- Redireccionar al controlador
 				// Le permito ir al CU gestionarUsuariosControlles
 				// response.sendRedirect("GestionarUsuariosController?ruta=listar");
-				System.out.println("Entro al tablero");
+				response.sendRedirect("VerTableroController");
 			} else {
 				// 3.- Redireccionar a la vista
 				response.sendRedirect("jsp/login.jsp");
