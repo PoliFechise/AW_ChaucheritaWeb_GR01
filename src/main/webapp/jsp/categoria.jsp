@@ -88,7 +88,7 @@
 						<th>Nombre</th>
 						<th>Acciones</th>
 					</tr>
-					<c:forEach items="${categorias}" var="categoria">
+					<c:forEach items="${categoriasEgreso}" var="categoria">
 						<tr>
 							<td>${categoria.id}</td>
 							<td>${categoria.nombre}</td>

@@ -43,7 +43,7 @@ public class CategoriaDAO {
 	// Metodo para obtener datos de tabla categoria_ingreso
 	public static List<Categoria> getCategoriasIngreso() throws SQLException {
 	    List<Categoria> categoriasIngreso = new ArrayList<Categoria>();
-	    String sqlGetCategoriasIngreso = "SELECT * FROM categoria_ingreso";
+	    String sqlGetCategoriasIngreso = "SELECT * FROM categoria_ingreso ORDER BY id ASC";
 
 	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasIngreso);
 	    ResultSet rs = pstmt.executeQuery();
@@ -68,7 +68,7 @@ public class CategoriaDAO {
 	// Metodo para obtener datos de tabla categoria_transferencia
 	public static List<Categoria> getCategoriasTransferencia() throws SQLException {
 	    List<Categoria> categoriasTransferencia = new ArrayList<Categoria>();
-	    String sqlGetCategoriasTransferencia = "SELECT * FROM categoria_transferencia";
+	    String sqlGetCategoriasTransferencia = "SELECT * FROM categoria_transferencia ORDER BY id ASC";
 
 	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasTransferencia);
 	    ResultSet rs = pstmt.executeQuery();
@@ -85,6 +85,27 @@ public class CategoriaDAO {
 	    BddConnection.cerrar();
 
 	    return categoriasTransferencia;
+	}
+	
+	public static List<Categoria> getCategoriasEgreso() throws SQLException {
+	    List<Categoria> categoriasEgreso = new ArrayList<Categoria>();
+	    String sqlGetCategoriasEgreso = "SELECT * FROM categoria_egreso ORDER BY id ASC";
+
+	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasEgreso);
+	    ResultSet rs = pstmt.executeQuery();
+
+	    while (rs.next()) {
+	        Categoria categoriaEgreso = new Categoria();
+	        categoriaEgreso.setId(rs.getInt("id"));
+	        categoriaEgreso.setNombre(rs.getString("nombre"));
+
+	        categoriasEgreso.add(categoriaEgreso);
+	    }
+	    BddConnection.cerrar(pstmt);
+	    BddConnection.cerrar(rs);
+	    BddConnection.cerrar();
+
+	    return categoriasEgreso;
 	}
 
 	
