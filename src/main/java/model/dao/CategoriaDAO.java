@@ -18,7 +18,7 @@ public class CategoriaDAO {
 	}
 	
 	// Metodo para obtener datos de tabla categoria_egreso
-	public static List<Categoria> getCategorias() throws SQLException {
+	public List<Categoria> getCategorias() throws SQLException {
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		String _SQL_GET_ALL = "SELECT * FROM categoria_egreso";
 
@@ -41,7 +41,7 @@ public class CategoriaDAO {
 	}
 	
 	// Metodo para obtener datos de tabla categoria_ingreso
-	public static List<Categoria> getCategoriasIngreso() throws SQLException {
+	public List<Categoria> getCategoriasIngreso() throws SQLException {
 	    List<Categoria> categoriasIngreso = new ArrayList<Categoria>();
 	    String sqlGetCategoriasIngreso = "SELECT * FROM categoria_ingreso ORDER BY id ASC";
 
@@ -66,7 +66,7 @@ public class CategoriaDAO {
 
 	
 	// Metodo para obtener datos de tabla categoria_transferencia
-	public static List<Categoria> getCategoriasTransferencia() throws SQLException {
+	public List<Categoria> getCategoriasTransferencia() throws SQLException {
 	    List<Categoria> categoriasTransferencia = new ArrayList<Categoria>();
 	    String sqlGetCategoriasTransferencia = "SELECT * FROM categoria_transferencia ORDER BY id ASC";
 
@@ -87,7 +87,7 @@ public class CategoriaDAO {
 	    return categoriasTransferencia;
 	}
 	
-	public static List<Categoria> getCategoriasEgreso() throws SQLException {
+	public List<Categoria> getCategoriasEgreso() throws SQLException {
 	    List<Categoria> categoriasEgreso = new ArrayList<Categoria>();
 	    String sqlGetCategoriasEgreso = "SELECT * FROM categoria_egreso ORDER BY id ASC";
 
@@ -109,7 +109,7 @@ public class CategoriaDAO {
 	}
 
 	
-	public static List<CategoriaEgresoDTO> obtenerCategoriasEgreso() throws SQLException {
+	public List<CategoriaEgresoDTO> obtenerCategoriasEgreso() throws SQLException {
 	    List<CategoriaEgresoDTO> categoriasEgreso = new ArrayList<>();
 	    String sql = "SELECT c.id, c.nombre AS categoria, SUM(m.valor) AS total_egreso " +
 	                 "FROM categoria_egreso c " +
