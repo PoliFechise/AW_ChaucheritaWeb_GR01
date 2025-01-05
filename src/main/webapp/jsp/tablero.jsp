@@ -7,7 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Tablero</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="styles/tablero.css">
+=======
+<link rel="stylesheet" href="/styles/tablero.css">
+>>>>>>> origin/eclipse-cuenta
 
 </head>
 <body>

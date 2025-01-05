@@ -37,13 +37,16 @@ h1, h2 {
 }
 
 .titulo-ajustes {
-    margin: 0px 10px;
+    margin: 10px 20px;
     font-size: 30px;
+    color: #ffffff;
+    font-family: 'Angel Club';
 }
 
 .titulo-ajustes h1 {
     font-family: "Angel Club";
     text-decoration: none;
+    color: white;
 }
 
 .barra-ajustes {
@@ -54,7 +57,7 @@ h1, h2 {
     box-sizing: border-box;
 }
 
-.boton-cuenta {
+.boton-cuenta, .boton-categoria {
     background-color: #5B5B5B;
     color: white;
     border: 1px solid #5B5B5B;
@@ -67,35 +70,15 @@ h1, h2 {
     font-family: "Angel Club";
 }
 
-.boton-cuenta:hover {
+.boton-cuenta:hover, .boton-categoria:hover {
     background-color: #FFC000;
     cursor: pointer;
 }
 
-.boton-cuenta h2 {
-
-}
-
-.boton-categoria {
-    background-color: #5B5B5B;
-    color: white;
-    border: 1px solid #5B5B5B;
-    text-align: center;
-    height: 9%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-family: "Angel Club";
-}
-
-.boton-categoria:hover {
+.boton-cuenta.active, .boton-categoria.active {
     background-color: #FFC000;
-    cursor: pointer;
-}
-
-.boton-categoria h2 {
-
+    color: black;
+    cursor: default;
 }
 
 .contenedor-dinamico {
@@ -103,6 +86,9 @@ h1, h2 {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #f5f5f5;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .contenedor-regresar {
@@ -117,20 +103,15 @@ h1, h2 {
 .boton-regresar {
     background-color: #FFC000;
     color: black;
-
-    height: 30px;
+    height: 40px;
     width: 140px;
-
     border: 1px solid black;
-
-    font-size: 25px;
+    font-size: 18px;
     font-weight: bold;
-
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-
     border-radius: 15px;
 }
 
@@ -139,8 +120,79 @@ h1, h2 {
     cursor: pointer;
 }
 
-.boton-cuenta.active, .boton-categoria.active {
-    background-color: #FFC000;
+/* Estilos para la tabla */
+.table-cuentas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table-cuentas th, .table-cuentas td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-cuentas th {
+    background-color: #2977BD;
+    color: white;
+    font-size: 18px;
+}
+
+.table-cuentas td {
+    background-color: #ffffff;
+    font-size: 16px;
+}
+
+.table-cuentas .acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.table-cuentas .acciones button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.table-cuentas .acciones .actualizar {
+    background-color: #F6F88E;
     color: black;
-    cursor: default;
+}
+
+.table-cuentas .acciones .actualizar:hover {
+    background-color: #eef100;
+}
+
+.table-cuentas .acciones .eliminar {
+    background-color: #FF0000;
+    color: white;
+}
+
+.table-cuentas .acciones .eliminar:hover {
+    background-color: #930404;
+}
+
+/* Botones Crear */
+.boton-crear {
+    background-color: #59C241;
+    color: white;
+    height: 40px;
+    width: 140px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.boton-crear:hover {
+    background-color: #4aae3f;
+    cursor: pointer;
 }

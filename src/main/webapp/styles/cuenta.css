@@ -1,43 +1,122 @@
+/* General */
 body {
     font-family: Arial, sans-serif;
 }
 
-h2 {
-    margin: 0px;
-    padding: 0px;
+header {
+    margin: 0;
+    padding: 0;
+    background-color: #2977BD;
+    color: white;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
 }
 
-.titulo-cuenta {
-    margin: 10px;
-    font-size: 25px;
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    flex-direction: row;
+    margin-top: 80px;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Angel Club';
+    src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf');
+}
+
+.font-angel {
+    font-family: 'Angel Club';
+}
+
+.titulo-ajustes {
+    margin: 10px 20px;
+    font-size: 30px;
+    color: #ffffff;
+    font-family: 'Angel Club';
+}
+
+.titulo-ajustes h1 {
+    font-family: "Angel Club";
+    text-decoration: none;
+    color: white;
+}
+
+.barra-ajustes {
+    background-color: #D9D9D9;
+    height: 100vh;
+    width: 15%;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.boton-cuenta, .boton-categoria {
+    background-color: #5B5B5B;
+    color: white;
+    border: 1px solid #5B5B5B;
+    text-align: center;
+    height: 9%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
     font-family: "Angel Club";
 }
 
-.contenedor-botones {
-    width: calc(100% - 20px); /* Ajusta el ancho para incluir el margen */
+.boton-cuenta:hover, .boton-categoria:hover {
+    background-color: #FFC000;
+    cursor: pointer;
+}
+
+.boton-cuenta.active, .boton-categoria.active {
+    background-color: #FFC000;
+    color: black;
+    cursor: default;
+}
+
+.contenedor-dinamico {
+    flex-grow: 1;
+    height: 100vh;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.contenedor-regresar {
+    width: 100%;
+    height: 9%;
     margin: 10px;
-    box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto del elemento */
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
 
 .boton-regresar {
     background-color: #FFC000;
     color: black;
-
-    height: 100%;
+    height: 40px;
     width: 140px;
-
     border: 1px solid black;
-
-    font-size: 25px;
+    font-size: 18px;
     font-weight: bold;
-
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-
     border-radius: 15px;
 }
 
@@ -46,29 +125,82 @@ h2 {
     cursor: pointer;
 }
 
-.boton-crear {
-    background-color: #59C241;
-    color: black;
+/* Estilos para la tabla */
+.table-cuentas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
 
-    height: 100%;
-    width: 140px;
-
+.table-cuentas th, .table-cuentas td {
     border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
 
-    font-size: 25px;
-    font-weight: bold;
+.table-cuentas th {
+    background-color: #2977BD;
+    color: white;
+    font-size: 18px;
+}
 
-    text-align: center;
+.table-cuentas td {
+    background-color: #ffffff;
+    font-size: 16px;
+}
+
+.table-cuentas .acciones {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+}
 
+.table-cuentas .acciones button {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid black;
+    cursor: pointer;
+    align-items: center;
+}
+
+.table-cuentas .acciones .actualizar {
+    background-color: #F6F88E;
+    color: black;
+}
+
+.table-cuentas .acciones .actualizar:hover {
+    background-color: #eef100;
+}
+
+.table-cuentas .acciones .eliminar {
+    background-color: #FF7F7F;
+    color: black;
+}
+
+.table-cuentas .acciones .eliminar:hover {
+    background-color: #ff4c4c;
+}
+
+/* Botones Crear */
+.boton-crear {
+    background-color: #59C241;
+    color: black;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
     border-radius: 15px;
+    cursor: pointer;
 }
 
 .boton-crear:hover {
     background-color: #4aae3f;
-    cursor: pointer;
 }
 
 .subtitulo-cuentas-actuales {
@@ -78,69 +210,8 @@ h2 {
 }
 
 .contenedor-tabla-cuentas {
-    width: calc(100% - 20px); /* Ajusta el ancho para incluir el margen */
-    margin: 10px;
-    box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto del elemento */
-}
-
-.contenedor-tabla-cuentas table {
     width: 100%;
-    border-collapse: collapse;
-    border: 1px solid black;
-}
-
-.contenedor-tabla-cuentas th {
-    border: 1px solid black;
-    background-color: #2977BD;
-    color: black;
-    font-size: 25px;
-    padding: 0;
-}
-
-.contenedor-tabla-cuentas td {
-    border: 1px solid black;
-    background-color: #ffffff;
-    color: black;
-    font-size: 22px;
-    padding: 0;
-}
-
-.acciones {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.boton-actualizar, .boton-eliminar {
-    flex: 1;
-    margin: 0;
-    padding: 0;
-    font-size: 25px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.boton-actualizar {
-    background-color: #F6F88E;
-    color: black;
-}
-
-.boton-actualizar:hover {
-    background-color: #eef100;
-    cursor: pointer;
-}
-
-.boton-eliminar {
-    background-color: #FF0000;
-    color: black;
-}
-
-.boton-eliminar:hover {
-    background-color: #930404;
-    cursor: pointer;
+    margin-top: 20px;
 }
 
 .modal {
