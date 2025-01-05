@@ -14,7 +14,7 @@
 
     <main class="form-container">
         <form class="form" action="GestionarCuentaController" method="POST">
-            <input type="hidden" name="action" value="guardar">
+            <input type="hidden" name="ruta" value="guardar">
             <input type="hidden" name="redirect" value="VerTableroController?ruta=ajustes">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>

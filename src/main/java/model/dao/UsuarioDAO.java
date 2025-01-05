@@ -15,7 +15,7 @@ public class UsuarioDAO {
 
 	}
 
-	public static List<Usuario> getUsuarios() throws SQLException {
+	public List<Usuario> getUsuarios() throws SQLException {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		String _SQL_GET_ALL = "SELECT * FROM usuario";
 
@@ -39,7 +39,7 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 
-	public static Usuario autenticarPersona(String usuario, String contrasena) throws SQLException {
+	public Usuario autenticarPersona(String usuario, String contrasena) throws SQLException {
 		
 		for (Usuario usr : getUsuarios()) {
 			if (usr.getUsuario().equals(usuario) && usr.getContrasena().equals(contrasena)) {

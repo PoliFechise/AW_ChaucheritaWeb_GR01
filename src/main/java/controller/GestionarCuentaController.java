@@ -6,129 +6,187 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Cuenta;
+import model.dao.CuentaDAO;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/GestionarCuentaController")
 public class GestionarCuentaController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private List<Cuenta> cuentas;
+	private List<Cuenta> cuentas;
 
-    public GestionarCuentaController() {
-        super();
-        cuentas = new ArrayList<>();
-        cuentas.add(new Cuenta("Cuenta 1", 12345, 1000.0f));
-        cuentas.add(new Cuenta("Cuenta 2", 67890, 2000.0f));
-    }
+	public GestionarCuentaController() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        procesarSolicitud(request, response);
-    }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ruteador(request, response);
+	}
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        procesarSolicitud(request, response);
-    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ruteador(request, response);
+	}
 
-    private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String action = request.getParameter("action");
+	private void ruteador(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// String action = request.getParameter("action");
+		String ruta = (request.getParameter("ruta") == null) ? "listar" : request.getParameter("ruta");
 
-        if (action == null || action.equals("listar")) {
-            listarCuentas(request, response);
-        } else if (action.equals("crear")) {
-            presentarFormularioCrear(request, response);
-        } else if (action.equals("guardar")) {
-            guardarCuenta(request, response);
-        } else if (action.equals("actualizar")) {
-            presentarFormularioActualizar(request, response);
-        } else if (action.equals("modificar")) {
-            actualizarCuenta(request, response);
-        } else if (action.equals("eliminar")) {
-            eliminarCuenta(request, response);
-        }
-    }
+		switch (ruta) {
+		case "listar":
+			listarCuentas(request, response);
+			break;
 
-    private void listarCuentas(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.setAttribute("cuentas", cuentas);
-        request.getRequestDispatcher("jsp/Cuenta.jsp").forward(request, response);
-    }
+		case "crear":
+			presentarFormularioCrear(request, response);
+			break;
 
-    private void presentarFormularioCrear(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("jsp/FormularioCrearCuenta.jsp").forward(request, response);
-    }
+		case "guardar":
+			guardarCuenta(request, response);
+			break;
 
-    private void guardarCuenta(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String nombre = request.getParameter("nombre");
-        int numero = Integer.parseInt(request.getParameter("numero"));
-        float saldo = Float.parseFloat(request.getParameter("saldo"));
+		case "actualizar":
+			presentarFormularioActualizar(request, response);
+			break;
 
-        cuentas.add(new Cuenta(nombre, numero, saldo));
+		case "modificar":
+			actualizarCuenta(request, response);
+			break;
 
-        // Redirige al apartado ajustes
-        String redirect = request.getParameter("redirect");
-        if (redirect != null && !redirect.isEmpty()) {
-            response.sendRedirect(redirect);
-        } else {
-            response.sendRedirect("VerTableroController?ruta=ajustes");
-        }
-    }
+		case "eliminar":
+			eliminarCuenta(request, response);
+			break;
 
-    private void presentarFormularioActualizar(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int numero = Integer.parseInt(request.getParameter("numero"));
-        Cuenta cuenta = buscarCuenta(numero);
+		default:
+			listarCuentas(request, response);
+			break;
+		}
+	}
 
-        if (cuenta != null) {
-            request.setAttribute("nombre", cuenta.getNombre());
-            request.setAttribute("numero", cuenta.getNumero());
-            request.setAttribute("saldo", cuenta.getSaldo());
-            request.getRequestDispatcher("jsp/FormularioActualizarCuenta.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("VerTableroController?ruta=ajustes");
-        }
-    }
+	private void listarCuentas(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1. Obtiene parámetros
+		// 2. Habla con el modelo
+		List<Cuenta> cuentas;
 
-    private void actualizarCuenta(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int numero = Integer.parseInt(request.getParameter("numero"));
-        String nombre = request.getParameter("nombre");
-        float saldo = Float.parseFloat(request.getParameter("saldo"));
+		try {
+			CuentaDAO cuentaDAO = new CuentaDAO();
+			cuentas = cuentaDAO.getCuentas();
 
-        Cuenta cuenta = buscarCuenta(numero);
-        if (cuenta != null) {
-            cuenta.setNombre(nombre);
-            cuenta.setSaldo(saldo);
-        }
+			// 3. Habla con la vista
+			request.setAttribute("cuentas", cuentas);
+			getServletContext().getRequestDispatcher("/jsp/cuenta.jsp").forward(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-        // Redirige a ajustes
-        String redirect = request.getParameter("redirect");
-        if (redirect != null && !redirect.isEmpty()) {
-            response.sendRedirect(redirect);
-        } else {
-            response.sendRedirect("VerTableroController?ruta=ajustes");
-        }
-    }
+	private void presentarFormularioCrear(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("jsp/formularioCrearCuenta.jsp").forward(request, response);
+	}
 
-    private void eliminarCuenta(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int numero = Integer.parseInt(request.getParameter("numero"));
-        cuentas.removeIf(cuenta -> cuenta.getNumero() == numero);
+	private void guardarCuenta(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 1. Obtiene parámetros
+		String nombre = request.getParameter("nombre");
+		String numero = request.getParameter("numero");
+		BigDecimal saldo = new BigDecimal(request.getParameter("saldo"));
 
-        // Redirige a ajustes o a la ruta proporcionada en redirect
-        String redirect = request.getParameter("redirect");
-        if (redirect != null && !redirect.isEmpty()) {
-            response.sendRedirect(redirect);
-        } else {
-            response.sendRedirect("VerTableroController?ruta=ajustes");
-        }
-    }
+		Cuenta cuenta = new Cuenta(0, nombre, numero, saldo);
+		try {
+			// 2. Habla con el modelo
+			CuentaDAO cuentaDAO = new CuentaDAO();
+			cuentaDAO.crear(cuenta);
 
-    private Cuenta buscarCuenta(int numero) {
-        return cuentas.stream().filter(cuenta -> cuenta.getNumero() == numero).findFirst().orElse(null);
-    }
+			// 3. Habla con la vista - Redirige al apartado ajustes
+			String redirect = request.getParameter("redirect");
+			if (redirect != null && !redirect.isEmpty()) {
+				response.sendRedirect(redirect);
+			} else {
+				response.sendRedirect("VerTableroController?ruta=ajustes");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void presentarFormularioActualizar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1. Obtiene parámetros
+		String numero = request.getParameter("numero");
+		// 2. Habla con el modelo
+		CuentaDAO cuentaDAO = new CuentaDAO();
+		Cuenta cuenta;
+		try {
+			cuenta = cuentaDAO.encontrarPorNumero(numero);
+			// 3. Habla con la vista
+			if (cuenta != null) {
+				// 3.- Hacia el formulario de actualización de cuenta
+				request.setAttribute("nombre", cuenta.getNombre());
+				request.setAttribute("numero", cuenta.getNumero());
+				request.setAttribute("saldo", cuenta.getSaldo());
+				request.getRequestDispatcher("jsp/formularioActualizarCuenta.jsp").forward(request, response);
+			} else {
+				// 3.- Hacia los ajustes otra vez, porque la cuenta no existe TODO: Mostrar
+				// mensaje de error
+				response.sendRedirect("VerTableroController?ruta=ajustes");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void actualizarCuenta(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 1. Obtiene parámetros
+		String nombre = request.getParameter("nombre");
+		String numero = request.getParameter("numero");
+		BigDecimal saldo = new BigDecimal(request.getParameter("saldo"));
+		// 2. Habla con el modelo
+		CuentaDAO cuentaDAO = new CuentaDAO();
+		Cuenta cuenta = new Cuenta(0, nombre, numero, saldo);
+
+		try {
+			cuentaDAO.actualizar(cuenta);
+			// 3. Habla con la vista - Redirige a ajustes
+			String redirect = request.getParameter("redirect");
+			if (redirect != null && !redirect.isEmpty()) {
+				response.sendRedirect(redirect);
+			} else {
+				response.sendRedirect("VerTableroController?ruta=ajustes");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void eliminarCuenta(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 1.- Obtiene parámetros
+		String numero = request.getParameter("numero");
+		// 2.- Habla con el modelo
+		CuentaDAO cuentaDAO = new CuentaDAO();
+		try {
+			cuentaDAO.eliminar(numero);
+			// 3.- Habla con la vista
+			String redirect = request.getParameter("redirect");
+			if (redirect != null && !redirect.isEmpty()) {
+				response.sendRedirect(redirect);
+			} else {
+				response.sendRedirect("VerTableroController?ruta=ajustes");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

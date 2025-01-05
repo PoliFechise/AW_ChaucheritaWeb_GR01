@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vista Cuenta</title>
+    <title>Cuenta</title>
     <link rel="stylesheet" href="styles/cuenta.css">
 </head>
 <body>
@@ -14,14 +14,14 @@
             Configuración de Cuentas
         </div>
         <div class="contenedor-botones">
-            <div class="boton-crear" onclick="location.href='GestionarCuentaController?action=crear'">Crear</div>
+            <div class="boton-crear" onclick="location.href='GestionarCuentaController?ruta=crear'">Crear</div>
             <div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ajustes'">Regresar</div>
         </div>
         <div class="subtitulo-cuentas-actuales">
             Cuentas actuales
         </div>
         <div class="contenedor-tabla-cuentas">
-            <table>
+            <table class="table-cuentas">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -40,7 +40,7 @@
                             <td>$ ${cuenta.saldo}</td>
                             <td class="acciones">
                                 <div class="boton-actualizar" 
-                                     onclick="location.href='GestionarCuentaController?action=actualizar&numero=${cuenta.numero}'">
+                                     onclick="location.href='GestionarCuentaController?ruta=actualizar&numero=${cuenta.numero}'">
                                     Actualizar
                                 </div>
                                 <div class="boton-eliminar" 
@@ -72,7 +72,7 @@
             modal.style.display = 'block';
             const btnSi = document.getElementById('btnSi');
             btnSi.onclick = function () {
-                location.href = `GestionarCuentaController?action=eliminar&numero=${numero}&redirect=VerTableroController?ruta=ajustes`;
+                location.href = `GestionarCuentaController?ruta=eliminar&numero=${numero}&redirect=VerTableroController?ruta=ajustes`;
             };
         }
 

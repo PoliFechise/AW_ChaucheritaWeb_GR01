@@ -16,7 +16,7 @@
 
 	<main class="form-container">
 		<form class="form" action="GestionarCuentaController" method="POST">
-			<input type="hidden" name="action" value="modificar"> <input
+			<input type="hidden" name="ruta" value="modificar"> <input
 				type="hidden" name="redirect"
 				value="VerTableroController?ruta=ajustes">
 			<!-- Para redirigir -->

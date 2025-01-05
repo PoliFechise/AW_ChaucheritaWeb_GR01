@@ -6,25 +6,25 @@ public class Categoria implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private int Id;
+	private int id;
 	private String nombre;
 	
 	public Categoria() {
 		
 	}
 	
-	public Categoria(int Id, String nombre) {
+	public Categoria(int id, String nombre) {
 		super();
-		this.Id = Id;
+		this.id = id;
 		this.nombre = nombre;
 	}
 	
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getNombre() {

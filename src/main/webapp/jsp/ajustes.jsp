@@ -8,7 +8,6 @@
     <meta charset="UTF-8">
     <title>Ajustes</title>
     <link rel="stylesheet" href="styles/ajustes.css">
-    <link rel="stylesheet" href="styles/cuenta.css">
 </head>
 <header>
     <div class="titulo-ajustes">
@@ -16,19 +15,9 @@
     </div>
 </header>
 <body>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Ajustes</title>
-    <link rel="stylesheet" href="styles/ajustes.css">
-    <link rel="stylesheet" href="styles/cuenta.css">
-</head>
-<body>
     <div class="barra-ajustes">
         <div class="boton-cuenta"
-             onclick="cargarContenido('cuenta.html?section=cuenta', this)">
+             onclick="cargarContenido('GestionarCuentaController?action=listar', this)">
             <h2>Cuenta</h2>
         </div>
         <div class="boton-categoria"

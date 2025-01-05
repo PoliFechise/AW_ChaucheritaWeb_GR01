@@ -41,6 +41,12 @@ h1, h2 {
     font-family: 'Angel Club';
 }
 
+.titulo-cuenta {
+	margin: 10px;
+    font-size: 25px;
+    font-family: "Angel Club";
+}
+
 .titulo-ajustes {
     margin: 10px 20px;
     font-size: 30px;

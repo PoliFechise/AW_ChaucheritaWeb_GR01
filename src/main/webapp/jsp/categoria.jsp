@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="contenedor-regresar">
-		<div class="boton-regresar" onclick="limpiarSeccion()">Regresar
+		<div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ajustes'">Regresar
 		</div>
 	</div>
 
@@ -206,7 +206,7 @@
 
     function limpiarSeccion() {
         // Recargar ajustes.html sin parámetros en la URL
-        window.location.href = 'ajustes.html';
+        window.location.href = 'ajustes.jsp';
     }
 </script>
 
