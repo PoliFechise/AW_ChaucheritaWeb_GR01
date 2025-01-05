@@ -56,7 +56,7 @@ public class GestionarCuentaController extends HttpServlet {
     private void listarCuentas(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("cuentas", cuentas);
-        request.getRequestDispatcher("jsp/VistaCuenta.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/Cuenta.jsp").forward(request, response);
     }
 
     private void presentarFormularioCrear(HttpServletRequest request, HttpServletResponse response)
