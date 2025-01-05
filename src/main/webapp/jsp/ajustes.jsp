@@ -29,7 +29,7 @@
         <!-- Contenido dinámico -->
     </div>
     <div id="contenedor-regresar" class="contenedor-regresar">
-        <div class="boton-regresar" onclick="location.href='tablero.html'">
+        <div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ver'">
             Regresar</div>
     </div>
 

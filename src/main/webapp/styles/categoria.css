@@ -30,7 +30,7 @@ h2, h3 {
 
     border: 1px solid black;
 
-    font-size: 25px;
+    font-size: 18px;
     font-weight: bold;
 
     text-align: center;
@@ -78,7 +78,6 @@ h2, h3 {
     background-color: #59C241;
     color: black;
 
-    height: 100%;
     width: 140px;
 
     border: 1px solid black;
@@ -117,7 +116,7 @@ h2, h3 {
 
 .contenedor-tabla-categorias th {
     background-color: #2977BD;
-    color: black;
+    color: white;
     font-size: 20px;
     border: 1px solid black;
 }

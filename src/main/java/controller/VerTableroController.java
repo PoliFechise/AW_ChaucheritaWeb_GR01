@@ -5,7 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Cuenta;
 import model.dao.CategoriaDAO;
+import model.dao.CuentaDAO;
 import model.dto.CategoriaEgresoDTO;
 
 import java.io.IOException;
@@ -48,19 +50,29 @@ public class VerTableroController extends HttpServlet {
 	}
 
 	private void ver(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1.- Obtener parámetros
-		// 2.- Hablar con el modelo
-		List<CategoriaEgresoDTO> categorias;
-		try {
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			categorias = categoriaDAO.obtenerCategoriasEgreso();
-			// 3.- Hablar con la vista
-			request.setAttribute("categorias", categorias);
-			getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request, response);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+	    // 1.- Obtener parámetros
+	    // 2.- Hablar con el modelo
+	    List<CategoriaEgresoDTO> categorias;
+	    List<Cuenta> cuentas;
+
+	    try {
+	        // Obtener categorías
+	        CategoriaDAO categoriaDAO = new CategoriaDAO();
+	        categorias = categoriaDAO.obtenerCategoriasEgreso();
+
+	        // Obtener cuentas
+	        CuentaDAO cuentaDAO = new CuentaDAO();
+	        cuentas = cuentaDAO.getCuentas();
+
+	        // 3.- Hablar con la vista
+	        request.setAttribute("categorias", categorias);
+	        request.setAttribute("cuentas", cuentas);
+
+	        getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request, response);
+	    } catch (SQLException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
 	}
 	
 	private void ajustes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

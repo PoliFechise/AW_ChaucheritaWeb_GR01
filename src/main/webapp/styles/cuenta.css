@@ -132,6 +132,7 @@ h1, h2 {
 }
 
 /* Estilos para la tabla */
+/* Estilos para la tabla */
 .table-cuentas {
     width: 100%;
     border-collapse: collapse;
@@ -159,50 +160,60 @@ h1, h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    margin: 0;
-    gap: 0;
+    gap: 10px; /* Añade un espacio entre los botones */
 }
 
-.table-cuentas .acciones button {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    padding: 10px 0;
+.boton-actualizar, .boton-eliminar {
+    padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
     border: 1px solid black;
+    text-align: center;
     cursor: pointer;
-    align-items: center;
+    display: inline-block;
+    border-radius: 5px;
 }
 
-.table-cuentas .acciones .actualizar {
+.boton-actualizar {
     background-color: #F6F88E;
     color: black;
 }
 
-.table-cuentas .acciones .actualizar:hover {
+.boton-actualizar:hover {
     background-color: #eef100;
 }
 
-.table-cuentas .acciones .eliminar {
+.boton-eliminar {
     background-color: #FF7F7F;
     color: black;
 }
 
-.table-cuentas .acciones .eliminar:hover {
+.boton-eliminar:hover {
     background-color: #ff4c4c;
 }
+
 
 /* Botones Crear */
 .boton-crear {
     background-color: #59C241;
     color: black;
-    padding: 10px 20px;
-    font-size: 18px;
+
+	height: 40px;
+    width: 140px;
+
+    border: 1px solid black;
+
+    font-size: 20px;
     font-weight: bold;
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     border-radius: 15px;
-    cursor: pointer;
+    
+    margin: 0px 0px 20px 0px;
 }
 
 .boton-crear:hover {
