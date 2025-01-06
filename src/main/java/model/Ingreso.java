@@ -6,15 +6,19 @@ public class Ingreso {
     private String concepto;
     private float valor;
     private Date fecha;
-    private int origen;
+    private String origen;
     private String destino;
 
-    public Ingreso(String concepto, float valor, Date fecha, int origen, String destino) {
+    public Ingreso(String concepto, float valor, Date fecha, String origen, String destino) {
         this.concepto = concepto;
         this.valor = valor;
         this.fecha = fecha;
         this.origen = origen;
         this.destino = destino;
+    }
+    
+    public Ingreso() {
+    	
     }
 
     // Getters y setters
@@ -42,11 +46,11 @@ public class Ingreso {
         this.fecha = fecha;
     }
 
-    public int getOrigen() {
+    public String getOrigen() {
         return origen;
     }
 
-    public void setOrigen(int origen) {
+    public void setOrigen(String origen) {
         this.origen = origen;
     }
 

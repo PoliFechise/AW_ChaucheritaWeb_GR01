@@ -61,7 +61,7 @@
 							</td>
 							<td class="actions">
 								<button
-									onclick="window.location.href='ingreso.html?numero=${cuenta.numero}'">Registrar
+									onclick="location.href='RegistrarIngresoController?ruta=registrar-ingreso&numero=${cuenta.numero}'">Registrar
 									ingreso</button>
 								<button
 									onclick="window.location.href='egreso.html?numero=${cuenta.numero}'">Registrar
