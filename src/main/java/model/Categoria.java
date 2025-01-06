@@ -13,13 +13,12 @@ public class Categoria implements Serializable {
 	public Categoria() {
 
 	}
-<<<<<<< Updated upstream
-	
+
 	public Categoria(int id, String nombre) {
-=======
+	}
 
 	public Categoria(int Id, String nombre, String tipo) {
->>>>>>> Stashed changes
+
 		super();
 		this.id = id;
 		this.nombre = nombre;
