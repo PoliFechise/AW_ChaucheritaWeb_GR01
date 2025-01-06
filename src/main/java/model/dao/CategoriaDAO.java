@@ -12,11 +12,11 @@ import model.bdd.BddConnection;
 import model.dto.CategoriaEgresoDTO;
 
 public class CategoriaDAO {
-	
+
 	public CategoriaDAO() {
-		
+
 	}
-	
+
 	public static List<Categoria> getCategorias() throws SQLException {
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		String _SQL_GET_ALL = "SELECT * FROM categoria_egreso";
@@ -38,35 +38,35 @@ public class CategoriaDAO {
 
 		return categorias;
 	}
-	
+
 	// Metodo para obtener datos de tabla categoria_ingreso
 	public List<Categoria> getCategoriasIngreso() throws SQLException {
-	    List<Categoria> categoriasIngreso = new ArrayList<Categoria>();
-	    String sqlGetCategoriasIngreso = "SELECT * FROM categoria_ingreso";
+		List<Categoria> categoriasIngreso = new ArrayList<Categoria>();
+		String sqlGetCategoriasIngreso = "SELECT * FROM categoria WHERE tipo = 'ingreso'";
+		
+		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasIngreso);
+		ResultSet rs = pstmt.executeQuery();
 
-	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasIngreso);
-	    ResultSet rs = pstmt.executeQuery();
+		// Iterar el result set para leer los datos
+		while (rs.next()) {
+			Categoria categoriaIngreso = new Categoria();
+			categoriaIngreso.setId(rs.getInt("id"));
+			categoriaIngreso.setNombre(rs.getString("nombre"));
 
-	    // Iterar el result set para leer los datos
-	    while (rs.next()) {
-	        Categoria categoriaIngreso = new Categoria();
-	        categoriaIngreso.setId(rs.getInt("id"));
-	        categoriaIngreso.setNombre(rs.getString("nombre"));
+			categoriasIngreso.add(categoriaIngreso);
+		}
 
-	        categoriasIngreso.add(categoriaIngreso);
-	    }
+		BddConnection.cerrar(pstmt);
+		BddConnection.cerrar(rs);
+		BddConnection.cerrar();
 
-	    BddConnection.cerrar(pstmt);
-	    BddConnection.cerrar(rs);
-	    BddConnection.cerrar();
-
-	    return categoriasIngreso;
+		return categoriasIngreso;
 	}
-	
+
 	// Metodo para obtener datos de tabla categoria_egreso
 	public List<Categoria> getCategoriasEgreso() throws SQLException {
 	    List<Categoria> categoriasEgreso = new ArrayList<Categoria>();
-	    String sqlGetCategoriasEgreso = "SELECT * FROM categoria_egreso";
+	    String sqlGetCategoriasEgreso = "SELECT * FROM categoria WHERE tipo = 'egreso'";
 
 	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasEgreso);
 	    ResultSet rs = pstmt.executeQuery();
@@ -85,44 +85,48 @@ public class CategoriaDAO {
 
 	    return categoriasEgreso;
 	}
-	
+
+
 	// Metodo para obtener datos de tabla categoria_transferencia
 	public List<Categoria> getCategoriasTransferencia() throws SQLException {
-	    List<Categoria> categoriasTransferencia = new ArrayList<Categoria>();
-	    String sqlGetCategoriasTransferencia = "SELECT * FROM categoria_transferencia";
+		List<Categoria> categoriasTransferencia = new ArrayList<Categoria>();
+		String sqlGetCategoriasTransferencia = "SELECT * FROM categoria WHERE tipo = 'transferencia'";
 
-	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasTransferencia);
-	    ResultSet rs = pstmt.executeQuery();
+		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasTransferencia);
+		ResultSet rs = pstmt.executeQuery();
 
-	    while (rs.next()) {
-	        Categoria categoriaTransferencia = new Categoria();
-	        categoriaTransferencia.setId(rs.getInt("id"));
-	        categoriaTransferencia.setNombre(rs.getString("nombre"));
+		while (rs.next()) {
+			Categoria categoriaTransferencia = new Categoria();
+			categoriaTransferencia.setId(rs.getInt("id"));
+			categoriaTransferencia.setNombre(rs.getString("nombre"));
 
-	        categoriasTransferencia.add(categoriaTransferencia);
-	    }
-	    BddConnection.cerrar(pstmt);
-	    BddConnection.cerrar(rs);
-	    BddConnection.cerrar();
+			categoriasTransferencia.add(categoriaTransferencia);
+		}
+		BddConnection.cerrar(pstmt);
+		BddConnection.cerrar(rs);
+		BddConnection.cerrar();
 
-	    return categoriasTransferencia;
+		return categoriasTransferencia;
 	}
 
-	
 	public static List<CategoriaEgresoDTO> obtenerCategoriasEgreso() throws SQLException {
 	    List<CategoriaEgresoDTO> categoriasEgreso = new ArrayList<>();
-	    String sql = "SELECT c.id, c.nombre AS categoria, SUM(m.valor) AS total_egreso " +
-	                 "FROM categoria_egreso c " +
+
+	    String sql = "SELECT c.id, " +
+	                 "       c.nombre AS categoria, " +
+	                 "       SUM(m.valor) AS total_egreso " +
+	                 "FROM categoria c " +
 	                 "JOIN egreso e ON c.id = e.destino " +
 	                 "JOIN movimiento m ON e.movimiento_id = m.id " +
-	                 "GROUP BY c.nombre " +
+	                 "WHERE c.tipo = 'egreso' " +
+	                 "GROUP BY c.id, c.nombre " +
 	                 "ORDER BY total_egreso DESC;";
 
 	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sql);
 	    ResultSet rs = pstmt.executeQuery();
 
 	    while (rs.next()) {
-	    	int id = rs.getInt("id");
+	        int id = rs.getInt("id");
 	        String nombre = rs.getString("categoria");
 	        float totalEgreso = rs.getFloat("total_egreso");
 
@@ -136,5 +140,6 @@ public class CategoriaDAO {
 
 	    return categoriasEgreso;
 	}
+
 
 }
