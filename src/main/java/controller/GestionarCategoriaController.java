@@ -52,21 +52,20 @@ public class GestionarCategoriaController extends HttpServlet {
 	private void listarCategorias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1.- Obtener parámetros
 		// 2.- Hablar con el modelo
-		List<CategoriaEgresoDTO> categorias;
-		
 		List<Categoria> categoriasIngreso;
+		List<Categoria> categoriasEgreso;
 		List<Categoria> categoriasTransferencia;
 		
 		try {
 			CategoriaDAO categoriaDAO = new CategoriaDAO();
 			
-			categorias = categoriaDAO.obtenerCategoriasEgreso();
 			categoriasIngreso = categoriaDAO.getCategoriasIngreso();
+			categoriasEgreso = categoriaDAO.getCategoriasEgreso();
 			categoriasTransferencia = categoriaDAO.getCategoriasTransferencia();
 			
 			
 		// 3.- Hablar con la vista
-			request.setAttribute("categorias", categorias);
+			request.setAttribute("categoriasEgreso", categoriasEgreso);
 			request.setAttribute("categoriasIngreso", categoriasIngreso);
 			request.setAttribute("categoriasTransferencia", categoriasTransferencia);
 			
