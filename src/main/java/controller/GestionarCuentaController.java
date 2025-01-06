@@ -91,7 +91,7 @@ public class GestionarCuentaController extends HttpServlet {
 
 	private void presentarFormularioCrear(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("jsp/formularioCrearCuenta.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/formularioCreacionCuenta.jsp").forward(request, response);
 	}
 
 	private void guardarCuenta(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -134,7 +134,7 @@ public class GestionarCuentaController extends HttpServlet {
 				request.setAttribute("nombre", cuenta.getNombre());
 				request.setAttribute("numero", cuenta.getNumero());
 				request.setAttribute("saldo", cuenta.getSaldo());
-				request.getRequestDispatcher("jsp/formularioActualizarCuenta.jsp").forward(request, response);
+				request.getRequestDispatcher("jsp/formularioActualizacionCuenta.jsp").forward(request, response);
 			} else {
 				// 3.- Hacia los ajustes otra vez, porque la cuenta no existe TODO: Mostrar
 				// mensaje de error

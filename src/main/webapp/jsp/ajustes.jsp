@@ -16,12 +16,10 @@
 </header>
 <body>
     <div class="barra-ajustes">
-        <div class="boton-cuenta"
-             onclick="cargarContenido('GestionarCuentaController?action=listar', this)">
+                <div class="boton-cuenta" onclick="cargarContenido('GestionarCuentaController?action=listar', this)">
             <h2>Cuenta</h2>
         </div>
-        <div class="boton-categoria"
-             onclick="cargarContenido('GestionarCategoriaController?action=listar', this)">
+                <div class="boton-categoria" onclick="cargarContenido('GestionarCategoriaController?action=listar', this)">
             <h2>Categoría</h2>
         </div>
     </div>
@@ -29,7 +27,7 @@
         <!-- Contenido dinámico -->
     </div>
     <div id="contenedor-regresar" class="contenedor-regresar">
-        <div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ver'">
+        <div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ver'">Regresar</div>
             Regresar</div>
     </div>
 

@@ -83,7 +83,7 @@ public class GestionarCategoriaController extends HttpServlet {
 
 	private void presentarFormularioCrear(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("jsp/formularioCrearCategoria.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/formularioCreacionCategoria.jsp").forward(request, response);
 	}
 
 	private void crearCategoria(HttpServletRequest request, HttpServletResponse response)

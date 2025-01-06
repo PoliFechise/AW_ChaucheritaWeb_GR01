@@ -21,7 +21,7 @@
 			<div class="opciones-header">
 				<div>
 					<button class="cerrarSesion"
-						onclick="location.href='../index.html'">Cerrar Sesión</button>
+						onclick="location.href='LoginController'">Cerrar Sesión</button>
 				</div>
 				<div class="logoConfiguracion"
 					onclick="location.href='VerTableroController?ruta=ajustes'">
@@ -92,19 +92,19 @@
 			<table>
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th>N°</th>
 						<th>Categoría</th>
 						<th>Total Egreso</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${categorias}" var="categoria">
-						<tr>
-							<td>${categoria.id}</td>
-							<td>${categoria.nombre}</td>
-							<td>${categoria.totalEgreso}</td>
-						</tr>
-					</c:forEach>
+					<c:forEach items="${categorias}" var="categoria" varStatus="status">
+                        <tr>
+                            <td>${status.index + 1}</td>
+                            <td>${categoria.nombre}</td>
+                            <td>${categoria.totalEgreso}</td>
+                        </tr>
+                    </c:forEach>
 				</tbody>
 			</table>
 		</div>
