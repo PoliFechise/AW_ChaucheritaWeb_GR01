@@ -17,6 +17,10 @@ public class CategoriaDAO {
 
 	}
 
+<<<<<<< Updated upstream
+=======
+	// Metodo para obtener datos de tabla categoria_egreso
+>>>>>>> Stashed changes
 	public static List<Categoria> getCategorias() throws SQLException {
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		String _SQL_GET_ALL = "SELECT * FROM categoria_egreso";
@@ -40,6 +44,7 @@ public class CategoriaDAO {
 	}
 
 	// Metodo para obtener datos de tabla categoria_ingreso
+<<<<<<< Updated upstream
 	public List<Categoria> getCategoriasIngreso() throws SQLException {
 		List<Categoria> categoriasIngreso = new ArrayList<Categoria>();
 		String sqlGetCategoriasIngreso = "SELECT * FROM categoria WHERE tipo = 'ingreso'";
@@ -78,11 +83,29 @@ public class CategoriaDAO {
 
 	        categoriasEgreso.add(categoriaEgreso);
 	    }
+=======
+	public static List<Categoria> getCategoriasIngreso() throws SQLException {
+		List<Categoria> categoriasIngreso = new ArrayList<Categoria>();
+		String sqlGetCategoriasIngreso = "SELECT * FROM categoria_ingreso";
 
-	    BddConnection.cerrar(pstmt);
-	    BddConnection.cerrar(rs);
-	    BddConnection.cerrar();
+		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasIngreso);
+		ResultSet rs = pstmt.executeQuery();
 
+		// Iterar el result set para leer los datos
+		while (rs.next()) {
+			Categoria categoriaIngreso = new Categoria();
+			categoriaIngreso.setId(rs.getInt("id"));
+			categoriaIngreso.setNombre(rs.getString("nombre"));
+
+			categoriasIngreso.add(categoriaIngreso);
+		}
+>>>>>>> Stashed changes
+
+		BddConnection.cerrar(pstmt);
+		BddConnection.cerrar(rs);
+		BddConnection.cerrar();
+
+<<<<<<< Updated upstream
 	    return categoriasEgreso;
 	}
 
@@ -91,6 +114,15 @@ public class CategoriaDAO {
 	public List<Categoria> getCategoriasTransferencia() throws SQLException {
 		List<Categoria> categoriasTransferencia = new ArrayList<Categoria>();
 		String sqlGetCategoriasTransferencia = "SELECT * FROM categoria WHERE tipo = 'transferencia'";
+=======
+		return categoriasIngreso;
+	}
+
+	// Metodo para obtener datos de tabla categoria_transferencia
+	public static List<Categoria> getCategoriasTransferencia() throws SQLException {
+		List<Categoria> categoriasTransferencia = new ArrayList<Categoria>();
+		String sqlGetCategoriasTransferencia = "SELECT * FROM categoria_transferencia";
+>>>>>>> Stashed changes
 
 		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sqlGetCategoriasTransferencia);
 		ResultSet rs = pstmt.executeQuery();
@@ -110,6 +142,7 @@ public class CategoriaDAO {
 	}
 
 	public static List<CategoriaEgresoDTO> obtenerCategoriasEgreso() throws SQLException {
+<<<<<<< Updated upstream
 	    List<CategoriaEgresoDTO> categoriasEgreso = new ArrayList<>();
 
 	    String sql = "SELECT c.id, " +
@@ -121,24 +154,53 @@ public class CategoriaDAO {
 	                 "WHERE c.tipo = 'egreso' " +
 	                 "GROUP BY c.id, c.nombre " +
 	                 "ORDER BY total_egreso DESC;";
+=======
+		List<CategoriaEgresoDTO> categoriasEgreso = new ArrayList<>();
+		String sql = "SELECT c.id, c.nombre AS categoria, SUM(m.valor) AS total_egreso " + "FROM categoria_egreso c "
+				+ "JOIN egreso e ON c.id = e.destino " + "JOIN movimiento m ON e.movimiento_id = m.id "
+				+ "GROUP BY c.nombre " + "ORDER BY total_egreso DESC;";
+>>>>>>> Stashed changes
 
-	    PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sql);
-	    ResultSet rs = pstmt.executeQuery();
+		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
 
+<<<<<<< Updated upstream
 	    while (rs.next()) {
 	        int id = rs.getInt("id");
 	        String nombre = rs.getString("categoria");
 	        float totalEgreso = rs.getFloat("total_egreso");
+=======
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			String nombre = rs.getString("categoria");
+			float totalEgreso = rs.getFloat("total_egreso");
+>>>>>>> Stashed changes
 
-	        CategoriaEgresoDTO dto = new CategoriaEgresoDTO(id, nombre, totalEgreso);
-	        categoriasEgreso.add(dto);
-	    }
+			CategoriaEgresoDTO dto = new CategoriaEgresoDTO(id, nombre, totalEgreso);
+			categoriasEgreso.add(dto);
+		}
 
-	    BddConnection.cerrar(pstmt);
-	    BddConnection.cerrar(rs);
-	    BddConnection.cerrar();
+		BddConnection.cerrar(pstmt);
+		BddConnection.cerrar(rs);
+		BddConnection.cerrar();
 
-	    return categoriasEgreso;
+		return categoriasEgreso;
+	}
+
+	// Método para crear una categoría 
+	public void guardarCategoria(Categoria categoria) throws SQLException {
+		List<Categoria> categorias = new ArrayList<Categoria>();
+
+		String _SQL_INSERT = "INSERT INTO categoria(nombre, tipo) VALUES (?, ?)";
+
+		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(_SQL_INSERT);
+		pstmt.setString(1, categoria.getNombre());
+		pstmt.setString(2, categoria.getTipo());
+
+		int filas = pstmt.executeUpdate();
+
+		BddConnection.cerrar(pstmt);
+		BddConnection.cerrar();
 	}
 
 
