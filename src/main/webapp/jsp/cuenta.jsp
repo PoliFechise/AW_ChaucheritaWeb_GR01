@@ -11,7 +11,7 @@
 <body>
     <div class="contenedor-cuentas">
         <div class="titulo-cuenta">
-            Configuración de Cuentas
+            <h2>Configuración de Cuentas</h2>
         </div>
         <div class="contenedor-botones">
             <div class="boton-crear" onclick="location.href='GestionarCuentaController?ruta=crear'">Crear</div>

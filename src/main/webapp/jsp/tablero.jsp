@@ -15,7 +15,8 @@
 	<header>
 		<div class="header">
 			<div class="titulo-ChW">
-				<img src="${pageContext.request.contextPath}/img/Titulo%20ChW.png" alt="">
+				<img src="${pageContext.request.contextPath}/img/Titulo%20ChW.png"
+					alt="">
 			</div>
 			<div class="opciones-header">
 				<div>
@@ -24,7 +25,9 @@
 				</div>
 				<div class="logoConfiguracion"
 					onclick="location.href='VerTableroController?ruta=ajustes'">
-					<img src="${pageContext.request.contextPath}/img/IconoEngranaje.png" alt="">
+					<img
+						src="${pageContext.request.contextPath}/img/IconoEngranaje.png"
+						alt="">
 				</div>
 			</div>
 		</div>
@@ -46,49 +49,37 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Banco Pichincha - Ahorros</td>
-						<td>1234567890</td>
-						<td>$ 100.00</td>
-						<td class="inspeccionar"
-							onclick="location.href='cuentaMovimiento.html'">
-							<button>Inspeccionar</button>
-						</td>
-						<td class="actions">
-							<button onclick="window.location.href='ingreso.html'">Registrar
-								ingreso</button>
-							<button onclick="window.location.href='egreso.html'">Registrar
-								egreso</button>
-							<button onclick="window.location.href='transferencia.html'">Registrar
-								transferencia</button>
-						</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Banco Pichincha - Corriente</td>
-						<td>0987654321</td>
-						<td>$ 100.00</td>
-						<td class="inspeccionar"
-							onclick="location.href='cuentaMovimiento.html'">
-							<button>Inspeccionar</button>
-						</td>
-						<td class="actions">
-							<button onclick="window.location.href='ingreso.html'">Registrar
-								ingreso</button>
-							<button onclick="window.location.href='egreso.html'">Registrar
-								egreso</button>
-							<button onclick="window.location.href='transferencia.html'">Registrar
-								transferencia</button>
-						</td>
-					</tr>
+					<c:forEach var="cuenta" items="${cuentas}">
+						<tr>
+							<td>${cuentas.indexOf(cuenta) + 1}</td>
+							<td>${cuenta.nombre}</td>
+							<td>${cuenta.numero}</td>
+							<td>$ ${cuenta.saldo}</td>
+							<td class="inspeccionar"
+								onclick="location.href='cuentaMovimiento.html?numero=${cuenta.numero}'">
+								<button>Inspeccionar</button>
+							</td>
+							<td class="actions">
+								<button
+									onclick="window.location.href='ingreso.html?numero=${cuenta.numero}'">Registrar
+									ingreso</button>
+								<button
+									onclick="window.location.href='egreso.html?numero=${cuenta.numero}'">Registrar
+									egreso</button>
+								<button
+									onclick="window.location.href='transferencia.html?numero=${cuenta.numero}'">Registrar
+									transferencia</button>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 
 		<div class="medio">
 			<div class="titulo-MisGastos">
-				<img src="${pageContext.request.contextPath}/img/MisGastos.png" alt="Mis gastos">
+				<img src="${pageContext.request.contextPath}/img/MisGastos.png"
+					alt="Mis gastos">
 			</div>
 			<div>
 				<button class="filtrar-Fecha" onclick="window.location.href=''">Filtrar
