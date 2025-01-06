@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,87 +16,93 @@ import model.Categoria;
 import model.Ingreso;
 import model.bdd.BddConnection;
 import model.dao.CategoriaDAO;
+import model.dao.CuentaDAO;
 import model.dao.IngresoDAO;
 
 @WebServlet("/RegistrarIngresoController")
 public class RegistrarIngresoController extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        this.ruteador(request, response);
-    }
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		this.ruteador(request, response);
+	}
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    	    	
-        String concepto = request.getParameter("concepto");
-        String valor = request.getParameter("valor");
-        String origen = request.getParameter("categoria");
-        String destino = request.getParameter("numeroCuenta");
-        String fecha = request.getParameter("fecha");
-        
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        if (concepto != null && valor != null && origen != null && destino != null && fecha != null) {
-        	
-            IngresoDAO ingresoDAO = new IngresoDAO();
+		String concepto = request.getParameter("concepto");
+		String valor = request.getParameter("valor");
+		String origen = request.getParameter("categoria");
+		String destino = request.getParameter("numeroCuenta");
+		String fecha = request.getParameter("fecha");
 
-            try {
-                Ingreso ingreso = new Ingreso();
-                ingreso.setConcepto(concepto);
-                ingreso.setValor(Float.parseFloat(valor));
-                ingreso.setOrigen(origen);
-                ingreso.setDestino(destino);
-                ingreso.setFecha(new java.text.SimpleDateFormat("yyyy-MM-dd").parse(fecha));
-                ingresoDAO.guardarIngreso(ingreso);
-                
-            } catch (SQLException | java.text.ParseException e) {
-                e.printStackTrace();
-                request.setAttribute("mensaje", "Error: " + e.getMessage());
-            } finally {
-                BddConnection.cerrar();
-            }
-        } else {
-            request.setAttribute("mensaje", "Todos los campos son obligatorios.");
-        }
+		if (concepto != null && valor != null && origen != null && destino != null && fecha != null) {
 
-        // Redirigir a ingreso.jsp con el mensaje
+			IngresoDAO ingresoDAO = new IngresoDAO();
+
+			try {
+				Ingreso ingreso = new Ingreso();
+				ingreso.setConcepto(concepto);
+				ingreso.setValor(Float.parseFloat(valor));
+				ingreso.setOrigen(origen);
+				ingreso.setDestino(destino);
+				ingreso.setFecha(new java.text.SimpleDateFormat("yyyy-MM-dd").parse(fecha));
+				ingresoDAO.guardarIngreso(ingreso);
+
+			} catch (SQLException | java.text.ParseException e) {
+				e.printStackTrace();
+				request.setAttribute("mensaje", "Error: " + e.getMessage());
+			} finally {
+				BddConnection.cerrar();
+			}
+		} else {
+			request.setAttribute("mensaje", "Todos los campos son obligatorios.");
+		}
+
+		// Redirigir a ingreso.jsp con el mensaje
 		response.sendRedirect("VerTableroController?ruta=ver");
-    }
+	}
 
-    private void ruteador(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String ruta = (request.getParameter("ruta") == null) ? "listar" : request.getParameter("ruta");
+	private void ruteador(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String ruta = (request.getParameter("ruta") == null) ? "listar" : request.getParameter("ruta");
 
-        switch (ruta) {
-            case "registrar-ingreso":
-                this.prepararIngreso(request, response);
-                break;
-            default:
-                response.sendRedirect("ingreso.jsp");
-                break;
-        }
-    }
+		switch (ruta) {
+		case "registrar-ingreso":
+			this.prepararIngreso(request, response);
+			break;
+		default:
+			response.sendRedirect("ingreso.jsp");
+			break;
+		}
+	}
 
-    private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            // Obtener categorías de ingreso
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-            List<Categoria> categoriasIngreso = categoriaDAO.getCategoriasIngreso();
+	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			// Obtener categorías de ingreso
+			CategoriaDAO categoriaDAO = new CategoriaDAO();
+			List<Categoria> categoriasIngreso = categoriaDAO.getCategoriasIngreso();
 
-            // Pasar las categorías como atributo
-            request.setAttribute("categoriasIngreso", categoriasIngreso);
+			// Obtener saldo de la cuenta
+			String numeroCuenta = request.getParameter("numero");
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            BigDecimal saldoCuenta = cuentaDAO.encontrarPorNumero(numeroCuenta).getSaldo();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("mensajeError", "Error al cargar las categorías: " + e.getMessage());
-        }
+			// Pasar las categorías como atributo
+			request.setAttribute("categoriasIngreso", categoriasIngreso);
+            request.setAttribute("saldoCuenta", saldoCuenta);
 
-        // Redirigir a ingreso.jsp
-        getServletContext().getRequestDispatcher("/jsp/ingreso.jsp").forward(request, response);
-    }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			request.setAttribute("mensajeError", "Error al cargar las categorías: " + e.getMessage());
+		}
+
+		// Redirigir a ingreso.jsp
+		getServletContext().getRequestDispatcher("/jsp/ingreso.jsp").forward(request, response);
+	}
 }

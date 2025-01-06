@@ -38,7 +38,7 @@
 									<div>
 										<label for="concepto">Concepto:</label> <input type="text"
 											id="concepto" name="concepto"
-											placeholder="Ingrese una descripcion del ingreso">
+											placeholder="Ingrese una d	escripcion del ingreso">
 									</div>
 									<div>
 										<label for="categoria">Categoría:</label> <select
@@ -74,12 +74,11 @@
 						</div>
 					</div>
 					<div class="right-side">
-						<div class="saldo">
-							<p>$ 10000.00</p>
-						</div>
-					</div>
+                        <div class="saldo">
+                            <p>$ ${saldoCuenta}</p>
+                        </div>
+                    </div>
 				</div>
-
 			</div>
 		</div>
 	</main>
