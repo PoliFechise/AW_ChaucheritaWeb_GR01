@@ -114,7 +114,7 @@
         }
 
         function limpiarSeccion() {
-            window.location.href = 'ajustes.html';
+            window.location.href = 'VerTableroController?ruta=ver';
         }
     </script>
 

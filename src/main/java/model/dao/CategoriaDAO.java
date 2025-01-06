@@ -118,12 +118,18 @@ public class CategoriaDAO {
 
 	// Método para guardar una nueva categoría
 	public void guardarCategoria(Categoria categoria) throws SQLException {
-		String sql = "INSERT INTO categoria(nombre, tipo) VALUES (?, ?)";
+		List<Categoria> categorias = new ArrayList<Categoria>();
 
-		try (PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sql)) {
-			pstmt.setString(1, categoria.getNombre());
-			pstmt.setString(2, categoria.getTipo());
-			pstmt.executeUpdate();
-		}
+		String _SQL_INSERT = "INSERT INTO categoria (nombre, tipo) VALUES (?, ?)";
+
+		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(_SQL_INSERT);
+		pstmt.setString(1, categoria.getNombre());
+		pstmt.setString(2, categoria.getTipo());
+
+		int filas = pstmt.executeUpdate();
+
+		BddConnection.cerrar(pstmt);
+		BddConnection.cerrar();
+
 	}
 }

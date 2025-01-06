@@ -27,7 +27,7 @@
 
 			<div class="contenedor-crear">
 				<div class="boton-crear"
-					onclick="location.href='formularioCreacionCategoria.html'">
+					onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=ingreso'">
 					Crear</div>
 			</div>
 
@@ -48,7 +48,7 @@
 							<td>
 								<div class="acciones">
 									<div class="boton-actualizar"
-										onclick="location.href='formularioActualizacionCategoria.html'">
+										onclick="location.href='formularioActualizacionCategoria.jsp'">
 										<img
 											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
 											alt="">
@@ -74,7 +74,7 @@
 
 			<div class="contenedor-crear">
 				<div class="boton-crear"
-					onclick="location.href='formularioCreacionCategoria.html'">
+					onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=egreso'">
 					Crear</div>
 			</div>
 
@@ -120,7 +120,7 @@
 
 			<div class="contenedor-crear">
 				<div class="boton-crear"
-					onclick="location.href='formularioCreacionCategoria.html'">
+					onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=transferencia'">
 					Crear</div>
 			</div>
 
@@ -206,7 +206,7 @@
 
     function limpiarSeccion() {
         // Recargar ajustes.html sin parámetros en la URL
-        window.location.href = 'ajustes.jsp';
+        window.location.href = 'VerTableroController?ruta=ajustes';
     }
 </script>
 
