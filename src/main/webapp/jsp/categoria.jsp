@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
@@ -15,8 +14,7 @@
 	</div>
 
 	<div class="contenedor-regresar">
-		<div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ajustes'">Regresar
-		</div>
+		<div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ajustes'">Regresar</div>
 	</div>
 
 	<div class="contenedor-recuadros">
@@ -26,13 +24,12 @@
 			</div>
 
 			<div class="contenedor-crear">
-				<div class="boton-crear"
-					onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=ingreso'">
-					Crear</div>
+				<div class="boton-crear" onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=ingreso'">
+					Crear
+				</div>
 			</div>
 
-			<div class="subtitulo-categorias-actuales">Categorías actuales
-			</div>
+			<div class="subtitulo-categorias-actuales">Categorías actuales</div>
 
 			<div class="contenedor-tabla-categorias">
 				<table>
@@ -47,23 +44,20 @@
 							<td>${categoria.nombre}</td>
 							<td>
 								<div class="acciones">
-									<div class="boton-actualizar"
-										onclick="location.href='formularioActualizacionCategoria.jsp'">
-										<img
-											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
-											alt="">
+									<div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.jsp'">
+										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
 									</div>
+									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
 									<div class="boton-eliminar">
-										<img
-											src="${pageContext.request.contextPath}/img/IconoBasurero.png"
-											alt="">
+										<a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}&tipo=ingreso">
+											<img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
+										</a>
 									</div>
 								</div>
 							</td>
 						</tr>
 					</c:forEach>
 				</table>
-
 			</div>
 		</div>
 
@@ -73,13 +67,12 @@
 			</div>
 
 			<div class="contenedor-crear">
-				<div class="boton-crear"
-					onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=egreso'">
-					Crear</div>
+				<div class="boton-crear" onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=egreso'">
+					Crear
+				</div>
 			</div>
 
-			<div class="subtitulo-categorias-actuales">Categorías actuales
-			</div>
+			<div class="subtitulo-categorias-actuales">Categorías actuales</div>
 
 			<div class="contenedor-tabla-categorias">
 				<table>
@@ -94,16 +87,14 @@
 							<td>${categoria.nombre}</td>
 							<td>
 								<div class="acciones">
-									<div class="boton-actualizar"
-										onclick="location.href='formularioActualizacionCategoria.html'">
-										<img
-											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
-											alt="">
+									<div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.html'">
+										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
 									</div>
+									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
 									<div class="boton-eliminar">
-										<img
-											src="${pageContext.request.contextPath}/img/IconoBasurero.png"
-											alt="">
+										<a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}&tipo=egreso">
+											<img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
+										</a>
 									</div>
 								</div>
 							</td>
@@ -119,13 +110,12 @@
 			</div>
 
 			<div class="contenedor-crear">
-				<div class="boton-crear"
-					onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=transferencia'">
-					Crear</div>
+				<div class="boton-crear" onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=transferencia'">
+					Crear
+				</div>
 			</div>
 
-			<div class="subtitulo-categorias-actuales">Categorías actuales
-			</div>
+			<div class="subtitulo-categorias-actuales">Categorías actuales</div>
 
 			<div class="contenedor-tabla-categorias">
 				<table>
@@ -140,16 +130,14 @@
 							<td>${categoria.nombre}</td>
 							<td>
 								<div class="acciones">
-									<div class="boton-actualizar"
-										onclick="location.href='formularioActualizacionCategoria.html'">
-										<img
-											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
-											alt="">
+									<div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.html'">
+										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
 									</div>
+									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
 									<div class="boton-eliminar">
-										<img
-											src="${pageContext.request.contextPath}/img/IconoBasurero.png"
-											alt="">
+										<a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}&tipo=transferencia">
+											<img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
+										</a>
 									</div>
 								</div>
 							</td>
@@ -159,56 +147,6 @@
 			</div>
 		</div>
 	</div>
-
-	<div id="modalEliminar" class="modal">
-		<div class="modal-contenido">
-			<span class="cerrar">&times;</span>
-			<p>¿Estás seguro de que deseas eliminar?</p>
-			<div class="modal-botones">
-				<button id="btnSi">Sí</button>
-				<button id="btnNo">No</button>
-			</div>
-		</div>
-	</div>
-
-	<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const modal = document.getElementById('modalEliminar');
-        const btnEliminar = document.querySelectorAll('.boton-eliminar');
-        const spanCerrar = document.querySelector('.cerrar');
-        const btnSi = document.getElementById('btnSi');
-        const btnNo = document.getElementById('btnNo');
-
-        btnEliminar.forEach(btn => {
-            btn.addEventListener('click', () => {
-                modal.style.display = 'block';
-            });
-        });
-
-        spanCerrar.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        btnSi.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        btnNo.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', event => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-    });
-
-    function limpiarSeccion() {
-        // Recargar ajustes.html sin parámetros en la URL
-        window.location.href = 'VerTableroController?ruta=ajustes';
-    }
-</script>
 
 </body>
 </html>

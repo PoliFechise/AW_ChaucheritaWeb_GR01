@@ -132,4 +132,14 @@ public class CategoriaDAO {
 		BddConnection.cerrar();
 
 	}
+	// Método para eliminar una categoría por su ID y tipo
+		public void eliminarCategoria(int id, String tipo) throws SQLException {
+		    String sql = "DELETE FROM categoria WHERE id = ? AND tipo = ?";  // Consideramos el tipo también
+
+		    try (PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sql)) {
+		        pstmt.setInt(1, id);
+		        pstmt.setString(2, tipo); // Establecemos el tipo también
+		        pstmt.executeUpdate();
+		    }
+		}
 }
