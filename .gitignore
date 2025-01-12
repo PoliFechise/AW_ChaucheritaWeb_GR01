@@ -1,2 +1,4 @@
 /.project
-".project" 
+/build/
+/target/
+/bin/

@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-
 body {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url('../img/Fondo.png');
     background-size: cover;
@@ -28,7 +27,6 @@ header {
 .Titulo {
     font-size: 60px;
     color: rgb(255, 255, 255);
-   
     font-family: 'Angel Club';
 }
 
@@ -67,6 +65,8 @@ header {
     background-color: rgb(174, 171, 171);
     height: 40px;
     border-radius: 8px;
+    display: flex;
+    align-items: center; /* Asegura que el contenido esté centrado verticalmente */
 }
 
 .ItemFormulario {
@@ -75,6 +75,17 @@ header {
 
 .ItemFormulario1 {
     width: 100%;
+}
+
+.ItemFormulario1 input {
+    width: 100%; /* Hace que el input ocupe todo el ancho del contenedor */
+    height: 100%; /* Hace que el input ocupe toda la altura del contenedor */
+    border: none;
+    background: transparent;
+    padding: 0 10px; /* Añade un pequeño padding interno */
+    box-sizing: border-box;
+    font-size: 16px; /* Ajusta el tamaño de la fuente según sea necesario */
+    font-family: inherit; /* Hereda la fuente del contenedor */
 }
 
 /* Estilos del botón */
@@ -88,27 +99,52 @@ header {
     margin-bottom: 25px;
 }
 
-button {
-    background-color: #e1ff5d;
-    color: rgb(0, 0, 0);
-    border-radius: 8px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 23px;
-    width: 200px;
-    font-family: 'Angel Club';
+.BtnCancelar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
-button:hover {
-    background-color: #9fac09;
+button.btn-guardar {
+    background-color: #37f332; 
+    color: rgb(0, 0, 0); 
+    border-radius: 8px; 
+    padding: 10px 20px;  
+    cursor: pointer;  
+    font-size: 23px;  
+    width: 200px;  
+    font-family: 'Angel Club';  
+}
+
+button.btn-guardar:hover {
+    background-color: #0eb10a; 
+}
+
+button.btn-cancelar {
+    background-color: #e74c3c; 
+    color: rgb(0, 0, 0); 
+    border-radius: 8px; 
+    padding: 10px 20px;  
+    cursor: pointer;  
+    font-size: 23px;  
+    width: 200px;  
+    font-family: 'Angel Club';  
+}
+
+button.btn-cancelar:hover {
+    background-color: #c0392b; 
 }
 
 .negrita-negra {
     color: black;
-    
     font-size: 23px;
     font-family: 'Angel Club';
 }
+
 @font-face {
     font-family: 'Angel Club';
     src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf');
