@@ -1,12 +1,38 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Ingreso {
-    private String concepto;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="ingreso")
+public class Ingreso implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@Column
+	private String concepto;
+	
+	@Column
     private float valor;
+	
+	@Column
     private Date fecha;
+	
+	@Column(name="categoriaId")
     private String origen;
+	
+	@Column(name="cuentaDestino")
     private String destino;
 
     public Ingreso(String concepto, float valor, Date fecha, String origen, String destino) {

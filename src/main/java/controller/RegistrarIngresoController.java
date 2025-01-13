@@ -44,26 +44,25 @@ public class RegistrarIngresoController extends HttpServlet {
 
 			IngresoDAO ingresoDAO = new IngresoDAO();
 
+			Ingreso ingreso = new Ingreso();
 			try {
-				Ingreso ingreso = new Ingreso();
 				ingreso.setConcepto(concepto);
 				ingreso.setValor(Float.parseFloat(valor));
 				ingreso.setOrigen(origen);
 				ingreso.setDestino(destino);
 				ingreso.setFecha(new java.text.SimpleDateFormat("yyyy-MM-dd").parse(fecha));
-				ingresoDAO.guardarIngreso(ingreso);
 
-			} catch (SQLException | java.text.ParseException e) {
-				e.printStackTrace();
-				request.setAttribute("mensaje", "Error: " + e.getMessage());
-			} finally {
-				BddConnection.cerrar();
+				ingresoDAO.guardarIngreso(ingreso);
+				
+			} catch(Exception e) {
+				System.out.println(e.toString());
 			}
+			
+
 		} else {
 			request.setAttribute("mensaje", "Todos los campos son obligatorios.");
 		}
 
-		// Redirigir a ingreso.jsp con el mensaje
 		response.sendRedirect("VerTableroController?ruta=ver");
 	}
 
@@ -90,12 +89,12 @@ public class RegistrarIngresoController extends HttpServlet {
 
 			// Obtener saldo de la cuenta
 			String numeroCuenta = request.getParameter("numero");
-            CuentaDAO cuentaDAO = new CuentaDAO();
-            BigDecimal saldoCuenta = cuentaDAO.encontrarPorNumero(numeroCuenta).getSaldo();
+			CuentaDAO cuentaDAO = new CuentaDAO();
+			BigDecimal saldoCuenta = cuentaDAO.encontrarPorNumero(numeroCuenta).getSaldo();
 
 			// Pasar las categorías como atributo
 			request.setAttribute("categoriasIngreso", categoriasIngreso);
-            request.setAttribute("saldoCuenta", saldoCuenta);
+			request.setAttribute("saldoCuenta", saldoCuenta);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
