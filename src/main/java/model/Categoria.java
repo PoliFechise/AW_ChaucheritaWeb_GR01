@@ -25,8 +25,8 @@ public class Categoria implements Serializable {
 	private String nombre;
 	
 	@Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "ENUM('ingreso', 'egreso', 'transferencia')")
-	private String tipo; // Puede ser ingreso, egreso o transferencia
+	@Column(nullable = false)
+	private TipoCategoria tipo;
 
 	public Categoria() {
 
@@ -35,7 +35,7 @@ public class Categoria implements Serializable {
 	public Categoria(int id, String nombre) {
 	}
 
-	public Categoria(int Id, String nombre, String tipo) {
+	public Categoria(int Id, String nombre, TipoCategoria tipo) {
 
 		super();
 		this.id = id;
@@ -63,11 +63,7 @@ public class Categoria implements Serializable {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
-		// Validación para asegurarse de que el tipo es válido
-		if (!tipo.equals("ingreso") && !tipo.equals("egreso") && !tipo.equals("transferencia")) {
-			throw new IllegalArgumentException("Tipo no válido: " + tipo);
-		}
+	public void setTipo(TipoCategoria tipo) {
 		this.tipo = tipo;
 	}
 

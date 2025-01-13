@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajustes</title>
-    <link rel="stylesheet" href="styles/ajustes.css">
+    <link rel="stylesheet" href="../styles/ajustes.css">
 </head>
 <header>
     <div class="titulo-ajustes">
@@ -111,7 +111,7 @@
         }
 
         function limpiarSeccion() {
-            window.location.href = 'VerTableroController?ruta=ver';
+            window.location.href = 'GestionarCategoriaController?ruta=listar';
         }
     </script>
 

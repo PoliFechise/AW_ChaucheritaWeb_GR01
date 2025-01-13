@@ -12,9 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Categoria;
-import model.Cuenta;
+import model.TipoCategoria;
 import model.dao.CategoriaDAO;
-import model.dao.CuentaDAO;
 
 @WebServlet("/GestionarCategoriaController")
 public class GestionarCategoriaController extends HttpServlet {
@@ -38,7 +37,7 @@ public class GestionarCategoriaController extends HttpServlet {
 
 	private void ruteador(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String ruta = (request.getParameter("ruta") == null) ? "listar" : request.getParameter("ruta");
+		String ruta = (request.getParameter("ruta") == null) ? "crear" : request.getParameter("ruta");
 
 		switch (ruta) {
 		case "listar":
@@ -50,42 +49,20 @@ public class GestionarCategoriaController extends HttpServlet {
 		case "guardar":
 			this.crearCategoria(request, response);
 			break;
-		case "eliminar":
-			this.eliminarCategoria(request, response); // Nueva ruta para eliminar
-			break;
 		default:
-			response.sendRedirect("ajustes.jsp");
+			response.sendRedirect("jsp/ajustes.jsp");
 			break;
 		}
 	}
-
+	
 	private void listarCategorias(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Categoria> categoriasIngreso;
-		List<Categoria> categoriasEgreso;
-		List<Categoria> categoriasTransferencia;
-
-		try {
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
-
-			categoriasIngreso = categoriaDAO.getCategoriasIngreso();
-			categoriasEgreso = categoriaDAO.getCategoriasEgreso();
-			categoriasTransferencia = categoriaDAO.getCategoriasTransferencia();
-
-			// Enviar datos a la vista
-			request.setAttribute("categoriasIngreso", categoriasIngreso);
-			request.setAttribute("categoriasEgreso", categoriasEgreso);
-			request.setAttribute("categoriasTransferencia", categoriasTransferencia);
-
 			getServletContext().getRequestDispatcher("/jsp/categoria.jsp").forward(request, response);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void presentarFormularioCrear(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("jsp/formularioCreacionCategoria.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/formularioCrearCategoria.jsp").forward(request, response);
 	}
 
 	private void crearCategoria(HttpServletRequest request, HttpServletResponse response)
@@ -99,15 +76,10 @@ public class GestionarCategoriaController extends HttpServlet {
 			return;
 		}
 
-		// Validar el tipo
-		if (!tipo.equals("ingreso") && !tipo.equals("egreso") && !tipo.equals("transferencia")) {
-			return;
-		}
-
 		// 2. Hablar con el dominio
 		Categoria categoria = new Categoria();
 		categoria.setNombre(nombre);
-		categoria.setTipo(tipo.toLowerCase());
+		categoria.setTipo(TipoCategoria.valueOf(tipo.toUpperCase()));
 
 		// 3. Hablar con la vista
 		try {
@@ -119,32 +91,4 @@ public class GestionarCategoriaController extends HttpServlet {
 		}
 	}
 
-	private void eliminarCategoria(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// Obtener los parámetros id y tipo para la eliminación
-		String idCategoria = request.getParameter("id");
-		String tipoCategoria = request.getParameter("tipo");
-
-		if (idCategoria == null || idCategoria.trim().isEmpty() || tipoCategoria == null
-				|| tipoCategoria.trim().isEmpty()) {
-			request.setAttribute("error", "ID de categoría o tipo no proporcionado.");
-			response.sendRedirect("GestionarCategoriaController?ruta=listar");
-			return;
-		}
-
-		try {
-			int id = Integer.parseInt(idCategoria);
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
-
-			// Llamamos al método de eliminación de la categoría
-			categoriaDAO.eliminarCategoria(id, tipoCategoria);
-
-			// Redirigir al listado después de eliminar
-			response.sendRedirect("GestionarCategoriaController?ruta=listar");
-		} catch (SQLException | NumberFormatException e) {
-			e.printStackTrace();
-			request.setAttribute("error", "Error al eliminar la categoría: " + e.getMessage());
-			getServletContext().getRequestDispatcher("/jsp/error.jsp").forward(request, response);
-		}
-	}
 }
