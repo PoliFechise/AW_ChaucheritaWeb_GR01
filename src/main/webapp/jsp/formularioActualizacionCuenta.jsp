@@ -18,19 +18,19 @@
             <form class="form" action="GestionarCuentaController" method="POST">
                 <input type="hidden" name="ruta" value="modificar">
                 <input type="hidden" name="redirect" value="VerTableroController?ruta=ajustes">
-                <input type="hidden" name="numero" value="${numero}">
+                <input type="hidden" name="numero" value="${cuenta.numero}">
 
                 <div class="Campos">
                     <div class="campo">
                         <span class="negrita-negra">Nombre:</span>
                         <div class="ItemFormulario1">
-                            <input type="text" id="nombre" name="nombre" value="${nombre}" required>
+                            <input type="text" id="nombre" name="nombre" value="${cuenta.nombre}" required>
                         </div>
                     </div>
                     <div class="campo">
                         <span class="negrita-negra">Saldo:</span>
                         <div class="ItemFormulario1">
-                            <input type="number" id="saldo" name="saldo" value="${saldo}" step="0.01" required>
+                            <input type="number" id="saldo" name="saldo" value="${cuenta.saldo}" step="0.01" required>
                         </div>
                     </div>
                 </div>

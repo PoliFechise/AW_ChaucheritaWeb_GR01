@@ -67,18 +67,36 @@
     </div>
 
     <script>
-        function confirmarEliminacion(numero) {
-            const modal = document.getElementById('modalConfirmacion');
-            modal.style.display = 'block';
-            const btnSi = document.getElementById('btnSi');
-            btnSi.onclick = function () {
-                location.href = `GestionarCuentaController?ruta=eliminar&numero=${numero}&redirect=VerTableroController?ruta=ajustes`;
-            };
-        }
+    function confirmarEliminacion(numero) {
+        const modal = document.getElementById('modalConfirmacion');
+        modal.style.display = 'block';
 
-        function cerrarModal() {
-            document.getElementById('modalConfirmacion').style.display = 'none';
-        }
+        const btnSi = document.getElementById('btnSi');
+        btnSi.onclick = function () {
+            // Enviar solicitud para eliminar sin redirigir
+            fetch(`GestionarCuentaController?ruta=eliminar&numero=${numero}`)
+                .then(response => {
+                    if (response.ok) {
+                        // Actualizar la tabla sin recargar la página
+                        location.href = 'VerTableroController?ruta=ajustes';
+                    } else {
+                        alert('Error al eliminar la cuenta.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al eliminar:', error);
+                    alert('Error al intentar eliminar la cuenta.');
+                });
+
+            cerrarModal();
+        };
+    }
+
+    function cerrarModal() {
+        const modal = document.getElementById('modalConfirmacion');
+        modal.style.display = 'none';
+    }
+
     </script>
 </body>
 </html>

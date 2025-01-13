@@ -49,31 +49,31 @@ public class VerTableroController extends HttpServlet {
 		}
 	}
 
-	private void ver(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    // 1.- Obtener parámetros
-	    // 2.- Hablar con el modelo
-	    List<CategoriaEgresoDTO> categorias;
-	    List<Cuenta> cuentas;
+    private void ver(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 1.- Obtener parámetros
+        // 2.- Hablar con el modelo
+        List<CategoriaEgresoDTO> categorias;
+        List<Cuenta> cuentas;
 
-	    try {
-	        // Obtener categorías
-	        CategoriaDAO categoriaDAO = new CategoriaDAO();
-	        categorias = categoriaDAO.obtenerCategoriasEgreso();
+        try {
+            // Obtener categorías
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            categorias = categoriaDAO.obtenerCategoriasEgreso();
 
-	        // Obtener cuentas
-	        CuentaDAO cuentaDAO = new CuentaDAO();
-	        cuentas = cuentaDAO.getCuentas();
+            // Obtener cuentas utilizando el método findAll() del nuevo DAO
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            cuentas = cuentaDAO.findAll();
 
-	        // 3.- Hablar con la vista
-	        request.setAttribute("categorias", categorias);
-	        request.setAttribute("cuentas", cuentas);
+            // 3.- Hablar con la vista
+            request.setAttribute("categorias", categorias);
+            request.setAttribute("cuentas", cuentas);
 
-	        getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request, response);
-	    } catch (SQLException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-	    }
-	}
+            getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ocurrió un error al procesar la solicitud.");
+        }
+    }
 	
 	private void ajustes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    getServletContext().getRequestDispatcher("/jsp/ajustes.jsp").forward(request, response);

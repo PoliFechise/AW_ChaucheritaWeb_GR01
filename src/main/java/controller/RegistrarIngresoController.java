@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Categoria;
+import model.Cuenta;
 import model.Ingreso;
 import model.bdd.BddConnection;
 import model.dao.CategoriaDAO;
@@ -81,28 +82,34 @@ public class RegistrarIngresoController extends HttpServlet {
 		}
 	}
 
-	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		try {
-			// Obtener categorías de ingreso
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			List<Categoria> categoriasIngreso = categoriaDAO.getCategoriasIngreso();
+    private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            // Obtener categorías de ingreso
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            List<Categoria> categoriasIngreso = categoriaDAO.getCategoriasIngreso();
 
-			// Obtener saldo de la cuenta
-			String numeroCuenta = request.getParameter("numero");
+            // Obtener saldo de la cuenta
+            String numeroCuenta = request.getParameter("numero");
             CuentaDAO cuentaDAO = new CuentaDAO();
-            BigDecimal saldoCuenta = cuentaDAO.encontrarPorNumero(numeroCuenta).getSaldo();
 
-			// Pasar las categorías como atributo
-			request.setAttribute("categoriasIngreso", categoriasIngreso);
-            request.setAttribute("saldoCuenta", saldoCuenta);
+            // Buscar cuenta por ID (simulamos que recibimos el ID en el número por ahora)
+            Cuenta cuenta = cuentaDAO.findById(Integer.parseInt(numeroCuenta)); // Cambia si "numero" no es un ID
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-			request.setAttribute("mensajeError", "Error al cargar las categorías: " + e.getMessage());
-		}
+            // Pasar las categorías como atributo
+            request.setAttribute("categoriasIngreso", categoriasIngreso);
+            if (cuenta != null) {
+                request.setAttribute("saldoCuenta", cuenta.getSaldo());
+            } else {
+                request.setAttribute("mensajeError", "La cuenta no existe.");
+            }
 
-		// Redirigir a ingreso.jsp
-		getServletContext().getRequestDispatcher("/jsp/ingreso.jsp").forward(request, response);
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("mensajeError", "Error al cargar las categorías: " + e.getMessage());
+        }
+
+        // Redirigir a ingreso.jsp
+        getServletContext().getRequestDispatcher("/jsp/ingreso.jsp").forward(request, response);
+    }
 }
