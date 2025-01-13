@@ -1,24 +1,29 @@
-package model;
+package orm.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name="usuario")
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(name="nombre")
 	private String nombre;
+	
+	@Column(name="contrasena")
 	private String contrasena;
+	
+	@Column(name="usuario")
 	private String usuario;
 	
-	private static List<Usuario> listaUsuarios = null;
-
 	public Usuario() {
 	}
-	
-	
 
 	public Usuario(Integer id, String nombre, String contrasena, String usuario) {
 		super();
@@ -27,8 +32,6 @@ public class Usuario implements Serializable {
 		this.contrasena = contrasena;
 		this.usuario = usuario;
 	}
-
-
 
 	public Integer getId() {
 		return id;

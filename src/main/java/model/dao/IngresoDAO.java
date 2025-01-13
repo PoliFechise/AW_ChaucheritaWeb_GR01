@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.Ingreso;
+import orm.entities.*;
 import model.bdd.BddConnection;
 
 import java.sql.CallableStatement;

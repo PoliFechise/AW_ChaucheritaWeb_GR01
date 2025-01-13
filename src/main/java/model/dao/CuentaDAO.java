@@ -6,16 +6,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Cuenta;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
+import orm.entities.*;
 import model.bdd.BddConnection;
 
 public class CuentaDAO {
 
+	private EntityManager entityManager = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager(); 
+	
 	public CuentaDAO() {
 
 	}
+	
+	public List<Cuenta> getCuentas() {
+        String sentenceJPQL = "SELECT c FROM Cuenta c";
+        Query query = entityManager.createQuery(sentenceJPQL);
+        return query.getResultList();
+    }
 
-	public List<Cuenta> getCuentas() throws SQLException {
+	public List<Cuenta> getCuentasSinORM() throws SQLException {
 		List<Cuenta> cuentas = new ArrayList<Cuenta>();
 		String _SQL_GET_ALL = "SELECT * FROM cuenta";
 

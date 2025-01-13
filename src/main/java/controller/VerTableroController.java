@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Cuenta;
+import orm.entities.*;
 import model.dao.CategoriaDAO;
 import model.dao.CuentaDAO;
 import model.dto.CategoriaEgresoDTO;
@@ -58,7 +58,7 @@ public class VerTableroController extends HttpServlet {
 	    try {
 	        // Obtener categorías
 	        CategoriaDAO categoriaDAO = new CategoriaDAO();
-	        categorias = categoriaDAO.obtenerCategoriasEgreso();
+	        categorias = categoriaDAO.getCategoriasEgreso();
 
 	        // Obtener cuentas
 	        CuentaDAO cuentaDAO = new CuentaDAO();

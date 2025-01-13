@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Usuario;
+import orm.entities.*;
 import model.dao.UsuarioDAO;
 
 import java.io.IOException;
@@ -52,20 +52,15 @@ public class LoginController extends HttpServlet {
 		// 2.- Hablar con el modelo
 		Usuario u;
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		try {
-			u = usuarioDAO.autenticarPersona(usuario, contrasena);
-			if (u != null) {
-				// 3.- Redireccionar al controlador
-				// Le permito ir al CU gestionarUsuariosControlles
-				// response.sendRedirect("GestionarUsuariosController?ruta=listar");
-				response.sendRedirect("VerTableroController");
-			} else {
-				// 3.- Redireccionar a la vista
-				response.sendRedirect("jsp/login.jsp");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		u = usuarioDAO.autenticarPersona(usuario, contrasena);
+		if (u != null) {
+			// 3.- Redireccionar al controlador
+			// Le permito ir al CU gestionarUsuariosControlles
+			// response.sendRedirect("GestionarUsuariosController?ruta=listar");
+			response.sendRedirect("VerTableroController");
+		} else {
+			// 3.- Redireccionar a la vista
+			response.sendRedirect("jsp/login.jsp");
 		}
 	}
 	

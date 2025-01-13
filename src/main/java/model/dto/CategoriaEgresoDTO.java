@@ -1,26 +1,42 @@
 package model.dto;
 
-public class CategoriaEgresoDTO {
-	private int id;
-    private String nombre;
-    private float totalEgreso;
+import java.math.BigDecimal;
 
-    public CategoriaEgresoDTO(int id, String nombre, float totalEgreso) {
+public class CategoriaEgresoDTO {
+    private int id;
+    private String nombre;
+    private BigDecimal totalEgreso;
+
+    // Constructor que EclipseLink necesita
+    public CategoriaEgresoDTO(int id, String nombre, BigDecimal totalEgreso) {
         this.id = id;
-    	this.nombre = nombre;
+        this.nombre = nombre;
         this.totalEgreso = totalEgreso;
+    }
+
+    // Getters y setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public float getTotalEgreso() {
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public BigDecimal getTotalEgreso() {
         return totalEgreso;
     }
-    
-    public int getId() {
-    	return id;
+
+    public void setTotalEgreso(BigDecimal sumaValor) {
+        this.totalEgreso = sumaValor;
     }
 }
-

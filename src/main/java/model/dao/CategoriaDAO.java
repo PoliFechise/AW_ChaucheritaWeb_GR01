@@ -5,17 +5,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 import model.bdd.BddConnection;
 import model.dto.CategoriaEgresoDTO;
-import model.Categoria;
+import orm.entities.*;
 
 public class CategoriaDAO {
+	
+	EntityManager em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager(); 
 
 	public CategoriaDAO() {
 	}
 
+	public List<Categoria> getCategorias() throws SQLException {
+		String sentenceJPQL = "SELECT c from Categoria c";
+		
+		Query query = em.createQuery(sentenceJPQL);
+		
+		return query.getResultList();
+	}
+	
+	public List<CategoriaEgresoDTO> getCategoriasEgreso() throws SQLException {
+	    try {
+	        String jpql = "SELECT new model.dto.CategoriaEgresoDTO(c.id, c.nombre, SUM(m.valor)) " +
+	                      "FROM Categoria c " +
+	                      "JOIN c.egresos e " +
+	                      "JOIN e.movimiento m " +
+	                      "WHERE c.tipo = :tipo " +
+	                      "GROUP BY c.id, c.nombre " +
+	                      "ORDER BY SUM(m.valor) DESC";
+
+	        Query query = em.createQuery(jpql);
+	        query.setParameter("tipo", Categoria.Tipo.EGRESO); // Usar enumeración para el tipo
+	        return query.getResultList();
+	    } catch (Exception e) {
+	        throw new SQLException("Error al obtener las categorías de egreso: " + e.getMessage(), e);
+	    }
+	}
+	
 	// Método para obtener todas las categorías
-	public static List<Categoria> getCategorias() throws SQLException {
+	public static List<Categoria> getCategoriasSinORM() throws SQLException {
 		List<Categoria> categorias = new ArrayList<>();
 		String sql = "SELECT * FROM categoria";
 
@@ -26,7 +58,7 @@ public class CategoriaDAO {
 				Categoria categoria = new Categoria();
 				categoria.setId(rs.getInt("id"));
 				categoria.setNombre(rs.getString("nombre"));
-				categoria.setTipo(rs.getString("tipo"));
+				//categoria.setTipo(rs.getString("tipo"));
 
 				categorias.add(categoria);
 			}
@@ -46,7 +78,7 @@ public class CategoriaDAO {
 				Categoria categoria = new Categoria();
 				categoria.setId(rs.getInt("id"));
 				categoria.setNombre(rs.getString("nombre"));
-				categoria.setTipo(rs.getString("tipo"));
+				//categoria.setTipo(rs.getString("tipo"));
 
 				categoriasIngreso.add(categoria);
 			}
@@ -55,7 +87,7 @@ public class CategoriaDAO {
 	}
 
 	// Método para obtener categorías de tipo egreso
-	public List<Categoria> getCategoriasEgreso() throws SQLException {
+	public List<Categoria> getCategoriasEgresoSinORM() throws SQLException {
 		List<Categoria> categoriasEgreso = new ArrayList<>();
 		String sql = "SELECT * FROM categoria WHERE tipo = 'egreso'";
 
@@ -66,7 +98,7 @@ public class CategoriaDAO {
 				Categoria categoria = new Categoria();
 				categoria.setId(rs.getInt("id"));
 				categoria.setNombre(rs.getString("nombre"));
-				categoria.setTipo(rs.getString("tipo"));
+				//categoria.setTipo(rs.getString("tipo"));
 
 				categoriasEgreso.add(categoria);
 			}
@@ -86,7 +118,7 @@ public class CategoriaDAO {
 				Categoria categoria = new Categoria();
 				categoria.setId(rs.getInt("id"));
 				categoria.setNombre(rs.getString("nombre"));
-				categoria.setTipo(rs.getString("tipo"));
+				//categoria.setTipo(rs.getString("tipo"));
 
 				categoriasTransferencia.add(categoria);
 			}
@@ -95,7 +127,7 @@ public class CategoriaDAO {
 	}
 
 	// Método para obtener datos de egresos agrupados y sumados
-	public static List<CategoriaEgresoDTO> obtenerCategoriasEgreso() throws SQLException {
+	public static List<CategoriaEgresoDTO> obtenerCategoriasEgresoSinORM() throws SQLException {
 		List<CategoriaEgresoDTO> categoriasEgreso = new ArrayList<>();
 		String sql = "SELECT c.id, c.nombre AS categoria, SUM(m.valor) AS total_egreso " + "FROM categoria c "
 				+ "JOIN egreso e ON c.id = e.destino " + "JOIN movimiento m ON e.movimiento_id = m.id "
@@ -124,7 +156,7 @@ public class CategoriaDAO {
 
 		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(_SQL_INSERT);
 		pstmt.setString(1, categoria.getNombre());
-		pstmt.setString(2, categoria.getTipo());
+		//pstmt.setString(2, categoria.getTipo());
 
 		int filas = pstmt.executeUpdate();
 
