@@ -5,13 +5,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 import model.bdd.BddConnection;
 import model.dto.CategoriaEgresoDTO;
 import model.Categoria;
 
 public class CategoriaDAO {
 
+	private EntityManager em;
+
 	public CategoriaDAO() {
+		this.em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager();
 	}
 
 	// Método para obtener todas las categorías
@@ -118,28 +124,19 @@ public class CategoriaDAO {
 
 	// Método para guardar una nueva categoría
 	public void guardarCategoria(Categoria categoria) throws SQLException {
-		List<Categoria> categorias = new ArrayList<Categoria>();
-
-		String _SQL_INSERT = "INSERT INTO categoria (nombre, tipo) VALUES (?, ?)";
-
-		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(_SQL_INSERT);
-		pstmt.setString(1, categoria.getNombre());
-		pstmt.setString(2, categoria.getTipo());
-
-		int filas = pstmt.executeUpdate();
-
-		BddConnection.cerrar(pstmt);
-		BddConnection.cerrar();
-
+		em.getTransaction().begin();
+		em.persist(categoria);
+		em.getTransaction().commit();
 	}
-	// Método para eliminar una categoría por su ID y tipo
-		public void eliminarCategoria(int id, String tipo) throws SQLException {
-		    String sql = "DELETE FROM categoria WHERE id = ? AND tipo = ?";  // Consideramos el tipo también
 
-		    try (PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sql)) {
-		        pstmt.setInt(1, id);
-		        pstmt.setString(2, tipo); // Establecemos el tipo también
-		        pstmt.executeUpdate();
-		    }
+	// Método para eliminar una categoría por su ID y tipo
+	public void eliminarCategoria(int id, String tipo) throws SQLException {
+		String sql = "DELETE FROM categoria WHERE id = ? AND tipo = ?"; // Consideramos el tipo también
+
+		try (PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sql)) {
+			pstmt.setInt(1, id);
+			pstmt.setString(2, tipo); // Establecemos el tipo también
+			pstmt.executeUpdate();
 		}
+	}
 }

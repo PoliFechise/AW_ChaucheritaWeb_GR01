@@ -2,12 +2,30 @@ package model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Categoria")
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name = "Nombre")
 	private String nombre;
+	
+	@Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "ENUM('ingreso', 'egreso', 'transferencia')")
 	private String tipo; // Puede ser ingreso, egreso o transferencia
 
 	public Categoria() {
