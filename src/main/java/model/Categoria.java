@@ -25,7 +25,7 @@ public class Categoria implements Serializable {
 	private String nombre;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(name= "Tipo", nullable = false)
 	private TipoCategoria tipo;
 
 	public Categoria() {
