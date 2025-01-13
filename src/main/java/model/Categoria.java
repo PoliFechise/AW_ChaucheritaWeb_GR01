@@ -4,8 +4,8 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "Tipo", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //Almacena todos los datos en una sola tabla
+@DiscriminatorColumn(name = "Tipo", discriminatorType = DiscriminatorType.STRING) //Columna de la base de datos que identificará a qué subclase pertenece cada registro en una tabla que almacena múltiples tipos de entidades
 public abstract class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;

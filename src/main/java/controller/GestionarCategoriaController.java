@@ -46,10 +46,10 @@ public class GestionarCategoriaController extends HttpServlet {
 			this.listarCategorias(request, response);
 			break;
 		case "crear":
-			this.presentarFormularioCrear(request, response);
+			this.crearCategoria(request, response);
 			break;
 		case "guardar":
-			this.crearCategoria(request, response);
+			this.guardarCategoria(request, response);
 			break;
 		default:
 			response.sendRedirect("ajustes.jsp");
@@ -76,12 +76,12 @@ public class GestionarCategoriaController extends HttpServlet {
         getServletContext().getRequestDispatcher("/jsp/categoria.jsp").forward(request, response);
     }
 
-	private void presentarFormularioCrear(HttpServletRequest request, HttpServletResponse response)
+	private void crearCategoria(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getRequestDispatcher("jsp/formularioCrearCategoria.jsp").forward(request, response);
 	}
 
-	private void crearCategoria(HttpServletRequest request, HttpServletResponse response)
+	private void guardarCategoria(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1. Obtener parámetros
 		String nombre = request.getParameter("nombre");
