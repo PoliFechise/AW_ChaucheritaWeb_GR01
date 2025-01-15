@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Cuenta;
+import orm.entities.*;
 import model.dao.CuentaDAO;
 
 import java.io.IOException;
@@ -76,17 +76,12 @@ public class GestionarCuentaController extends HttpServlet {
 		// 2. Habla con el modelo
 		List<Cuenta> cuentas;
 
-		try {
-			CuentaDAO cuentaDAO = new CuentaDAO();
-			cuentas = cuentaDAO.getCuentas();
+		CuentaDAO cuentaDAO = new CuentaDAO();
+		cuentas = cuentaDAO.getCuentas();
 
-			// 3. Habla con la vista
-			request.setAttribute("cuentas", cuentas);
-			getServletContext().getRequestDispatcher("/jsp/cuenta.jsp").forward(request, response);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// 3. Habla con la vista
+		request.setAttribute("cuentas", cuentas);
+		getServletContext().getRequestDispatcher("/jsp/cuenta.jsp").forward(request, response);
 	}
 
 	private void presentarFormularioCrear(HttpServletRequest request, HttpServletResponse response)

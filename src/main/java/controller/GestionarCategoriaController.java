@@ -11,10 +11,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Categoria;
-import model.Cuenta;
+import orm.entities.*;
 import model.dao.CategoriaDAO;
 import model.dao.CuentaDAO;
+import model.dto.CategoriaEgresoDTO;
 
 @WebServlet("/GestionarCategoriaController")
 public class GestionarCategoriaController extends HttpServlet {
@@ -62,7 +62,7 @@ public class GestionarCategoriaController extends HttpServlet {
 	private void listarCategorias(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<Categoria> categoriasIngreso;
-		List<Categoria> categoriasEgreso;
+		List<CategoriaEgresoDTO> categoriasEgreso;
 		List<Categoria> categoriasTransferencia;
 
 		try {
@@ -107,7 +107,7 @@ public class GestionarCategoriaController extends HttpServlet {
 		// 2. Hablar con el dominio
 		Categoria categoria = new Categoria();
 		categoria.setNombre(nombre);
-		categoria.setTipo(tipo.toLowerCase());
+		//categoria.setTipo(tipo.toLowerCase());
 
 		// 3. Hablar con la vista
 		try {
