@@ -57,7 +57,7 @@
 							<td>$ ${cuenta.saldo}</td>
 							<td class="inspeccionar"
 								onclick="location.href='cuentaMovimiento.html?numero=${cuenta.numero}'">
-								<button>Inspeccionar</button>
+								<button onclick="window.location.href='cuentaMovimiento.jsp'">Inspeccionar</button>
 							</td>
 							<td class="actions">
 								<button

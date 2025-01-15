@@ -78,7 +78,7 @@ header {
 }
 
 /* Estilos del botón */
-.BtnCrear {
+.BtnCrear, .BtnCancelar {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,6 +86,21 @@ header {
     height: 50px;
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+button.btn-cancelar {
+	background-color: #e74c3c;
+	color: rgb(0, 0, 0);
+	border-radius: 8px;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 23px;
+	width: 200px;
+	font-family: 'Angel Club';
+}
+
+button.btn-cancelar:hover {
+	background-color: #c0392b;
 }
 
 button {
