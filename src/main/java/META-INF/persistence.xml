@@ -3,12 +3,16 @@
 		
 		<persistence-unit name="AW_ChaucheritaWeb_GR01" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+<<<<<<< HEAD
 		<class>orm.entities.Categoria</class>
 		<class>orm.entities.Usuario</class>
 		<class>orm.entities.Egreso</class>
 		<class>orm.entities.Ingreso</class>
 		<class>orm.entities.Movimiento</class>
 		<class>orm.entities.Cuenta</class>
+=======
+		<class>model.Categoria</class>
+>>>>>>> 58883aff8136454ae8b8687919e6bd7856412d4a
 
 		<properties>
 			<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/chaucherita_web"/>
