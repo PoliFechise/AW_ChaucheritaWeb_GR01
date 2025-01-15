@@ -9,15 +9,17 @@
     align-items: center;
     justify-content: center;
 }
-
-.main .fondo {
-    position: relative;
-}
-
-.main .fondo img {
-    height: 100%;
-    width: 100%;
-    opacity: 50%;
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)),
+		url('../img/Fondo.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #000;
 }
 
 .main .ingreso {
@@ -61,6 +63,7 @@
     font-size: 27px;
     align-items: center;
     margin-top: 30px;
+    font-weight : bold;
 }
 
 .main .ingreso .left-side .ls-content .formulario div {
@@ -102,20 +105,22 @@
 
 .main .ingreso .botones {
     display: flex;
-    justify-content: center;
-    padding-bottom: 60px;
+    justify-content: flex-end;
+    padding-right: 60px;
+    padding-bottom: 40px;
+    gap: 20px; 
 }
+
 
 .main .ingreso .btn-guardar {
     display: flex;
     align-items: center;
-    padding: 0px;
-    background-color: #59C241;
-    margin-right: 60px;
     padding: 10px 40px;
+    background-color: #59C241;
     border: 1px solid black;
     border-radius: 15px;
     font-size: 25px;
+    font-weight: bold;
 }
 .main .ingreso .btn-guardar:hover {
     background-color: #48a034;
@@ -125,11 +130,11 @@
     display: flex;
     align-items: center;
     background-color: #F83737;
-    margin-right: 60px;
     padding: 10px 40px;
     border: 1px solid black;
     border-radius: 15px;
     font-size: 25px;
+    font-weight: bold;
 }
 .main .ingreso .btn-cancelar:hover {
     background-color: #db3232;

@@ -10,16 +10,18 @@
     justify-content: center;
 }
 
-.main .fondo {
-    position: relative;
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)),
+		url('../img/Fondo.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #000;
 }
-
-.main .fondo img {
-    height: 100%;
-    width: 100%;
-    opacity: 50%;
-}
-
 .main .transferencia {
     position: absolute;
     background-color: #ffffff;
@@ -31,8 +33,8 @@
 }
 
 .main .transferencia .titulo img {
-    width: 50%;
-    padding: 60px 0px 0px 60px;
+    width: 40%;
+    padding: 50px 0px 0px 50px;
 }
 
 .main .transferencia .content {
@@ -61,6 +63,7 @@
     font-size: 27px;
     align-items: center;
     margin-top: 0px;
+    font-weight : bold;
 }
 
 .main .transferencia .left-side .ls-content .formulario div {
@@ -102,21 +105,22 @@
 
 .main .transferencia .botones {
     display: flex;
-    justify-content: center;
-    padding-top: 50px;
-    padding-bottom: 60px;
+    justify-content: flex-end;
+    padding-right: 60px;
+    padding-bottom: 40px;
+    gap: 20px; 
+    
 }
 
 .main .transferencia .btn-guardar {
     display: flex;
     align-items: center;
-    padding: 0px;
-    background-color: #59C241;
-    margin-right: 60px;
     padding: 10px 40px;
+    background-color: #59C241;
     border: 1px solid black;
     border-radius: 15px;
     font-size: 25px;
+    font-weight: bold;
 }
 .main .transferencia .btn-guardar:hover {
     background-color: #48a034;
@@ -126,11 +130,11 @@
     display: flex;
     align-items: center;
     background-color: #F83737;
-    margin-right: 60px;
     padding: 10px 40px;
     border: 1px solid black;
     border-radius: 15px;
     font-size: 25px;
+    font-weight: bold;
 }
 .main .transferencia .btn-cancelar:hover {
     background-color: #db3232;
