@@ -41,7 +41,7 @@ public class GestionarCuentaController extends HttpServlet {
                 eliminarCuenta(request, response);
                 break;
             default:
-                listarCuentas(request, response);
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Acción no encontrada");
                 break;
         }
     }
@@ -56,6 +56,9 @@ public class GestionarCuentaController extends HttpServlet {
                 break;
             case "modificar":
                 actualizarCuenta(request, response);
+                break;
+            case "cancelar":
+                cancelarAccion(request, response);
                 break;
         }
     }
@@ -75,25 +78,29 @@ public class GestionarCuentaController extends HttpServlet {
         String numero = request.getParameter("numero");
         BigDecimal saldo = new BigDecimal(request.getParameter("saldo"));
         Cuenta cuenta = new Cuenta(null, nombre, numero, saldo);
-        cuentaDAO.create(cuenta);
-        response.sendRedirect("VerTableroController?ruta=ajustes");
+
+        try {
+            cuentaDAO.create(cuenta);
+            response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&mensaje=guardado");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&mensaje=error");
+        }
     }
 
     private void presentarFormularioActualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String numero = request.getParameter("numero");
 
-        // Validar que el parámetro numero no sea nulo o vacío
         if (numero == null || numero.isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "El parámetro 'numero' es requerido.");
             return;
         }
 
-        // Buscar la cuenta por número
         List<Cuenta> cuentas = cuentaDAO.findAll();
         Cuenta cuenta = cuentas.stream()
-                               .filter(c -> c.getNumero().equals(numero))
-                               .findFirst()
-                               .orElse(null);
+                .filter(c -> c.getNumero().equals(numero))
+                .findFirst()
+                .orElse(null);
 
         if (cuenta == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Cuenta no encontrada.");
@@ -109,42 +116,45 @@ public class GestionarCuentaController extends HttpServlet {
         String numero = request.getParameter("numero");
         BigDecimal saldo = new BigDecimal(request.getParameter("saldo"));
 
-        // Buscar la cuenta por número
         List<Cuenta> cuentas = cuentaDAO.findAll();
         Cuenta cuenta = cuentas.stream()
-                               .filter(c -> c.getNumero().equals(numero))
-                               .findFirst()
-                               .orElse(null);
+                .filter(c -> c.getNumero().equals(numero))
+                .findFirst()
+                .orElse(null);
 
-        if (cuenta != null) {
-            cuenta.setNombre(nombre);
-            cuenta.setSaldo(saldo);
-            cuentaDAO.update(cuenta);
+        try {
+            if (cuenta != null) {
+                cuenta.setNombre(nombre);
+                cuenta.setSaldo(saldo);
+                cuentaDAO.update(cuenta);
+            }
+            response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&mensaje=modificado");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&mensaje=error");
         }
-
-        response.sendRedirect("VerTableroController?ruta=ajustes");
     }
 
     private void eliminarCuenta(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String numero = request.getParameter("numero");
 
-        if (numero == null || numero.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("El parámetro 'numero' es requerido.");
-            return;
-        }
-
         try {
-            // Buscar y eliminar la cuenta
-            cuentaDAO.deleteByNumero(numero);
-            response.setStatus(HttpServletResponse.SC_OK);
+            if (numero != null && !numero.isEmpty()) {
+                cuentaDAO.deleteByNumero(numero);
+                response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&cuenta=eliminado");
+            } else {
+                response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&eliminado=fallido");
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("Error al eliminar la cuenta.");
+            response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&mensaje=error");
         }
     }
 
+    private void cancelarAccion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Redirigir a la vista principal de ajustes en sección cuenta
+        response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta");
+    }
 
     @Override
     public void destroy() {
