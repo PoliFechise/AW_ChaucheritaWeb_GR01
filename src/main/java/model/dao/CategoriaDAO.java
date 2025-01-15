@@ -8,19 +8,14 @@ import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
-<<<<<<< HEAD
 import jakarta.persistence.Query;
-=======
->>>>>>> 58883aff8136454ae8b8687919e6bd7856412d4a
 import model.bdd.BddConnection;
 import model.dto.CategoriaEgresoDTO;
 import orm.entities.*;
 
 public class CategoriaDAO {
 	
-	EntityManager em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager(); 
-
-	private EntityManager em;
+	private EntityManager em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager(); 
 
 	public CategoriaDAO() {
 		this.em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager();

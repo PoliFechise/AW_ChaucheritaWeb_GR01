@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
-		
-		<persistence-unit name="AW_ChaucheritaWeb_GR01" transaction-type="RESOURCE_LOCAL">
-		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-<<<<<<< HEAD
-		<class>orm.entities.Categoria</class>
-		<class>orm.entities.Usuario</class>
-		<class>orm.entities.Egreso</class>
-		<class>orm.entities.Ingreso</class>
-		<class>orm.entities.Movimiento</class>
-		<class>orm.entities.Cuenta</class>
-=======
-		<class>model.Categoria</class>
->>>>>>> 58883aff8136454ae8b8687919e6bd7856412d4a
-
-		<properties>
-			<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/chaucherita_web"/>
-			<property name="jakarta.persistence.jdbc.user" value="root"/>
-			<property name="jakarta.persistence.jdbc.password" value=""/>
-			<property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-			
-			<!-- property name="eclipselink.ddl-generation" value="create-tables" /-->
-			<property name="eclipselink.ddl-generation" value="none" />
-			<!-- property name="eclipselink.ddl-generation" value="none" /-->
-			
-		</properties>
-	</persistence-unit>
-	
+    <persistence-unit name="AW_ChaucheritaWeb_GR01" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>orm.entities.Categoria</class>
+        <class>orm.entities.Usuario</class>
+        <class>orm.entities.Egreso</class>
+        <class>orm.entities.Ingreso</class>
+        <class>orm.entities.Movimiento</class>
+        <class>orm.entities.Cuenta</class>
+        <properties>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/chaucherita_web"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <!-- Uncomment the line below to create tables automatically -->
+            <!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+            <property name="eclipselink.ddl-generation" value="none"/>
+        </properties>
+    </persistence-unit>
 </persistence>
