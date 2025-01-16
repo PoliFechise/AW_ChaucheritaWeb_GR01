@@ -1,74 +1,42 @@
 package model;
 
 import java.io.Serializable;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Categoria")
-public class Categoria implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //Almacena todos los datos en una sola tabla
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING) //Columna de la base de datos que identificará a qué subclase pertenece cada registro en una tabla que almacena múltiples tipos de entidades
+public abstract class Categoria implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(name = "Nombre")
-	private String nombre;
-	
-	@Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "ENUM('ingreso', 'egreso', 'transferencia')")
-	private String tipo; // Puede ser ingreso, egreso o transferencia
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public Categoria() {
+    @Column(name = "nombre")
+    private String nombre;
 
-	}
+    public Categoria() {
+    }
 
-	public Categoria(int id, String nombre) {
-	}
+    public Categoria(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public Categoria(int Id, String nombre, String tipo) {
+    public int getId() {
+        return id;
+    }
 
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.tipo = tipo;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		// Validación para asegurarse de que el tipo es válido
-		if (!tipo.equals("ingreso") && !tipo.equals("egreso") && !tipo.equals("transferencia")) {
-			throw new IllegalArgumentException("Tipo no válido: " + tipo);
-		}
-		this.tipo = tipo;
-	}
-
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }
