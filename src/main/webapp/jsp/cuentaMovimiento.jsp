@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
 	<!-- Header -->
 	<header>
 		<h1>CHAUCHERITA WEB</h1>
-		<div class="btn-regresar" onclick="location.href='tablero.html'">
+		<div class="btn-regresar" onclick="location.href='VerTableroController?ruta=ver'">
 			Regresar</div>
 	</header>
 

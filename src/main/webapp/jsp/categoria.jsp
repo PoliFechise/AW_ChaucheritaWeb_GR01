@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
@@ -14,7 +15,8 @@
 	</div>
 
 	<div class="contenedor-regresar">
-		<div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ajustes'">Regresar</div>
+		<div class="boton-regresar"
+			onclick="location.href='VerTableroController?ruta=ajustes'">Regresar</div>
 	</div>
 
 	<div class="contenedor-recuadros">
@@ -24,9 +26,9 @@
 			</div>
 
 			<div class="contenedor-crear">
-				<div class="boton-crear" onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=ingreso'">
-					Crear
-				</div>
+				<div class="boton-crear"
+					onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=ingreso'">
+					Crear</div>
 			</div>
 
 			<div class="subtitulo-categorias-actuales">Categorías actuales</div>
@@ -44,13 +46,21 @@
 							<td>${categoria.nombre}</td>
 							<td>
 								<div class="acciones">
-									<div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.jsp'">
-										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
+									<div class="boton-actualizar">
+										<a
+											href="GestionarCategoriaController?ruta=actualizar&id=${categoria.id}">
+											<img
+											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
+											alt="Actualizar">
+										</a>
 									</div>
 									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
 									<div class="boton-eliminar">
-										<a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}&tipo=ingreso">
-											<img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
+										<a
+											href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}&tipo=ingreso">
+											<img
+											src="${pageContext.request.contextPath}/img/IconoBasurero.png"
+											alt="">
 										</a>
 									</div>
 								</div>
@@ -67,9 +77,9 @@
 			</div>
 
 			<div class="contenedor-crear">
-				<div class="boton-crear" onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=egreso'">
-					Crear
-				</div>
+				<div class="boton-crear"
+					onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=egreso'">
+					Crear</div>
 			</div>
 
 			<div class="subtitulo-categorias-actuales">Categorías actuales</div>
@@ -87,13 +97,21 @@
 							<td>${categoria.nombre}</td>
 							<td>
 								<div class="acciones">
-									<div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.html'">
-										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
+									<div class="boton-actualizar">
+										<a
+											href="GestionarCategoriaController?ruta=actualizar&id=${categoria.id}">
+											<img
+											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
+											alt="Actualizar">
+										</a>
 									</div>
 									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
 									<div class="boton-eliminar">
-										<a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}&tipo=egreso">
-											<img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
+										<a
+											href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}&tipo=egreso">
+											<img
+											src="${pageContext.request.contextPath}/img/IconoBasurero.png"
+											alt="">
 										</a>
 									</div>
 								</div>
@@ -110,9 +128,9 @@
 			</div>
 
 			<div class="contenedor-crear">
-				<div class="boton-crear" onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=transferencia'">
-					Crear
-				</div>
+				<div class="boton-crear"
+					onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=transferencia'">
+					Crear</div>
 			</div>
 
 			<div class="subtitulo-categorias-actuales">Categorías actuales</div>
@@ -130,13 +148,21 @@
 							<td>${categoria.nombre}</td>
 							<td>
 								<div class="acciones">
-									<div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.html'">
-										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
+									<div class="boton-actualizar">
+										<a
+											href="GestionarCategoriaController?ruta=actualizar&id=${categoria.id}">
+											<img
+											src="${pageContext.request.contextPath}/img/IconoLapiz.png"
+											alt="Actualizar">
+										</a>
 									</div>
 									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
 									<div class="boton-eliminar">
-										<a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}&tipo=transferencia">
-											<img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
+										<a
+											href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}&tipo=transferencia">
+											<img
+											src="${pageContext.request.contextPath}/img/IconoBasurero.png"
+											alt="">
 										</a>
 									</div>
 								</div>
