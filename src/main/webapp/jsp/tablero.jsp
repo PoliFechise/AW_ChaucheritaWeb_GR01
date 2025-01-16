@@ -55,9 +55,8 @@
 							<td>${cuenta.nombre}</td>
 							<td>${cuenta.numero}</td>
 							<td>$ ${cuenta.saldo}</td>
-							<td class="inspeccionar"
-								onclick="location.href='cuentaMovimiento.html?numero=${cuenta.numero}'">
-								<button>Inspeccionar</button>
+							<td class="inspeccionar">
+								<button onclick="location.href='VerTableroController?ruta=cuentaMovimiento&numero=${cuenta.numero}'">Inspeccionar</button>
 							</td>
 							<td class="actions">
 								<button

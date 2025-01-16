@@ -27,6 +27,10 @@
 			<div class="BtnCrear" id="btnCrear">
 				<button type="submit">Crear</button>
 			</div>
+			<div class="BtnCancelar" id="btnCancelar">
+					<button type="button" class="btn-cancelar"
+						onclick="window.location.href='VerTableroController?ruta=ajustes&section=categoria'">Cancelar</button>
+				</div>
 		</form>
 
 	</div>

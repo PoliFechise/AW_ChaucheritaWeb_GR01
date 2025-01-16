@@ -46,6 +46,10 @@ public class VerTableroController extends HttpServlet {
 		case "ajustes":
             this.ajustes(request, response);
             break;
+            
+		case "cuentaMovimiento":
+            this.cuentaMovimiento(request, response);
+            break;
 		}
 	}
 
@@ -78,5 +82,11 @@ public class VerTableroController extends HttpServlet {
 	private void ajustes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    getServletContext().getRequestDispatcher("/jsp/ajustes.jsp").forward(request, response);
 	}
+	
+	// Redirigir a la vista cuentaMovimiento.jsp
+	private void cuentaMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    getServletContext().getRequestDispatcher("/jsp/cuentaMovimiento.jsp").forward(request, response);
+	}
+
 
 }

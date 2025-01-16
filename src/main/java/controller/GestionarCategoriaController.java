@@ -53,6 +53,9 @@ public class GestionarCategoriaController extends HttpServlet {
 		case "eliminar":
 			this.eliminarCategoria(request, response); // Nueva ruta para eliminar
 			break;
+		case "actualizar": // Nueva ruta para actualizar
+            this.presentarFormularioActualizar(request, response);
+            break;
 		default:
 			response.sendRedirect("ajustes.jsp");
 			break;
@@ -87,6 +90,12 @@ public class GestionarCategoriaController extends HttpServlet {
 			throws ServletException, IOException {
 		request.getRequestDispatcher("jsp/formularioCreacionCategoria.jsp").forward(request, response);
 	}
+	
+	private void presentarFormularioActualizar(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+	    getServletContext().getRequestDispatcher("/jsp/formularioActualizacionCategoria.jsp").forward(request, response);
+	}
+
 
 	private void crearCategoria(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
