@@ -60,9 +60,9 @@ public class VerTableroController extends HttpServlet {
 	        CategoriaDAO categoriaDAO = new CategoriaDAO();
 	        categorias = categoriaDAO.getCategoriasEgreso();
 
-	        // Obtener cuentas
-	        CuentaDAO cuentaDAO = new CuentaDAO();
-	        cuentas = cuentaDAO.getCuentas();
+            // Obtener cuentas utilizando el método findAll() del nuevo DAO
+            CuentaDAO cuentaDAO = new CuentaDAO();
+            cuentas = cuentaDAO.findAll();
 
 	        // 3.- Hablar con la vista
 	        request.setAttribute("categorias", categorias);
