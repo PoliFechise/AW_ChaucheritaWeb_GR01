@@ -27,6 +27,15 @@ public class Movimiento implements Serializable {
 	@JoinColumn(name = "cuenta")
 	private Cuenta cuenta;
 	
+	@OneToOne(mappedBy = "movimiento")
+    private Egreso egreso;
+
+    @OneToOne(mappedBy = "movimiento")
+    private Ingreso ingreso;
+
+    @OneToOne(mappedBy = "movimiento")
+    private Transferencia transferencia;
+	
 	public Movimiento() {}
 
 	public Integer getId() {

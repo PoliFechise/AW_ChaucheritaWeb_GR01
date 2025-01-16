@@ -13,15 +13,15 @@ public class Ingreso implements Serializable {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "origen")
+	@JoinColumn(name = "origen", nullable = false)
 	private Categoria origen;
 
 	@ManyToOne
-	@JoinColumn(name = "destino")
+	@JoinColumn(name = "destino", nullable = false)
 	private Cuenta destino;
 
 	@OneToOne
-	@JoinColumn(name = "movimiento_id")
+	@JoinColumn(name = "movimiento_id", nullable = false)
 	private Movimiento movimiento;
 
 	public Ingreso() {

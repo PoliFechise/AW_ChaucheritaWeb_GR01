@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
-    <persistence-unit name="AW_ChaucheritaWeb_GR01" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>orm.entities.Categoria</class>
-        <class>orm.entities.Usuario</class>
-        <class>orm.entities.Egreso</class>
-        <class>orm.entities.Ingreso</class>
-        <class>orm.entities.Movimiento</class>
-        <class>orm.entities.Cuenta</class>
-        <properties>
+<persistence version="3.0"
+	xmlns="https://jakarta.ee/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+	<persistence-unit name="AW_ChaucheritaWeb_GR01"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>orm.entities.Categoria</class>
+		<class>orm.entities.CatIngreso</class>
+		<class>orm.entities.CatEgreso</class>
+		<class>orm.entities.CatTransferencia</class>
+		<class>orm.entities.Usuario</class>
+		<class>orm.entities.Egreso</class>
+		<class>orm.entities.Ingreso</class>
+		<class>orm.entities.Movimiento</class>
+		<class>orm.entities.Cuenta</class>
+		<class>orm.entities.Transferencia</class>
+		<properties>
 			<property name="jakarta.persistence.jdbc.url"
-    value="jdbc:mysql://chaucherita-web.cxg6qio8yw66.us-east-2.rds.amazonaws.com:3306/chaucherita_web?useSSL=false" />
+				value="jdbc:mysql://chaucherita-web.cxg6qio8yw66.us-east-2.rds.amazonaws.com:3306/chaucherita_web" />
 			<property name="jakarta.persistence.jdbc.user" value="admin" />
-			<property name="jakarta.persistence.jdbc.password" value="chaucheritaweb123" />
-			<property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            
-            <property name="eclipselink.ddl-generation" value="create-tables"/>
-        </properties>
-    </persistence-unit>
+			<property name="jakarta.persistence.jdbc.password"
+				value="chaucheritaweb123" />
+			<property name="jakarta.persistence.jdbc.driver"
+				value="com.mysql.cj.jdbc.Driver" />
+
+			<property name="eclipselink.ddl-generation"
+				value="none" />
+		</properties>
+	</persistence-unit>
 </persistence>

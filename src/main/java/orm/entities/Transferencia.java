@@ -7,18 +7,25 @@ import jakarta.persistence.*;
 public class Transferencia {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Column(name = "origen")
-	private Cuenta origen;
-	
-	@Column(name = "destino")
-	private Cuenta destino;
-	
-	@Column(name = "categoria")
-	private Categoria categoria;
-	
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "origen", nullable = false)
+    private Cuenta origen;
+
+    @ManyToOne
+    @JoinColumn(name = "destino", nullable = false)
+    private Cuenta destino;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria", nullable = false)
+    private Categoria categoria;
+
+    @OneToOne
+    @JoinColumn(name = "movimiento_id", nullable = false)
+    private Movimiento movimiento;
+    
 	public Transferencia() {
 		
 	}

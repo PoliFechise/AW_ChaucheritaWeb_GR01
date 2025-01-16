@@ -1,88 +1,42 @@
 package orm.entities;
 
 import java.io.Serializable;
-import java.util.List;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //Almacena todos los datos en una sola tabla
+@DiscriminatorColumn(name = "Tipo", discriminatorType = DiscriminatorType.STRING) //Columna de la base de datos que identificará a qué subclase pertenece cada registro en una tabla que almacena múltiples tipos de entidades
+public abstract class Categoria implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(name = "nombre")
-	private String nombre;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo")
-	private Tipo tipo; // Puede ser ingreso, egreso o transferencia
-	
-	@OneToMany(mappedBy = "destino")
-    private List<Egreso> egresos;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public Categoria() {
+    @Column(name = "Nombre")
+    private String nombre;
 
-	}
+    public Categoria() {
+    }
 
-	public Categoria(int id, String nombre, Tipo tipo) {
-        this.id = id;
+    public Categoria(String nombre) {
         this.nombre = nombre;
-        this.tipo = tipo;
     }
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Tipo getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Tipo tipo) {
-        // Validación para asegurarse de que el tipo es válido
-        if (tipo == null) {
-            throw new IllegalArgumentException("Tipo no puede ser nulo");
-        }
-        this.tipo = tipo;
-    }
-	
-	 public List<Egreso> getEgresos() {
-	        return egresos;
-	    }
-
-	    public void setEgresos(List<Egreso> egresos) {
-	        this.egresos = egresos;
-	    }
-	
-	public enum Tipo {
-        INGRESO,
-        EGRESO,
-        TRANSFERENCIA
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }
