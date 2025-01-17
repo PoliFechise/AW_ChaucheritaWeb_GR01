@@ -15,11 +15,9 @@ import orm.entities.*;
 
 public class CategoriaDAO {
 	
-	private EntityManager em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager(); 
+	EntityManager em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager(); 
 
-	public CategoriaDAO() {
-		this.em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager();
-	}
+	public CategoriaDAO() {}
 
 	public List<Categoria> getCategorias() throws SQLException {
 		String sentenceJPQL = "SELECT c from Categoria c";
@@ -30,22 +28,21 @@ public class CategoriaDAO {
 	}
 	
 	public List<CategoriaEgresoDTO> getCategoriasEgreso() throws SQLException {
-	    try {
-	        String jpql = "SELECT new model.dto.CategoriaEgresoDTO(c.id, c.nombre, SUM(m.valor)) " +
-	                      "FROM Categoria c " +
-	                      "JOIN c.egresos e " +
-	                      "JOIN e.movimiento m " +
-	                      "WHERE c.tipo = :tipo " +
-	                      "GROUP BY c.id, c.nombre " +
-	                      "ORDER BY SUM(m.valor) DESC";
+        try {
+            String jpql = "SELECT new model.dto.CategoriaEgresoDTO(c.id, c.nombre, SUM(m.valor)) " +
+                          "FROM Egreso e " +
+                          "JOIN e.destino c " +
+                          "JOIN e.movimiento m " +
+                          "WHERE TYPE(c) = CatEgreso " +
+                          "GROUP BY c.id, c.nombre " +
+                          "ORDER BY SUM(m.valor) DESC";
 
-	        Query query = em.createQuery(jpql);
-	        query.setParameter("tipo", Categoria.Tipo.EGRESO); // Usar enumeración para el tipo
-	        return query.getResultList();
-	    } catch (Exception e) {
-	        throw new SQLException("Error al obtener las categorías de egreso: " + e.getMessage(), e);
-	    }
-	}
+            Query query = em.createQuery(jpql);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new SQLException("Error al obtener las categorías de egreso: " + e.getMessage(), e);
+        }
+    }
 	
 	// Método para obtener todas las categorías
 	public static List<Categoria> getCategoriasSinORM() throws SQLException {

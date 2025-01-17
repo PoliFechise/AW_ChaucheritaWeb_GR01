@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 public class CategoriaEgresoDTO {
     private int id;
     private String nombre;
-    private BigDecimal totalEgreso;
+    private BigDecimal sumaValor;
 
     // Constructor que EclipseLink necesita
-    public CategoriaEgresoDTO(int id, String nombre, BigDecimal totalEgreso) {
+    public CategoriaEgresoDTO(int id, String nombre, BigDecimal sumaValor) {
         this.id = id;
         this.nombre = nombre;
-        this.totalEgreso = totalEgreso;
+        this.totalEgreso = sumaValor;
     }
 
     // Getters y setters
@@ -32,11 +32,11 @@ public class CategoriaEgresoDTO {
         this.nombre = nombre;
     }
 
-    public BigDecimal getTotalEgreso() {
-        return totalEgreso;
+    public BigDecimal getSumaValor() {
+        return sumaValor;
     }
 
-    public void setTotalEgreso(BigDecimal sumaValor) {
-        this.totalEgreso = sumaValor;
+    public void setSumaValor(BigDecimal sumaValor) {
+        this.sumaValor = sumaValor;
     }
 }
