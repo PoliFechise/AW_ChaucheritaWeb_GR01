@@ -3,24 +3,24 @@ package model.dto;
 import java.math.BigDecimal;
 
 public class CategoriaEgresoDTO {
-    private int id;
+    private Integer id;
     private String nombre;
     private BigDecimal sumaValor;
 
     // Constructor que EclipseLink necesita
-    public CategoriaEgresoDTO(int id, String nombre, BigDecimal sumaValor) {
+    public CategoriaEgresoDTO(Integer id, String nombre, BigDecimal sumaValor) {
         this.id = id;
         this.nombre = nombre;
-        this.totalEgreso = sumaValor;
+        this.sumaValor = sumaValor;
     }
 
     // Getters y setters
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

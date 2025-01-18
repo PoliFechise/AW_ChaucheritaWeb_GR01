@@ -1,31 +1,36 @@
-/* Declarar las fuentes locales */
-/* Importar Fuentes */
-@font-face {
-    font-family: 'Angel Club';
-    src: url('../fonts/Angel\ Club\ -\ \(Demo\)\ hanscostudio.com.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Smothy Bubble';
-    src: url('../fonts/Smothy\ Bubble\ -\ \(Demo\)\ hanscostudio.com.otf') format('opentype');
-}
-
+/* General */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* Declarar las fuentes locales */
+/* Importar Fuentes */
+@font-face {
+    font-family: 'Angel Club';
+    src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Smothy Bubble';
+    src: url('../fonts/Smothy Bubble - (Demo) hanscostudio.com.otf') format('opentype');
+}
+
 /* General */
 body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: 
         linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
         url('../img/Fondo.png');
     background-size: cover;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-position: center;
-    margin: 0;
-    height: 100vh;
+    overflow: hidden; /* Para que el fondo animado no cause scroll */
 }
 
 /* Contenedor principal */
@@ -35,33 +40,92 @@ body {
     align-items: center;
     flex-direction: column;
     padding: 30px;
+    text-align: center; /* Asegura que todo el contenido esté centrado */
+    position: relative; /* Para posicionar el fondo animado */
+    z-index: 1; /* Para que el contenido esté por encima del fondo animado */
+    background-color: rgba(255, 255, 255, 0); /* Fondo transparente */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
 }
 
 /* Logo */
 .logo {
-    margin-top: 30px;
-    height: 230px; 
+    position: relative;
+    height: 150px; 
+    display: flex;  /* Asegura que el contenedor de la imagen use flexbox */
+    justify-content: center;  /* Centra el contenido horizontalmente */
+    align-items: center;  /* Centra el contenido verticalmente */
 }
 
-.logo img {
-    height: 100%;
+.logo-img {
+    position: relative;
+    z-index: 2; /* Asegura que el logo esté al frente */
+    height: 100%; /* Ajusta la altura del logo */
+    width: auto; /* Mantiene la proporción de la imagen */
 }
 
-/* Titulo y Frase */
+.dinero {
+    position: absolute;
+    top: -150px; /* Posición inicial fuera de la vista */
+    height: 100px; /* Ajusta la altura según sea necesario */
+    z-index: 1; /* Asegura que el billete esté detrás del logo */
+    animation: dinero-animation 5s ease-in-out infinite; /* Animación */
+}
+
+@keyframes dinero-animation {
+    0%, 100% {
+        top: -100px; /* Posición inicial y final fuera de la vista */
+    }
+    50% {
+        top: 0; /* Posición visible */
+    }
+}
+
+/* Título */
 .titulo {
-    font-size: 70px;
+    font-size: 50px;
     color: #ffc000;
     font-family: 'Smothy Bubble', sans-serif;
     font-weight: 200;
     letter-spacing: 2px;
+    margin-top: 20px; /* Añadido para separar del logo */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
 }
 
+/* Contenedor de la Frase */
+.frase-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* Frase */
 .frase {
+    display: inline-block;
     font-size: 20px;
     font-family: 'Angel Club', sans-serif; 
     color: #2977bd;
     font-weight: 100;
-    margin-bottom: 30px;
+    animation: scroll-text 20s linear infinite;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Sombra del texto */
+}
+
+@keyframes scroll-text {
+    0% {
+        transform: translateX(100%);
+    }
+    10%, 40% {
+        transform: translateX(0);
+    }
+    60%, 90% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 /* Campo de entrada */
@@ -104,8 +168,42 @@ body {
     font-size: 20px;
     font-family: 'Angel Club', sans-serif;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.boton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transition: all 0.3s ease;
+}
+
+.boton:hover::before {
+    left: 100%;
 }
 
 .boton:hover {
-    background-color: #f1f1f1;
+    background: linear-gradient(45deg, #0000FF, #1E90FF, #00BFFF, #87CEFA, #B0E0E6);
+    background-size: 400% 400%;
+    animation: gradient-animation 3s ease infinite;
+    color: black;
+    border-color: black;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

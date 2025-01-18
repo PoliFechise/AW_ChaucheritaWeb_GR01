@@ -6,9 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import orm.entities.*;
+import services.TableroService;
 import model.dao.CategoriaDAO;
 import model.dao.CuentaDAO;
 import model.dto.CategoriaEgresoDTO;
+import model.dto.TableroDTO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -60,19 +62,26 @@ public class VerTableroController extends HttpServlet {
 	    List<Cuenta> cuentas;
 
 	    try {
-	        // Obtener categorías
-	        CategoriaDAO categoriaDAO = new CategoriaDAO();
-	        categorias = categoriaDAO.getCategoriasEgreso();
+	    	TableroService tableroService = new TableroService();
+	    	TableroDTO tableroDTO = tableroService.obtenerDatosTablero();
+	    	
+	    	// 3.- Hablar con la vista
+	    	request.setAttribute("tableroDTO", tableroDTO);
+			 getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request, response);
 
-            // Obtener cuentas utilizando el método findAll() del nuevo DAO
-            CuentaDAO cuentaDAO = new CuentaDAO();
-            cuentas = cuentaDAO.findAll();
-
-	        // 3.- Hablar con la vista
-	        request.setAttribute("categorias", categorias);
-	        request.setAttribute("cuentas", cuentas);
-
-	        getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request, response);
+			/*
+			 * // Obtener categorías CategoriaDAO categoriaDAO = new CategoriaDAO();
+			 * categorias = categoriaDAO.getCategoriasEgreso();
+			 * 
+			 * // Obtener cuentas utilizando el método findAll() del nuevo DAO CuentaDAO
+			 * cuentaDAO = new CuentaDAO(); cuentas = cuentaDAO.findAll();
+			 * 
+			 * // 3.- Hablar con la vista request.setAttribute("categorias", categorias);
+			 * request.setAttribute("cuentas", cuentas);
+			 * 
+			 * getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request,
+			 * response);
+			 */
 	    } catch (SQLException e) {
 	        // TODO Auto-generated catch block
 	        e.printStackTrace();

@@ -6,61 +6,129 @@
     font-family: Arial, sans-serif;
 }
 
+@font-face {
+    font-family: 'Smothy Bubble';
+    src: url('../fonts/Smothy\ Bubble\ -\ \(Demo\)\ hanscostudio.com.otf') format('opentype');
+}
+
 body {
-    background: linear-gradient(rgba(68, 51, 34, 0.7), rgba(68, 51, 34, 0.7)), url('../img/Fondo.png');
-    background-size: cover;
-    background-repeat: repeat;
-    background-position: center;
+    background: #f0f0f0; /* Fondo claro sin imagen */
     color: #000;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center; /* Todos los elementos centrados verticalmente */
     background-color: #1f65b7;
     height: 60px;
-    align-items: center;
+    padding: 0 20px; /* Añadir algo de padding a los lados */
 }
 
 .titulo-ChW {
-    padding: 15px 0px 0px 0px ;
-}
-.titulo-ChW img{
-    width: 400px;
-    height: 100%;
+    font-family: 'Smothy Bubble', Arial, sans-serif;
+    font-size: 36px; /* Tamaño de fuente más grande */
+    color: white; /* Color del texto */
 }
 
 .opciones-header {
     display: flex;
     gap: 10px;
+    align-items: center; /* Asegurar que los elementos dentro también estén centrados */
 }
+
 .cerrarSesion {
     background-color: #ffc107;
     border: none;
-    padding: 10px;
+    padding: 8px 16px; /* Reducir el padding */
     border-radius: 15px;
     cursor: pointer;
     font-weight: bold;
-    color: #1f65b7;
+    color: black;
+    display: flex;
+    align-items: center;
+    font-family: 'Arial Black', Gadget, sans-serif; /* Fuente más robusta */
+    font-size: 14px; /* Reducir tamaño de fuente */
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
+}
+
+.cerrarSesion i {
+    margin-right: 8px;
+    transition: color 0.4s ease;
+}
+
+.cerrarSesion::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: #1f65b7;
+    transition: transform 0.5s ease;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    z-index: 0;
+}
+
+.cerrarSesion:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.cerrarSesion:hover {
+    color: white;
+}
+
+.cerrarSesion:hover i {
+    color: white;
+}
+
+.cerrarSesion span {
+    position: relative;
+    z-index: 1;
 }
 
 .logoConfiguracion {
     font-size: 30px;
     background-color: #ffc107;
-    height: 38px;
+    height: 42px;
     width: 42px;
     border-radius: 50%;
-    color: #000;
+    color: black;
     cursor: pointer;
-    margin-right: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
 }
 
-.logoConfiguracion img {
-    width: 30px;
-    height: 30px;
+.logoConfiguracion::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: #1f65b7;
+    transition: transform 0.5s ease;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    z-index: 0;
+}
+
+.logoConfiguracion:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.logoConfiguracion:hover {
+    color: white;
+}
+
+.logoConfiguracion span {
+    position: relative;
+    z-index: 1;
 }
 
 .container {
@@ -71,19 +139,28 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff;
+    background-color: #fff; /* Fondo blanco para la tabla */
+    border: 1px solid #343a40; /* Bordes oscuros */
+    border-radius: 8px; /* Bordes redondeados para un toque moderno */
+    overflow: hidden; /* Para aplicar el borde redondeado a toda la tabla */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #343a40; /* Bordes oscuros */
     text-align: center;
     padding: 10px;
-    
 }
 
 th {
     background-color: #1f65b7;
     color: #fff;
+    font-weight: bold;
+}
+
+td {
+    background-color: #fff; /* Fondo blanco para las celdas */
+    color: #343a40; /* Texto oscuro para contraste */
 }
 
 .actions {
@@ -92,6 +169,7 @@ th {
     padding: 0;
     margin: 0;
     border: 0px;
+    gap: 5px; /* Espacio entre los botones */
 }
 
 .actions button {
@@ -103,41 +181,84 @@ th {
     cursor: pointer;
     font-weight: bold;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
 }
 
-
-.inspeccionar {
-    padding: 0;
-    margin: 0;
-    background-color: #e4c66e;
-    cursor: pointer;
+.actions button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: #1f65b7;
+    transition: transform 0.5s ease;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    z-index: 0;
 }
 
-.inspeccionar button {
-    background-color: #e4c66e;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
+.actions button:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
 }
 
-/*button:hover {background-color: #e0a800;}*/
+.actions button:hover {
+    color: white;
+}
+
+.actions button span {
+    position: relative;
+    z-index: 1;
+}
 
 .medio {
     margin-top: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Smothy Bubble', Arial, sans-serif;
+    font-size: 36px; /* Tamaño de fuente más grande */
+    color: black; /* Color del texto */
 }
-.titulo-MisGastos img{
-    width: 300px;
-    height: 100%;
-}
+
 .filtrar-Fecha {
     background-color: #ffc107;
     border: none;
-    color: #000;
+    color: black;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 8px 16px; /* Reducir el padding */
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 15px;
+    font-family: 'Arial Black', Gadget, sans-serif; /* Fuente más robusta */
+    font-size: 14px; /* Reducir tamaño de fuente */
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
+}
+
+.filtrar-Fecha::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: #1f65b7;
+    transition: transform 0.5s ease;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    z-index: 0;
+}
+
+.filtrar-Fecha:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.filtrar-Fecha:hover {
+    color: white;
+}
+
+.filtrar-Fecha span {
+    position: relative;
+    z-index: 1;
 }

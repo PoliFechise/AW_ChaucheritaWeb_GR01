@@ -14,36 +14,33 @@ import model.dto.CategoriaEgresoDTO;
 import orm.entities.*;
 
 public class CategoriaDAO {
-	
-	EntityManager em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager(); 
 
-	public CategoriaDAO() {}
+	private EntityManager em = Persistence.createEntityManagerFactory("AW_ChaucheritaWeb_GR01").createEntityManager();
+
+	public CategoriaDAO() {
+	}
 
 	public List<Categoria> getCategorias() throws SQLException {
 		String sentenceJPQL = "SELECT c from Categoria c";
-		
+
 		Query query = em.createQuery(sentenceJPQL);
-		
+
 		return query.getResultList();
 	}
-	
-	public List<CategoriaEgresoDTO> getCategoriasEgreso() throws SQLException {
-        try {
-            String jpql = "SELECT new model.dto.CategoriaEgresoDTO(c.id, c.nombre, SUM(m.valor)) " +
-                          "FROM Egreso e " +
-                          "JOIN e.destino c " +
-                          "JOIN e.movimiento m " +
-                          "WHERE TYPE(c) = CatEgreso " +
-                          "GROUP BY c.id, c.nombre " +
-                          "ORDER BY SUM(m.valor) DESC";
 
-            Query query = em.createQuery(jpql);
-            return query.getResultList();
-        } catch (Exception e) {
-            throw new SQLException("Error al obtener las categorías de egreso: " + e.getMessage(), e);
-        }
-    }
-	
+	public List<CategoriaEgresoDTO> getCategoriasEgreso() throws SQLException {
+		try {
+			String jpql = "SELECT new model.dto.CategoriaEgresoDTO(c.id, c.nombre, SUM(m.valor)) " + "FROM Egreso e "
+					+ "JOIN e.destino c " + "JOIN e.movimiento m " + "WHERE TYPE(c) = CatEgreso "
+					+ "GROUP BY c.id, c.nombre " + "ORDER BY SUM(m.valor) DESC";
+
+			Query query = em.createQuery(jpql);
+			return query.getResultList();
+		} catch (Exception e) {
+			throw new SQLException("Error al obtener las categorías de egreso: " + e.getMessage(), e);
+		}
+	}
+
 	// Método para obtener todas las categorías
 	public static List<Categoria> getCategoriasSinORM() throws SQLException {
 		List<Categoria> categorias = new ArrayList<>();
@@ -56,7 +53,7 @@ public class CategoriaDAO {
 				Categoria categoria = new Categoria();
 				categoria.setId(rs.getInt("id"));
 				categoria.setNombre(rs.getString("nombre"));
-				//categoria.setTipo(rs.getString("tipo"));
+				// categoria.setTipo(rs.getString("tipo"));
 
 				categorias.add(categoria);
 			}
@@ -76,7 +73,7 @@ public class CategoriaDAO {
 				Categoria categoria = new Categoria();
 				categoria.setId(rs.getInt("id"));
 				categoria.setNombre(rs.getString("nombre"));
-				//categoria.setTipo(rs.getString("tipo"));
+				// categoria.setTipo(rs.getString("tipo"));
 
 				categoriasIngreso.add(categoria);
 			}
@@ -96,7 +93,7 @@ public class CategoriaDAO {
 				Categoria categoria = new Categoria();
 				categoria.setId(rs.getInt("id"));
 				categoria.setNombre(rs.getString("nombre"));
-				//categoria.setTipo(rs.getString("tipo"));
+				// categoria.setTipo(rs.getString("tipo"));
 
 				categoriasEgreso.add(categoria);
 			}
@@ -116,7 +113,7 @@ public class CategoriaDAO {
 				Categoria categoria = new Categoria();
 				categoria.setId(rs.getInt("id"));
 				categoria.setNombre(rs.getString("nombre"));
-				//categoria.setTipo(rs.getString("tipo"));
+				// categoria.setTipo(rs.getString("tipo"));
 
 				categoriasTransferencia.add(categoria);
 			}
@@ -154,7 +151,7 @@ public class CategoriaDAO {
 
 		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(_SQL_INSERT);
 		pstmt.setString(1, categoria.getNombre());
-		//pstmt.setString(2, categoria.getTipo());
+		// pstmt.setString(2, categoria.getTipo());
 
 		int filas = pstmt.executeUpdate();
 
