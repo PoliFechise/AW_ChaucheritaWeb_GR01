@@ -44,7 +44,7 @@ public class CategoriaDAO {
         return query.getResultList();
     }
 	// Método para guardar una nueva categoría
-	public void guardarCategoria(Categoria categoria) throws SQLException {
+	public void guardar(Categoria categoria) throws SQLException {
 		List<Categoria> categorias = new ArrayList<Categoria>();
 
 		String _SQL_INSERT = "INSERT INTO categoria (nombre, tipo) VALUES (?, ?)";
@@ -63,14 +63,8 @@ public class CategoriaDAO {
 		// em.getTransaction().commit();
 	}
 
-	// Método para eliminar una categoría por su ID y tipo
-	public void eliminarCategoria(int id, String tipo) throws SQLException {
-		String sql = "DELETE FROM categoria WHERE id = ? AND tipo = ?"; // Consideramos el tipo también
-
-		try (PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sql)) {
-			pstmt.setInt(1, id);
-			pstmt.setString(2, tipo); // Establecemos el tipo también
-			pstmt.executeUpdate();
-		}
+	// Método para eliminar una categoría por su ID 
+	public void eliminar(int id) {
 	}
+		
 }

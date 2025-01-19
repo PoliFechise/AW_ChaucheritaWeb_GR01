@@ -7,16 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Registrar Ingreso</title>
-<link rel="stylesheet" href="styles/ingreso-styles.css">
-
+<link rel="stylesheet" href="../styles/ingreso-styles.css">
 </head>
 <body>
 	<main>
 		<div class="main">
-			<div class="fondo">
-				<img src="${pageContext.request.contextPath}/img/Fondo.png"
-					alt="Fondo">
-			</div>
 			<div class="ingreso">
 				<div class="titulo">
 					<img src="${pageContext.request.contextPath}/img/Ingreso.png"
@@ -33,12 +28,12 @@
 									<div>
 										<label for="valor">Valor:</label> <input type="number"
 											id="valor" name="valor"
-											placeholder="Ingrese el valor del ingreso">
+											placeholder="Ingrese el valor del ingreso" required>
 									</div>
 									<div>
 										<label for="concepto">Concepto:</label> <input type="text"
 											id="concepto" name="concepto"
-											placeholder="Ingrese una d	escripcion del ingreso">
+											placeholder="Ingrese una descripción del ingreso" required>
 									</div>
 									<div>
 										<label for="categoria">Categoría:</label> <select
@@ -57,37 +52,35 @@
 									</div>
 									<div>
 										<label for="fecha">Fecha:</label> <input type="date"
-											id="fecha" name="fecha">
+											id="fecha" name="fecha" required>
 									</div>
-									<input type="hidden" id="destino" name="numeroCuenta" value="${param.numero}">
+									<input type="hidden" id="destino" name="numeroCuenta"
+										value="${param.numero}">
 									<div class="botones">
-										<div>
-											<button type="submit" class="btn-guardar">Guardar</button>
-										</div>
-										<!--  TODO: Navegación entre tablero y cuenta, según de cuál viene -->
-										<div class="btn-cancelar" id="btnCancelar">
-											<p>Cancelar</p>
-										</div>
+										<button type="submit" class="btn-guardar" id="btnGuardar">
+											Guardar</button>
+										<button type="button" class="btn-cancelar" id="btnCancelar">
+											Cancelar</button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
 					<div class="right-side">
-                        <div class="saldo">
-                            <p>$ ${saldoCuenta}</p>
-                        </div>
-                    </div>
+						<div class="saldo">
+							<p>$ ${saldoCuenta}</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</main>
-	<footer> </footer>
+	<footer></footer>
 
 	<script>
         const btnCancelar = document.getElementById('btnCancelar');
         btnCancelar.addEventListener('click', () => {
-            window.history.back(); // Go back to the previous page
+            window.history.back(); // Regresar a la página anterior
         });
     </script>
 </body>
