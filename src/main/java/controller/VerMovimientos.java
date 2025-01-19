@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dao.CategoriaDAO;
+import model.dao.CuentaDAO;
 import model.dao.MovimientoDAO;
 
 import java.io.IOException;
@@ -50,17 +51,15 @@ public class VerMovimientos extends HttpServlet {
             throws ServletException, IOException {
         // 1. Obtener parámetros
         String numero = request.getParameter("numero");
-        String nombre = request.getParameter("nombre");
-        String saldo = request.getParameter("saldo");
 
         // 2. Hablar con el modelo
+        CuentaDAO cuentaDAO = new CuentaDAO();
+        Cuenta cuenta = cuentaDAO.encontrarPorNumero(numero);
         MovimientoDAO movimientoDAO = new MovimientoDAO();
         List<Movimiento> movimientos = movimientoDAO.obtenerMovimientos();
 
         // 3. Pasar los datos a la vista
-        request.setAttribute("numero", numero);
-        request.setAttribute("nombre", nombre);
-        request.setAttribute("saldo", saldo);
+        request.setAttribute("cuenta", cuenta);
         request.setAttribute("movimientos", movimientos);
 
         // 4. Hablar con la vista
@@ -78,16 +77,16 @@ public class VerMovimientos extends HttpServlet {
         List<Categoria> categorias = null;
         switch (tipoCategoria) {
             case "Ingreso":
-                categorias = categoriaDAO.getCategoriasIngreso();
+                categorias = categoriaDAO.obtenerCategoriasIngreso();
                 break;
             case "Egreso":
-                categorias = categoriaDAO.getCategoriasEgreso();
+                categorias = categoriaDAO.obtenerCategoriasEgreso();
                 break;
             case "Transferencia":
-                categorias = categoriaDAO.getCategoriasTransferencia();
+                categorias = categoriaDAO.obtenerCategoriasTransferencia();
                 break;
             default:
-                categorias = categoriaDAO.getCategorias();
+                categorias = categoriaDAO.obtenerCategorias();
                 break;
         }
 

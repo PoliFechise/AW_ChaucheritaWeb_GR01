@@ -28,6 +28,21 @@ public class CuentaDAO {
     public Cuenta findById(Integer id) {
         return em.find(Cuenta.class, id);
     }
+    
+ // Nuevo método para encontrar por número de cuenta
+    public Cuenta encontrarPorNumero(String numero) {
+        try {
+            // Crear la consulta JPQL
+            TypedQuery<Cuenta> query = em.createQuery("SELECT c FROM Cuenta c WHERE c.numero = :numero", Cuenta.class);
+            // Establecer el parámetro de la consulta
+            query.setParameter("numero", numero);
+            // Ejecutar la consulta y devolver el resultado
+            return query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public List<Cuenta> findAll() {
         return em.createQuery("SELECT c FROM Cuenta c", Cuenta.class).getResultList();

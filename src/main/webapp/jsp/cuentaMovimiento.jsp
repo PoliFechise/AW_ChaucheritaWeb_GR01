@@ -27,11 +27,11 @@
 
         <!-- Información de la Cuenta -->
         <div class="container-info">
-            <div class="cuenta">Cuenta: ${nombre}</div>
-            <div class="saldo">$ ${saldo}</div>
+            <div class="cuenta">Cuenta: ${cuenta.nombre}</div>
+            <div class="saldo">$ ${cuenta.saldo}</div>
         </div>
 
-        <div class="numero-cuenta">Número: ${numero}</div>
+        <div class="numero-cuenta">Número: ${cuenta.numero}</div>
 
         <div class="registro-txt">Registro de movimientos</div>
 

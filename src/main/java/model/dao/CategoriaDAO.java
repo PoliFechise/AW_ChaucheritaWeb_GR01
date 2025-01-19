@@ -20,25 +20,25 @@ public class CategoriaDAO {
 	public CategoriaDAO() {
 	}
 
-	public List<Categoria> getCategorias() {
+	public List<Categoria> obtenerCategorias() {
         String jpql = "SELECT c FROM Categoria c";
         Query query = em.createQuery(jpql);
         return query.getResultList();
     }
 
-	public List<Categoria> getCategoriasEgreso() {
+	public List<Categoria> obtenerCategoriasEgreso() {
         String jpql = "SELECT c FROM CatEgreso c";
         Query query = em.createQuery(jpql);
         return query.getResultList();
     }
 
-    public List<Categoria> getCategoriasIngreso() {
+    public List<Categoria> obtenerCategoriasIngreso() {
         String jpql = "SELECT c FROM CatIngreso c";
         Query query = em.createQuery(jpql);
         return query.getResultList();
     }
 
-    public List<Categoria> getCategoriasTransferencia() {
+    public List<Categoria> obtenerCategoriasTransferencia() {
         String jpql = "SELECT c FROM CatTransferencia c";
         Query query = em.createQuery(jpql);
         return query.getResultList();
