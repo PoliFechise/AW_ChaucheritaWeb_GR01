@@ -3,9 +3,15 @@ package controller;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,6 +23,7 @@ import model.bdd.BddConnection;
 import model.dao.CategoriaDAO;
 import model.dao.CuentaDAO;
 import model.dao.IngresoDAO;
+import model.dao.MovimientoDAO;
 
 @WebServlet("/RegistrarIngresoController")
 public class RegistrarIngresoController extends HttpServlet {
@@ -32,38 +39,46 @@ public class RegistrarIngresoController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String concepto = request.getParameter("concepto");
-		String valor = request.getParameter("valor");
-		String origen = request.getParameter("categoria");
-		String destino = request.getParameter("numeroCuenta");
-		String fecha = request.getParameter("fecha");
-
-		if (concepto != null && valor != null && origen != null && destino != null && fecha != null) {
-
-			IngresoDAO ingresoDAO = new IngresoDAO();
-
-			try {
-				Ingreso ingreso = new Ingreso();
-				ingreso.setConcepto(concepto);
-				ingreso.setValor(Float.parseFloat(valor));
-				ingreso.setOrigen(origen);
-				ingreso.setDestino(destino);
-				ingreso.setFecha(new java.text.SimpleDateFormat("yyyy-MM-dd").parse(fecha));
-				ingresoDAO.guardarIngreso(ingreso);
-
-			} catch (SQLException | java.text.ParseException e) {
-				e.printStackTrace();
-				request.setAttribute("mensaje", "Error: " + e.getMessage());
-			} finally {
-				BddConnection.cerrar();
-			}
-		} else {
-			request.setAttribute("mensaje", "Todos los campos son obligatorios.");
-		}
-
-		// Redirigir a ingreso.jsp con el mensaje
-		response.sendRedirect("VerTableroController?ruta=ver");
+		
+		Ingreso ingreso = new Ingreso();
+		Movimiento movimiento = new Movimiento();
+		Cuenta cuenta = new Cuenta();
+		CatIngreso catIngreso = new CatIngreso();
+		
+		movimiento.setConcepto(request.getParameter("concepto"));
+		
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDateTime dateTime = LocalDate.parse(request.getParameter("fecha"), format).atStartOfDay();
+		movimiento.setFecha(dateTime);
+		
+		CuentaDAO cuentaDAO = new CuentaDAO();
+		cuenta = cuentaDAO.encontrarPorNumero(request.getParameter("numeroCuenta"));
+		movimiento.setCuenta(cuenta);
+		
+		movimiento.setValor(BigDecimal.valueOf(Double.parseDouble(request.getParameter("valor"))));
+		
+		MovimientoDAO movimientoDAO = new MovimientoDAO();
+		movimientoDAO.guardarMovimiento(movimiento);
+		
+		catIngreso.setNombre(request.getParameter("categoria"));
+		ingreso.setOrigen(catIngreso);
+		
+		ingreso.setDestino(cuenta);
+		
+		ingreso.setMovimiento(movimiento);
+		
+		System.out.println(movimiento.getConcepto() + " - " + movimiento.getFecha() + " - " + movimiento.getValor() + " - " 
+				+ movimiento.getCuenta().getNombre() + " - " + movimiento.getCuenta().getNumero() + " - " + catIngreso.getNombre());
+		
+		IngresoDAO ingresoDAO = new IngresoDAO();
+		ingresoDAO.guardarIngreso(ingreso);
+		
+		BigDecimal nuevoBalance = movimiento.getValor().add(cuenta.getSaldo());
+		cuenta.setSaldo(nuevoBalance);
+		
+		cuentaDAO.update(cuenta);
+		
+		response.sendRedirect("VerTableroController");
 	}
 
 	private void ruteador(HttpServletRequest request, HttpServletResponse response)
@@ -71,13 +86,20 @@ public class RegistrarIngresoController extends HttpServlet {
 		String ruta = (request.getParameter("ruta") == null) ? "listar" : request.getParameter("ruta");
 
 		switch (ruta) {
-		case "registrar-ingreso":
+		case "ingreso":
 			this.prepararIngreso(request, response);
 			break;
+		case "registrar-ingreso":
+			this.registrarIngreso(request, response);
 		default:
 			response.sendRedirect("ingreso.jsp");
 			break;
 		}
+	}
+
+	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response) {
+			
+		
 	}
 
 	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
@@ -85,7 +107,7 @@ public class RegistrarIngresoController extends HttpServlet {
 		try {
 			// Obtener categorías de ingreso
 			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			List<Categoria> categoriasIngreso = categoriaDAO.getCategoriasIngreso();
+			List<Categoria> categoriasIngreso = categoriaDAO.obtenerCategoriasIngreso();
 
 			// Obtener saldo de la cuenta
 			String numeroCuenta = request.getParameter("numero");
@@ -96,7 +118,7 @@ public class RegistrarIngresoController extends HttpServlet {
 			request.setAttribute("categoriasIngreso", categoriasIngreso);
             request.setAttribute("saldoCuenta", saldoCuenta);
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("mensajeError", "Error al cargar las categorías: " + e.getMessage());
 		}

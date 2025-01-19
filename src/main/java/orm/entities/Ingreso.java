@@ -12,7 +12,7 @@ public class Ingreso implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "origen", nullable = false)
 	private CatIngreso origen;
 
@@ -60,13 +60,6 @@ public class Ingreso implements Serializable {
 		this.movimiento = movimiento;
 	}
 	
-	@Override
-    public String toString() {
-        return "Ingreso{" +
-                "id=" + id +
-                ", origen=" + (origen != null ? origen.getNombre() : "null") +
-                ", destino=" + (destino != null ? destino.getNombre() : "null") +
-                ", movimiento=" + (movimiento != null ? "id=" + movimiento.getId() + ", concepto=" + movimiento.getConcepto() + ", valor=" + movimiento.getValor() : "null") +
-                '}';
-    }
+	
+
 }
