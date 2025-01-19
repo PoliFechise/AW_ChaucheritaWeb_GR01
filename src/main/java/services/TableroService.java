@@ -90,6 +90,8 @@ public class TableroService {
     }
 
     private List<Cuenta> obtenerCuentas() {
-        return em.createQuery("SELECT c FROM Cuenta c", Cuenta.class).getResultList();
+        List<Cuenta> cuentas = em.createQuery("SELECT c FROM Cuenta c", Cuenta.class).getResultList();
+        System.out.println("Cuentas obtenidas: " + cuentas); // Log para verificar
+        return cuentas;
     }
 }

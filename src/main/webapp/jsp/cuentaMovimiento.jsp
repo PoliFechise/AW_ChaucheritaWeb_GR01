@@ -11,93 +11,95 @@
 </head>
 <body>
 
-	<!-- Header -->
-	<header>
-		<h1>CHAUCHERITA WEB</h1>
-		<div class="btn-regresar" onclick="location.href='VerTableroController?ruta=ver'">
-			Regresar</div>
-	</header>
+    <!-- Header -->
+    <header class="header">
+        <div class="titulo-ChW">
+            Chaucherita Web
+        </div>
+        <div class="opciones-header">
+            <div class="btn-regresar" onclick="location.href='VerTableroController?ruta=ver'">
+                <span>Regresar</span>
+            </div>
+        </div>
+    </header>
 
-	<div class="container">
+    <div class="container">
 
-		<!-- Información de la Cuenta -->
-		<div class="container-info">
-			<div class="cuenta">Cuenta: Banco Pichincha - Ahorros</div>
-			<div class="saldo">$ 100.00</div>
-		</div>
+        <!-- Información de la Cuenta -->
+        <div class="container-info">
+            <div class="cuenta">Cuenta: ${nombre}</div>
+            <div class="saldo">$ ${saldo}</div>
+        </div>
 
-		<div class="numero-cuenta">Número: 1234567890</div>
+        <div class="numero-cuenta">Número: ${numero}</div>
 
-		<div class="registro-txt">Registro de movimientos</div>
+        <div class="registro-txt">Registro de movimientos</div>
 
-		<!-- Botones -->
-		<div class="container-botones">
-			<div class="boton"
-				onclick="window.location.href='ingreso.html?from=cuentaMovimiento'">
-				Registrar ingreso</div>
-			<div class="boton"
-				onclick="window.location.href='egreso.html?from=cuentaMovimiento'">
-				Registrar egreso</div>
-			<div class="boton"
-				onclick="window.location.href='transferencia.html?from=cuentaMovimiento'">
-				Registrar transferencia</div>
-		</div>
+        <!-- Botones -->
+        <div class="container-botones">
+            <div class="boton" onclick="window.location.href='ingreso.html?from=cuentaMovimiento'">
+                <span>Registrar ingreso</span>
+            </div>
+            <div class="boton" onclick="window.location.href='egreso.html?from=cuentaMovimiento'">
+                <span>Registrar egreso</span>
+            </div>
+            <div class="boton" onclick="window.location.href='transferencia.html?from=cuentaMovimiento'">
+                <span>Registrar transferencia</span>
+            </div>
+        </div>
 
-		<!-- Filtro -->
-		<div class="container-filtro">
-			<h2>Lista de movimientos</h2>
-			<div class="boton">Filtrar por categoría</div>
-		</div>
+        <!-- Filtro -->
+        <div class="container-filtro">
+            <div class="titulo-seccion">Lista de movimientos</div>
+            <form method="get" action="VerMovimientos">
+                <input type="hidden" name="ruta" value="filtrarPorCategoria">
+                <select name="tipoCategoria" onchange="this.form.submit()">
+                    <option value="" ${tipoCategoriaSeleccionada == '' ? 'selected' : ''}>Todos los tipos</option>
+                    <option value="Ingreso" ${tipoCategoriaSeleccionada == 'Ingreso' ? 'selected' : ''}>Ingreso</option>
+                    <option value="Egreso" ${tipoCategoriaSeleccionada == 'Egreso' ? 'selected' : ''}>Egreso</option>
+                    <option value="Transferencia" ${tipoCategoriaSeleccionada == 'Transferencia' ? 'selected' : ''}>Transferencia</option>
+                </select>
+                <select name="categoria" onchange="this.form.submit()">
+                    <option value="">Todas las categorías</option>
+                    <c:forEach var="categoria" items="${categorias}">
+                        <option value="${categoria.nombre}" ${categoriaSeleccionada == categoria.nombre ? 'selected' : ''}>${categoria.nombre}</option>
+                    </c:forEach>
+                </select>
+            </form>
+        </div>
 
-		<!-- Tabla con Divs -->
-		<div class="container-tabla" id="container-tabla">
-			<!-- Encabezado -->
-			<div class="row header">
-				<div class="cell-1">No.</div>
-				<div class="cell-2">Movimiento</div>
-				<div class="cell-3">Concepto</div>
-				<div class="cell-2">Origen</div>
-				<div class="cell-2">Destino</div>
-				<div class="cell-2">Categoría</div>
-				<div class="cell-1">Valor</div>
-			</div>
-			<!-- Las Filas dinámicas se generan aquí -->
-		</div>
-	</div>
-
-	<script>
-        // Datos simulados
-        const movimientos = [
-            { movimiento: "Ingreso", concepto: "Paga por horas extras", origen: "Trabajo", destino: "Bco. Pichincha - Ahorros", categoria: "Trabajo", valor: "$ 50" },
-            { movimiento: "Egreso", concepto: "...", origen: "...", destino: "...", categoria: "...", valor: "..." },
-            { movimiento: "Transferencia", concepto: "...", origen: "...", destino: "...", categoria: "...", valor: "..." }
-        ];
-
-        // Función para generar las filas dinámicamente
-        function generarFilas(datos) {
-            const containerTabla = document.getElementById('container-tabla');
-
-            datos.forEach((item, index) => {
-                const row = document.createElement('div');
-                row.className = 'row';
-
-                row.innerHTML = `
-                    <div class="cell-1">${index + 1}</div>
-                    <div class="cell-2">${item.movimiento}</div>
-                    <div class="cell-3">${item.concepto}</div>
-                    <div class="cell-2">${item.origen}</div>
-                    <div class="cell-2">${item.destino}</div>
-                    <div class="cell-2">${item.categoria}</div>
-                    <div class="cell-1">${item.valor}</div>
-                `;
-
-                containerTabla.appendChild(row);
-            });
-        }
-
-        // Llamar a la función con los datos simulados
-        generarFilas(movimientos);
-    </script>
+        <!-- Tabla con Divs -->
+        <div class="container-tabla" id="container-tabla">
+            <!-- Encabezado -->
+            <div class="row header">
+                <div class="cell-1">No.</div>
+                <div class="cell-2">Movimiento</div>
+                <div class="cell-3">Concepto</div>
+                <div class="cell-2">Origen</div>
+                <div class="cell-2">Destino</div>
+                <div class="cell-2">Categoría</div>
+                <div class="cell-1">Valor</div>
+            </div>
+            <!-- Las Filas dinámicas se generan aquí -->
+            <c:forEach var="movimiento" items="${movimientos}">
+                <div class="row">
+                    <div class="cell-1">${movimientos.indexOf(movimiento) + 1}</div>
+                    <div class="cell-2">
+                        <c:choose>
+                            <c:when test="${not empty movimiento.ingreso}">Ingreso</c:when>
+                            <c:when test="${not empty movimiento.egreso}">Egreso</c:when>
+                            <c:when test="${not empty movimiento.transferencia}">Transferencia</c:when>
+                        </c:choose>
+                    </div>
+                    <div class="cell-3">${movimiento.concepto}</div>
+                    <div class="cell-2">${movimiento.origen}</div>
+                    <div class="cell-2">${movimiento.destino}</div>
+                    <div class="cell-2">${movimiento.categoria.nombre}</div>
+                    <div class="cell-1">${movimiento.valor}</div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
 
 </body>
 </html>

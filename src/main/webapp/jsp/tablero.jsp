@@ -36,31 +36,37 @@
 
         <!-- Tabla de Cuentas -->
         <div class="section">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 10%;">N°</th>
-                        <th style="width: 30%;">Cuenta</th>
-                        <th style="width: 20%;">Balance</th>
-                        <th style="width: 40%;">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="cuenta" items="${tableroOTD.cuentas}">
-                        <tr>
-                            <td>${tableroOTD.cuentas.indexOf(cuenta) + 1}</td>
-                            <td>${cuenta.nombre}</td>
-                            <td>$ ${cuenta.saldo}</td>
-                            <td class="actions">
-                                <button onclick="location.href='VerTableroController?ruta=cuentaMovimiento&numero=${cuenta.numero}'"><span>Inspeccionar</span></button>
-                                <button onclick="location.href='RegistrarIngresoController?ruta=registrar-ingreso&numero=${cuenta.numero}'"><span>Registrar ingreso</span></button>
-                                <button onclick="window.location.href='egreso.html?numero=${cuenta.numero}'"><span>Registrar egreso</span></button>
-                                <button onclick="window.location.href='transferencia.html?numero=${cuenta.numero}'"><span>Registrar transferencia</span></button>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+        <table>
+    <thead>
+        <tr>
+            <th style="width: 10%;">N°</th>
+            <th style="width: 30%;">Cuenta</th>
+            <th style="width: 20%;">Balance</th>
+            <th style="width: 40%;">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach var="cuenta" items="${tableroDTO.cuentas}">
+            <tr>
+                <td>${tableroDTO.cuentas.indexOf(cuenta) + 1}</td>
+                <td>${cuenta.nombre}</td>
+                <td>$ ${cuenta.saldo}</td>
+                <td class="actions">
+                    <div class="actions-inspect">
+    					<button onclick="location.href='VerMovimientos?ruta=inspeccionar&numero=${cuenta.numero}&nombre=${cuenta.nombre}&saldo=${cuenta.saldo}'">
+    					<span>Inspeccionar</span>
+   						 </button>
+                    </div>
+                    <div class="actions-group">
+                        <button onclick="location.href='RegistrarIngresoController?ruta=registrar-ingreso&numero=${cuenta.numero}'"><span>Registrar ingreso</span></button>
+                        <button onclick="window.location.href='egreso.html?numero=${cuenta.numero}'"><span>Registrar egreso</span></button>
+                        <button onclick="window.location.href='transferencia.html?numero=${cuenta.numero}'"><span>Registrar transferencia</span></button>
+                    </div>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
         </div>
 
         <div class="medio">

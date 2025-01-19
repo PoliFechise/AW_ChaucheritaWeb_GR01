@@ -16,38 +16,75 @@
     src: url('../fonts/Smothy\ Bubble\ -\ \(Demo\)\ hanscostudio.com.otf') format('opentype');
 }
 
-/* Barra del Inicio */
-header {
-    background-color: #2977bd;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+body {
+    background: #f0f0f0; /* Fondo claro sin imagen */
+    color: #000;
+    font-family: Arial, sans-serif; /* Aseguramos la misma fuente para todo */
 }
 
-header h1 {
-    font-size: 40px;
-    color: #ffc000;
-    padding: 10px;
-    text-align: start;
-    font-family: 'Smothy Bubble', sans-serif;
-    font-weight: 200;
-    letter-spacing: 1.5px;
+/* Barra del Inicio */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Todos los elementos centrados verticalmente */
+    background-color: #1f65b7;
+    height: 60px;
+    padding: 0 20px; /* Añadir algo de padding a los lados */
+}
+
+.titulo-ChW {
+    font-family: 'Smothy Bubble', Arial, sans-serif;
+    font-size: 36px; /* Tamaño de fuente más grande */
+    color: white; /* Color del texto */
+}
+
+.opciones-header {
+    display: flex;
+    gap: 10px;
+    align-items: center; /* Asegurar que los elementos dentro también estén centrados */
 }
 
 .btn-regresar {
-    background-color: #ffc000;
-    margin-right: 10px;
-    width: 120px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: sans-serif;
-    font-size: 14px;
+    background-color: #ffc107;
+    border: none;
+    padding: 8px 16px; /* Reducir el padding */
     border-radius: 15px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    font-family: 'Arial Black', Gadget, sans-serif; /* Fuente más robusta */
+    font-size: 14px; /* Reducir tamaño de fuente */
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
+}
+
+.btn-regresar::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800%;
+    height: 800%;
+    background: #1f65b7;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.btn-regresar:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.btn-regresar:hover {
+    color: white;
+}
+
+.btn-regresar span {
+    position: relative;
+    z-index: 1;
 }
 
 /* Contenedor Principal */
@@ -55,42 +92,50 @@ header h1 {
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
 }
 
-/* Informacion de la cuenta y saldo */
+/* Información de la cuenta y saldo */
 .container-info {
     display: flex;
     justify-content: space-between;
-    padding: 20px 40px 0 40px;
+    padding: 20px 0;
     align-items: center;
 }
 
 .cuenta {
+    font-size: 36px;
+    font-family: 'Angel Club', sans-serif;
+    color: #2977bd;
+}
+
+.titulo-seccion {
     font-size: 30px;
-    font-family: 'Angel Club', sans-serif; 
+    font-family: 'Angel Club', sans-serif;
+    color: #2977bd;
 }
 
 .numero-cuenta {
-    font-size: 20px;
-    font-weight: 600;
-    font-family: sans-serif;
+    font-size: 25px;
+    font-family: 'Angel Club', sans-serif;
     padding: 0 40px;
+    color: #343a40;
 }
 
 .registro-txt {
     font-size: 30px;
-    font-weight: 600;
-    font-family: sans-serif;
-    padding: 40px 0 20px 40px;
+    font-family: 'Angel Club', sans-serif;
+    padding: 20px 0;
+    color: #2977bd;
 }
 
 .saldo {
     background-color: #ffc000;
     width: 150px;
     height: 55px;
-    margin-top: 20px;
-    margin-right: 20px;
-    font-family: sans-serif;
+    font-family: 'Arial', sans-serif;
     font-size: 18px;
     display: flex;
     align-items: center;
@@ -99,10 +144,9 @@ header h1 {
     border-radius: 15px;
 }
 
-/* Botones*/
+/* Botones */
 .container-botones {
     display: flex;
-    padding-left: 40px;
     padding-bottom: 10px;
 }
 
@@ -111,66 +155,123 @@ header h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: sans-serif;
-    font-size: 20px;
+    font-size: 14px;
     border-radius: 15px;
     cursor: pointer;
-    font-weight: 600;
     padding: 15px;
-    margin-right: 30px;
+    margin-right: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
+    font-family: 'Arial Black', Gadget, sans-serif;
 }
 
-/* Filtrar Movimientos*/
+.boton::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800%;
+    height: 800%;
+    background: #1f65b7;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.boton:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.boton:hover {
+    color: white;
+}
+
+.boton span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Filtrar Movimientos */
 .container-filtro {
     display: flex;
-    justify-content: space-between;
-    padding: 0 40px;
-    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-.container-filtro h2 {
-    font-size: 30px;
-    font-weight: 600;
-    font-family: sans-serif;
+.container-filtro .titulo-seccion {
+    font-size: 24px;
+    font-family: 'Angel Club', sans-serif;
+    color: #2977bd;
+    margin-bottom: 10px;
 }
 
-/* Tabla Dinamica*/
+.container-filtro form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.container-filtro select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.container-filtro select:focus {
+    border-color: #2977bd;
+}
+
+.container-filtro select option {
+    font-size: 16px;
+    padding: 10px;
+}
+
+/* Tabla Dinamica */
 .container-tabla {
     display: flex;
     flex-direction: column;
-    padding: 20px 40px;
+    padding: 20px 0;
 }
 
 .row {
     display: flex;
+    border-bottom: 1px solid #ddd; /* Línea inferior sutil */
 }
 
 .row.header {
-    background-color:#2977bd;
-    color: #000000;
+    background-color: #2977bd;
+    color: white; /* Texto blanco para el encabezado */
     font-weight: bold;
-    font-size: 20px;
-    font-family: sans-serif;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    border: none; /* Eliminar borde */
+}
+
+.cell-1, .cell-2, .cell-3 {
+    flex: 1;
+    padding: 12px 10px;
+    text-align: center;
+    border: none; /* Eliminar bordes */
 }
 
 .cell-1 {
     flex: 0.5;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #000000;
-}
-
-.cell-2 {
-    flex: 1;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #000000;
 }
 
 .cell-3 {
     flex: 2;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #000000;
 }
 
+.row:last-child {
+    border-bottom: none; /* Eliminar borde inferior de la última fila */
+}

@@ -56,34 +56,21 @@ public class VerTableroController extends HttpServlet {
 	}
 
 	private void ver(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    // 1.- Obtener parámetros
-	    // 2.- Hablar con el modelo
-	    List<CategoriaEgresoDTO> categorias;
-	    List<Cuenta> cuentas;
-
 	    try {
-	    	TableroService tableroService = new TableroService();
-	    	TableroDTO tableroDTO = tableroService.obtenerDatosTablero();
-	    	
-	    	// 3.- Hablar con la vista
-	    	request.setAttribute("tableroDTO", tableroDTO);
-			 getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request, response);
-
-			/*
-			 * // Obtener categorías CategoriaDAO categoriaDAO = new CategoriaDAO();
-			 * categorias = categoriaDAO.getCategoriasEgreso();
-			 * 
-			 * // Obtener cuentas utilizando el método findAll() del nuevo DAO CuentaDAO
-			 * cuentaDAO = new CuentaDAO(); cuentas = cuentaDAO.findAll();
-			 * 
-			 * // 3.- Hablar con la vista request.setAttribute("categorias", categorias);
-			 * request.setAttribute("cuentas", cuentas);
-			 * 
-			 * getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request,
-			 * response);
-			 */
+	    	// 1.- Obtener parámetros
+	    	// 2.- Hablar con el modelo
+	        TableroService tableroService = new TableroService();
+	        TableroDTO tableroDTO = tableroService.obtenerDatosTablero();
+	        
+	        // Log para verificar que las cuentas están siendo obtenidas
+	        System.out.println("Cuentas en TableroDTO: " + tableroDTO.getCuentas());
+	        
+	        // Pasar el objeto TableroDTO a la vista
+	        request.setAttribute("tableroDTO", tableroDTO);
+	        
+	        // 3. Hablar con la vista
+	        getServletContext().getRequestDispatcher("/jsp/tablero.jsp").forward(request, response);
 	    } catch (SQLException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
 	}
