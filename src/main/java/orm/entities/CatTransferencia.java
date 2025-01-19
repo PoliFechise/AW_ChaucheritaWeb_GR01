@@ -7,7 +7,9 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("TRANSFERENCIA")
 public class CatTransferencia extends Categoria {
 
-    public CatTransferencia() {
+	private static final long serialVersionUID = 1L;
+
+	public CatTransferencia() {
     }
 
     public CatTransferencia(String nombre) {

@@ -7,7 +7,9 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("EGRESO")
 public class CatEgreso extends Categoria {
 
-    public CatEgreso() {
+	private static final long serialVersionUID = 1L;
+
+	public CatEgreso() {
     }
 
     public CatEgreso(String nombre) {

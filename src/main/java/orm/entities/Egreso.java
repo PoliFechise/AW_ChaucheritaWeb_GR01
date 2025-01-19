@@ -18,7 +18,7 @@ public class Egreso implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "destino", nullable = false)
-	private Categoria destino;
+	private CatEgreso destino;
 
 	@OneToOne
 	@JoinColumn(name = "movimiento_id", nullable = false)
@@ -45,11 +45,11 @@ public class Egreso implements Serializable {
 		this.origen = origen;
 	}
 
-	public Categoria getDestino() {
+	public CatEgreso getDestino() {
 		return destino;
 	}
 
-	public void setDestino(Categoria destino) {
+	public void setDestino(CatEgreso destino) {
 		this.destino = destino;
 	}
 

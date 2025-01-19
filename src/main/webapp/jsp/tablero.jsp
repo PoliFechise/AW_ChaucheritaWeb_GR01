@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="styles/tablero.css">
     <!-- Incluye Font Awesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        function validarFechas() {
+            var fechaInicio = document.getElementById("fechaInicio").value;
+            var fechaFin = document.getElementById("fechaFin").value;
+            var mensajeError = document.getElementById("mensajeError");
+
+            if (new Date(fechaInicio) > new Date(fechaFin)) {
+                mensajeError.style.display = 'block';
+                return false;
+            }
+            mensajeError.style.display = 'none';
+            return true;
+        }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -52,7 +66,7 @@
                             <td>$ ${cuenta.saldo}</td>
                             <td class="actions">
                                 <div class="actions-inspect">
-                                    <button onclick="location.href='VerMovimientos?ruta=inspeccionar&numero=${cuenta.numero}&nombre=${cuenta.nombre}&saldo=${cuenta.saldo}'">
+                                    <button onclick="location.href='VerMovimientosController?ruta=inspeccionar&numero=${cuenta.numero}&nombre=${cuenta.nombre}&saldo=${cuenta.saldo}'">
                                     <span>Inspeccionar</span>
                                     </button>
                                 </div>
@@ -73,7 +87,7 @@
             <div class="categorias-titulo">
                 Categorías
             </div>
-            <form method="get" action="VerTableroController">
+            <form method="get" action="VerTableroController" onsubmit="return validarFechas()">
                 <input type="hidden" name="ruta" value="filtrarPorFechas">
                 <label for="fechaInicio" class="label-fecha">Fecha Inicio:</label>
                 <input type="date" id="fechaInicio" name="fechaInicio" class="input-fecha" value="${param.fechaInicio}">
@@ -81,6 +95,7 @@
                 <input type="date" id="fechaFin" name="fechaFin" class="input-fecha" value="${param.fechaFin}">
                 <button type="submit" class="filtrar-Fecha"><span>Filtrar por fechas</span></button>
                 <button type="button" class="borrar-Filtro" onclick="window.location.href='VerTableroController?ruta=borrarFiltro'"><span>Borrar filtro</span></button>
+                <div id="mensajeError" style="display: none; color: red; margin-top: 4px; font-size: 16px;">La fecha de inicio no puede ser posterior a la fecha de fin.</div>
             </form>
         </div>
 
@@ -95,6 +110,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <c:if test="${empty tableroDTO.categoriasIngreso}">
+                        <tr>
+                            <td colspan="3" style="text-align: center;">No hay categorías de ingreso disponibles.</td>
+                        </tr>
+                    </c:if>
                     <c:forEach items="${tableroDTO.categoriasIngreso}" var="categoria" varStatus="status">
                         <tr>
                             <td>${status.index + 1}</td>
@@ -117,6 +137,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <c:if test="${empty tableroDTO.categoriasEgreso}">
+                        <tr>
+                            <td colspan="3" style="text-align: center;">No hay categorías de egreso disponibles.</td>
+                        </tr>
+                    </c:if>
                     <c:forEach items="${tableroDTO.categoriasEgreso}" var="categoria" varStatus="status">
                         <tr>
                             <td>${status.index + 1}</td>
@@ -139,6 +164,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <c:if test="${empty tableroDTO.categoriasTransferencia}">
+                        <tr>
+                            <td colspan="3" style="text-align: center;">No hay categorías de transferencia disponibles.</td>
+                        </tr>
+                    </c:if>
                     <c:forEach items="${tableroDTO.categoriasTransferencia}" var="categoria" varStatus="status">
                         <tr>
                             <td>${status.index + 1}</td>

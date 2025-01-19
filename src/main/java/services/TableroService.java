@@ -1,6 +1,9 @@
 package services;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
@@ -36,7 +39,11 @@ public class TableroService {
         return tableroDTO;
     }
 
-    public TableroDTO obtenerDatosTableroPorFechas(String fechaInicio, String fechaFin) throws SQLException {
+    public TableroDTO obtenerDatosTableroPorFechas(String fechaInicioStr, String fechaFinStr) throws SQLException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime fechaInicio = LocalDate.parse(fechaInicioStr, formatter).atStartOfDay();
+        LocalDateTime fechaFin = LocalDate.parse(fechaFinStr, formatter).atTime(23, 59, 59);
+
         TableroDTO tableroDTO = new TableroDTO();
 
         // Obtener categorías de egreso
@@ -74,7 +81,7 @@ public class TableroService {
         }
     }
 
-    private List<CategoriaEgresoDTO> obtenerCategoriasEgresoPorFechas(String fechaInicio, String fechaFin) throws SQLException {
+    private List<CategoriaEgresoDTO> obtenerCategoriasEgresoPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) throws SQLException {
         try {
             String jpql = "SELECT new model.dto.CategoriaEgresoDTO(c.id, c.nombre, SUM(m.valor)) " +
                           "FROM Egreso e " +
@@ -109,7 +116,7 @@ public class TableroService {
         }
     }
 
-    private List<CategoriaIngresoDTO> obtenerCategoriasIngresoPorFechas(String fechaInicio, String fechaFin) throws SQLException {
+    private List<CategoriaIngresoDTO> obtenerCategoriasIngresoPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) throws SQLException {
         try {
             String jpql = "SELECT new model.dto.CategoriaIngresoDTO(c.id, c.nombre, SUM(m.valor)) " +
                           "FROM Ingreso i " +
@@ -144,7 +151,7 @@ public class TableroService {
         }
     }
 
-    private List<CategoriaTransferenciaDTO> obtenerCategoriasTransferenciaPorFechas(String fechaInicio, String fechaFin) throws SQLException {
+    private List<CategoriaTransferenciaDTO> obtenerCategoriasTransferenciaPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) throws SQLException {
         try {
             String jpql = "SELECT new model.dto.CategoriaTransferenciaDTO(c.id, c.nombre, SUM(m.valor)) " +
                           "FROM Transferencia t " +

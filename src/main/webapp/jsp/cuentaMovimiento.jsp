@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -51,8 +51,9 @@
         <!-- Filtro -->
         <div class="container-filtro">
             <div class="titulo-seccion">Lista de movimientos</div>
-            <form method="get" action="VerMovimientos">
+            <form method="get" action="VerMovimientosController">
                 <input type="hidden" name="ruta" value="filtrarPorCategoria">
+                <input type="hidden" name="numero" value="${cuenta.numero}">
                 <select name="tipoCategoria" onchange="this.form.submit()">
                     <option value="" ${tipoCategoriaSeleccionada == '' ? 'selected' : ''}>Todos los tipos</option>
                     <option value="Ingreso" ${tipoCategoriaSeleccionada == 'Ingreso' ? 'selected' : ''}>Ingreso</option>
@@ -65,41 +66,88 @@
                         <option value="${categoria.nombre}" ${categoriaSeleccionada == categoria.nombre ? 'selected' : ''}>${categoria.nombre}</option>
                     </c:forEach>
                 </select>
+                <c:if test="${empty categorias}">
+                    <div class="mensaje-error">No hay categorías disponibles para el tipo seleccionado.</div>
+                </c:if>
             </form>
         </div>
 
         <!-- Tabla con Divs -->
         <div class="container-tabla" id="container-tabla">
-            <!-- Encabezado -->
-            <div class="row header">
-                <div class="cell-1">No.</div>
-                <div class="cell-2">Movimiento</div>
-                <div class="cell-3">Concepto</div>
-                <div class="cell-2">Origen</div>
-                <div class="cell-2">Destino</div>
-                <div class="cell-2">Categoría</div>
-                <div class="cell-1">Valor</div>
-            </div>
-            <!-- Las Filas dinámicas se generan aquí -->
-            <c:forEach var="movimiento" items="${movimientos}">
-                <div class="row">
-                    <div class="cell-1">${movimientos.indexOf(movimiento) + 1}</div>
-                    <div class="cell-2">
-                        <c:choose>
-                            <c:when test="${not empty movimiento.ingreso}">Ingreso</c:when>
-                            <c:when test="${not empty movimiento.egreso}">Egreso</c:when>
-                            <c:when test="${not empty movimiento.transferencia}">Transferencia</c:when>
-                        </c:choose>
-                    </div>
-                    <div class="cell-3">${movimiento.concepto}</div>
-                    <div class="cell-2">${movimiento.origen}</div>
-                    <div class="cell-2">${movimiento.destino}</div>
-                    <div class="cell-2">${movimiento.categoria.nombre}</div>
-                    <div class="cell-1">${movimiento.valor}</div>
-                </div>
-            </c:forEach>
+            <table>
+                <!-- Encabezado -->
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Movimiento</th>
+                        <th>Concepto</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Categoría</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:set var="index" value="1" />
+                    <!-- Ingresos -->
+                    <c:forEach var="ingreso" items="${ingresos}">
+                        <tr>
+                            <td>${index}</td>
+                            <td>Ingreso</td>
+                            <td>${ingreso.movimiento.concepto}</td>
+                            <td>${ingreso.origen.nombre}</td>
+                            <td>${ingreso.destino.nombre}</td>
+                            <td>${ingreso.origen.nombre}</td>
+                            <td>${ingreso.movimiento.valor}</td>
+                        </tr>
+                        <c:set var="index" value="${index + 1}" />
+                    </c:forEach>
+                    <c:if test="${empty ingresos && (tipoCategoriaSeleccionada == 'Ingreso' || tipoCategoriaSeleccionada == '')}">
+                        <tr>
+                            <td colspan="7" style="text-align: center;">No hay ingresos registrados.</td>
+                        </tr>
+                    </c:if>
+
+                    <!-- Egresos -->
+                    <c:forEach var="egreso" items="${egresos}">
+                        <tr>
+                            <td>${index}</td>
+                            <td>Egreso</td>
+                            <td>${egreso.movimiento.concepto}</td>
+                            <td>${egreso.origen.nombre}</td>
+                            <td>${egreso.destino.nombre}</td>
+                            <td>${egreso.destino.nombre}</td>
+                            <td>${egreso.movimiento.valor}</td>
+                        </tr>
+                        <c:set var="index" value="${index + 1}" />
+                    </c:forEach>
+                    <c:if test="${empty egresos && (tipoCategoriaSeleccionada == 'Egreso')}">
+                        <tr>
+                            <td colspan="7" style="text-align: center;">No hay egresos registrados.</td>
+                        </tr>
+                    </c:if>
+
+                    <!-- Transferencias -->
+                    <c:forEach var="transferencia" items="${transferencias}">
+                        <tr>
+                            <td>${index}</td>
+                            <td>Transferencia</td>
+                            <td>${transferencia.movimiento.concepto}</td>
+                            <td>${transferencia.origen.nombre}</td>
+                            <td>${transferencia.destino.nombre}</td>
+                            <td>${transferencia.categoria.nombre}</td>
+                            <td>${transferencia.movimiento.valor}</td>
+                        </tr>
+                        <c:set var="index" value="${index + 1}" />
+                    </c:forEach>
+                    <c:if test="${empty transferencias && (tipoCategoriaSeleccionada == 'Transferencia')}">
+                        <tr>
+                            <td colspan="7" style="text-align: center;">No hay transferencias registradas.</td>
+                        </tr>
+                    </c:if>
+                </tbody>
+            </table>
         </div>
     </div>
-
 </body>
 </html>

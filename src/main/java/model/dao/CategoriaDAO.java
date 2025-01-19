@@ -20,12 +20,6 @@ public class CategoriaDAO {
 	public CategoriaDAO() {
 	}
 
-	public List<Categoria> obtenerCategorias() {
-        String jpql = "SELECT c FROM Categoria c";
-        Query query = em.createQuery(jpql);
-        return query.getResultList();
-    }
-
 	public List<Categoria> obtenerCategoriasEgreso() {
         String jpql = "SELECT c FROM CatEgreso c";
         Query query = em.createQuery(jpql);
@@ -43,34 +37,4 @@ public class CategoriaDAO {
         Query query = em.createQuery(jpql);
         return query.getResultList();
     }
-	// Método para guardar una nueva categoría
-	public void guardarCategoria(Categoria categoria) throws SQLException {
-		List<Categoria> categorias = new ArrayList<Categoria>();
-
-		String _SQL_INSERT = "INSERT INTO categoria (nombre, tipo) VALUES (?, ?)";
-
-		PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(_SQL_INSERT);
-		pstmt.setString(1, categoria.getNombre());
-		// pstmt.setString(2, categoria.getTipo());
-
-		int filas = pstmt.executeUpdate();
-
-		BddConnection.cerrar(pstmt);
-		BddConnection.cerrar();
-
-		// em.getTransaction().begin();
-		// em.persist(categoria);
-		// em.getTransaction().commit();
-	}
-
-	// Método para eliminar una categoría por su ID y tipo
-	public void eliminarCategoria(int id, String tipo) throws SQLException {
-		String sql = "DELETE FROM categoria WHERE id = ? AND tipo = ?"; // Consideramos el tipo también
-
-		try (PreparedStatement pstmt = BddConnection.getConexion().prepareStatement(sql)) {
-			pstmt.setInt(1, id);
-			pstmt.setString(2, tipo); // Establecemos el tipo también
-			pstmt.executeUpdate();
-		}
-	}
 }

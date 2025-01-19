@@ -1,10 +1,14 @@
 package orm.entities;
 
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="transferencia")
-public class Transferencia {
+public class Transferencia implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +24,7 @@ public class Transferencia {
 
     @ManyToOne
     @JoinColumn(name = "categoria", nullable = false)
-    private Categoria categoria;
+    private CatTransferencia categoria;
 
     @OneToOne
     @JoinColumn(name = "movimiento_id", nullable = false)
@@ -54,12 +58,20 @@ public class Transferencia {
 		this.destino = destino;
 	}
 
-	public Categoria getCategoria() {
+	public CatTransferencia getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(CatTransferencia categoria) {
 		this.categoria = categoria;
+	}
+	
+	public Movimiento getMovimiento() {
+		return movimiento;
+	}
+
+	public void setMovimiento(Movimiento movimiento) {
+		this.movimiento = movimiento;
 	}
 	
 	

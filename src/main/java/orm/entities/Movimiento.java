@@ -77,6 +77,49 @@ public class Movimiento implements Serializable {
 	public void setCuenta(Cuenta cuenta) {
 		this.cuenta = cuenta;
 	}
+
+	public Egreso getEgreso() {
+		return egreso;
+	}
+
+	public void setEgreso(Egreso egreso) {
+		this.egreso = egreso;
+	}
+
+	public Ingreso getIngreso() {
+		return ingreso;
+	}
+
+	public void setIngreso(Ingreso ingreso) {
+		this.ingreso = ingreso;
+	}
+
+	public Transferencia getTransferencia() {
+		return transferencia;
+	}
+
+	public void setTransferencia(Transferencia transferencia) {
+		this.transferencia = transferencia;
+	}
 	
-	
+	@Override
+    public String toString() {
+        String tipoMovimiento = "Desconocido";
+        if (ingreso != null) {
+            tipoMovimiento = "Ingreso";
+        } else if (egreso != null) {
+            tipoMovimiento = "Egreso";
+        } else if (transferencia != null) {
+            tipoMovimiento = "Transferencia";
+        }
+        
+        return "Movimiento{" +
+                "id=" + id +
+                ", concepto='" + concepto + '\'' +
+                ", valor=" + valor +
+                ", fecha=" + fecha +
+                ", cuenta=" + (cuenta != null ? cuenta.getNombre() : "null") +
+                ", tipo=" + tipoMovimiento +
+                '}';
+    }
 }

@@ -241,37 +241,47 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px 0;
+    overflow-x: auto; /* Para manejar tablas anchas en dispositivos pequeños */
 }
 
-.row {
-    display: flex;
-    border-bottom: 1px solid #ddd; /* Línea inferior sutil */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Eliminar espacios entre celdas */
+    background-color: #fff; /* Fondo blanco para la tabla */
+    border: 1px solid #343a40; /* Bordes oscuros */
+    border-radius: 8px; /* Bordes redondeados para un toque moderno */
+    overflow: hidden; /* Para aplicar el borde redondeado a toda la tabla */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
 }
 
-.row.header {
-    background-color: #2977bd;
-    color: white; /* Texto blanco para el encabezado */
-    font-weight: bold;
-    font-size: 18px;
-    font-family: 'Arial', sans-serif;
-    border: none; /* Eliminar borde */
-}
-
-.cell-1, .cell-2, .cell-3 {
-    flex: 1;
-    padding: 12px 10px;
+th, td {
+    border: 1px solid #343a40; /* Bordes oscuros */
     text-align: center;
-    border: none; /* Eliminar bordes */
+    padding: 10px;
 }
 
-.cell-1 {
-    flex: 0.5;
+th {
+    background-color: #1f65b7;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #343a40; /* Bordes oscuros */
 }
 
-.cell-3 {
-    flex: 2;
+td {
+    background-color: #fff; /* Fondo blanco para las celdas */
+    color: #343a40; /* Texto oscuro para contraste */
+    border: 1px solid #343a40; /* Bordes oscuros */
 }
 
-.row:last-child {
-    border-bottom: none; /* Eliminar borde inferior de la última fila */
+tr:nth-child(even) td {
+    background-color: #f0f0f0; /* Zebra striping para filas */
 }
+
+.mensaje-error {
+        display: inline-block;
+        vertical-align: middle;
+        color: red;
+        margin-left: 10px;
+        font-size: 14px;
+        align-content: center;
+    }

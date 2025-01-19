@@ -144,6 +144,7 @@ table {
     border-radius: 8px; /* Bordes redondeados para un toque moderno */
     overflow: hidden; /* Para aplicar el borde redondeado a toda la tabla */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+    margin: 15px 0px 15px 0px;
 }
 
 th, td {
@@ -156,11 +157,13 @@ th {
     background-color: #1f65b7;
     color: #fff;
     font-weight: bold;
+	border: 1px solid #343a40; /* Bordes oscuros */
 }
 
 td {
     background-color: #fff; /* Fondo blanco para las celdas */
     color: #343a40; /* Texto oscuro para contraste */
+    border: 1px solid #343a40; /* Bordes oscuros */
 }
 
 .actions {
@@ -267,7 +270,7 @@ td {
 }
 
 .filtro-categorias {
-    margin-top: 40px;
+    margin: 40px 0px 20px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;

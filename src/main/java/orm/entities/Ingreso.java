@@ -14,7 +14,7 @@ public class Ingreso implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "origen", nullable = false)
-	private Categoria origen;
+	private CatIngreso origen;
 
 	@ManyToOne
 	@JoinColumn(name = "destino", nullable = false)
@@ -36,11 +36,11 @@ public class Ingreso implements Serializable {
 		this.id = id;
 	}
 
-	public Categoria getOrigen() {
+	public CatIngreso getOrigen() {
 		return origen;
 	}
 
-	public void setOrigen(Categoria origen) {
+	public void setOrigen(CatIngreso origen) {
 		this.origen = origen;
 	}
 
@@ -60,6 +60,13 @@ public class Ingreso implements Serializable {
 		this.movimiento = movimiento;
 	}
 	
-	
-
+	@Override
+    public String toString() {
+        return "Ingreso{" +
+                "id=" + id +
+                ", origen=" + (origen != null ? origen.getNombre() : "null") +
+                ", destino=" + (destino != null ? destino.getNombre() : "null") +
+                ", movimiento=" + (movimiento != null ? "id=" + movimiento.getId() + ", concepto=" + movimiento.getConcepto() + ", valor=" + movimiento.getValor() : "null") +
+                '}';
+    }
 }
