@@ -48,9 +48,10 @@ h2, h3 {
     background-color: #59C241;
     color: black;
     width: 140px;
-    border: 1px solid black;
     font-size: 20px;
     margin-right: 10px; /* Añadir espacio entre los botones */
+    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
+    font-weight: bold; /* Asegura que el texto esté en negrita */
 }
 
 .boton-crear::before {
@@ -71,8 +72,9 @@ h2, h3 {
     color: black;
     height: 30px;
     width: 140px;
-    border: 1px solid black;
     font-size: 18px;
+    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
+    font-weight: bold; /* Asegura que el texto esté en negrita */
 }
 
 .boton-regresar::before {
@@ -93,7 +95,8 @@ h2, h3 {
     color: black;
     padding: 10px 20px;
     font-size: 16px;
-    border: 1px solid black;
+    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
+    font-weight: bold; /* Asegura que el texto esté en negrita */
 }
 
 .boton-actualizar::before {
@@ -114,7 +117,8 @@ h2, h3 {
     color: black;
     padding: 10px 20px;
     font-size: 16px;
-    border: 1px solid black;
+    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
+    font-weight: bold; /* Asegura que el texto esté en negrita */
 }
 
 .boton-eliminar::before {
