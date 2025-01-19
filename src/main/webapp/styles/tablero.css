@@ -189,7 +189,7 @@ td {
     transition: color 0.4s ease;
     position: relative;
     overflow: hidden;
-	font-size: 16px;
+    font-size: 16px;
     font-family: Arial, sans-serif; /* Asegura que use la misma fuente */
 }
 
@@ -224,7 +224,7 @@ td {
     display: flex;
     flex-direction: column;
     gap: 5px; /* Espacio entre los botones */
-	font-family: Arial, sans-serif; /* Asegura que use la misma fuente */
+    font-family: Arial, sans-serif; /* Asegura que use la misma fuente */
 }
 
 .actions-group button {
@@ -266,17 +266,40 @@ td {
     z-index: 1;
 }
 
-.medio {
+.filtro-categorias {
     margin-top: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 18px; /* Tamaño de fuente para las etiquetas */
+    color: black; /* Color del texto */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.categorias-titulo {
     font-family: 'Smothy Bubble', Arial, sans-serif;
     font-size: 36px; /* Tamaño de fuente más grande */
     color: black; /* Color del texto */
 }
 
-.filtrar-Fecha {
+.label-fecha {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.input-fecha {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.filtrar-Fecha, .borrar-Filtro {
     background-color: #ffc107;
     border: none;
     color: black;
@@ -291,7 +314,7 @@ td {
     transition: color 0.4s ease;
 }
 
-.filtrar-Fecha::before {
+.filtrar-Fecha::before, .borrar-Filtro::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -304,15 +327,15 @@ td {
     z-index: 0;
 }
 
-.filtrar-Fecha:hover::before {
+.filtrar-Fecha:hover::before, .borrar-Filtro:hover::before {
     transform: translate(-50%, -50%) rotate(45deg) scale(1);
 }
 
-.filtrar-Fecha:hover {
+.filtrar-Fecha:hover, .borrar-Filtro:hover {
     color: white;
 }
 
-.filtrar-Fecha span {
+.filtrar-Fecha span, .borrar-Filtro span {
     position: relative;
     z-index: 1;
 }
