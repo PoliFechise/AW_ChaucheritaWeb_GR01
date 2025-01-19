@@ -42,7 +42,7 @@ h1, h2 {
 }
 
 .titulo-cuenta {
-	margin: 10px;
+    margin: 10px;
     font-size: 25px;
     font-family: "Angel Club";
 }
@@ -92,6 +92,22 @@ h1, h2 {
     cursor: default;
 }
 
+.contenedor-regresar {
+    width: 100%;
+    height: 9%;
+    margin: 10px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.contenedor-botones {
+    display: flex;
+    justify-content: space-between; /* Espaciar los botones */
+    align-items: center;
+    margin: 10px 0; /* Añadir margen para separar del contenido superior */
+}
+
 .contenedor-dinamico {
     flex-grow: 1;
     height: 100vh;
@@ -102,41 +118,66 @@ h1, h2 {
     box-sizing: border-box;
 }
 
-/* Botones Crear */
-.boton-crear {
-    background-color: #59C241;
-    color: black;
-
-	height: 40px;
-    width: 140px;
-
-    border: 1px solid black;
-
-    font-size: 20px;
-    font-weight: bold;
-
+/* Botones Crear y Regresar */
+.boton-crear, .boton-regresar, .boton-actualizar, .boton-eliminar {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
+    transition: color 0.4s ease;
+}
 
-    border-radius: 15px;
-    
-    margin: 0px 0px 20px 0px;
+.boton-crear::before, .boton-regresar::before, .boton-actualizar::before, .boton-eliminar::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.boton-crear span, .boton-regresar span, .boton-actualizar span, .boton-eliminar span {
+    position: relative;
+    z-index: 1;
+}
+
+.boton-crear {
+    background-color: #59C241;
+    color: black;
+    height: 40px;
+    width: 140px;
+    border: 1px solid black;
+    font-size: 20px;
+    margin-right: 10px; /* Añadir espacio entre los botones */
+}
+
+.boton-crear {
+    background-color: #59C241;
+    color: black;
+    height: 40px;
+    width: 140px;
+    border: 1px solid black;
+    font-size: 20px;
+}
+
+.boton-crear::before {
+    background: #ff8c00; /* Naranja de énfasis */
+}
+
+.boton-crear:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
 }
 
 .boton-crear:hover {
-    background-color: #4aae3f;
+    color: white;
     cursor: pointer;
-}
-
-.contenedor-regresar {
-    width: 100%;
-    height: 9%;
-    margin: 10px;
-    display: flex;
-    justify-content: right;
-    align-items: center;
 }
 
 .boton-regresar {
@@ -146,20 +187,63 @@ h1, h2 {
     width: 140px;
     border: 1px solid black;
     font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
+}
+
+.boton-regresar::before {
+    background: #1f65b7; /* Azul de énfasis */
+}
+
+.boton-regresar:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
 }
 
 .boton-regresar:hover {
-    background-color: #f5a500;
+    color: white;
     cursor: pointer;
 }
 
-/* Estilos para la tabla */
+.boton-actualizar {
+    background-color: #F6F88E;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid black;
+}
+
+.boton-actualizar::before {
+    background: #ff69b4; /* Rosado de énfasis */
+}
+
+.boton-actualizar:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.boton-actualizar:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.boton-eliminar {
+    background-color: #FF7F7F;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid black;
+}
+
+.boton-eliminar::before {
+    background: #9370db; /* Morado de énfasis */
+}
+
+.boton-eliminar:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.boton-eliminar:hover {
+    color: white;
+    cursor: pointer;
+}
+
 /* Estilos para la tabla */
 .table-cuentas {
     width: 100%;
@@ -189,35 +273,6 @@ h1, h2 {
     justify-content: center;
     align-items: center;
     gap: 10px; /* Añade un espacio entre los botones */
-}
-
-.boton-actualizar, .boton-eliminar {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: 1px solid black;
-    text-align: center;
-    cursor: pointer;
-    display: inline-block;
-    border-radius: 5px;
-}
-
-.boton-actualizar {
-    background-color: #F6F88E;
-    color: black;
-}
-
-.boton-actualizar:hover {
-    background-color: #eef100;
-}
-
-.boton-eliminar {
-    background-color: #FF7F7F;
-    color: black;
-}
-
-.boton-eliminar:hover {
-    background-color: #ff4c4c;
 }
 
 .subtitulo-cuentas-actuales {

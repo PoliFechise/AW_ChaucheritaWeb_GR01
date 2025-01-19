@@ -100,24 +100,61 @@ h1, h2 {
 	align-items: center;
 }
 
-.boton-regresar {
-	background-color: #FFC000;
-	color: black;
-	height: 40px;
-	width: 140px;
-	border: 1px solid black;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 15px;
+/* Asegúrate de que estos estilos estén en ajustes.css */
+
+.contenedor-regresar {
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido a la derecha */
+    padding: 10px 20px; /* Añade padding para espaciar un poco del borde */
 }
 
-.boton-regresar:hover {
-	background-color: #f5a500;
-	cursor: pointer;
+.boton-regresar {
+    height: 40px;
+    width: auto; /* Ajuste de ancho automático basado en el contenido */
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.boton-regresar button {
+    background-color: #ffc107;
+    border: 1px solid #ddd;
+    padding: 10px 20px; /* Añade padding para el botón */
+    cursor: pointer;
+    transition: color 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    font-size: 16px;
+    border-radius:  15px;
+    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
+    font-weight: bold; /* Asegura que el texto esté en negrita */
+}
+
+.boton-regresar button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%; /* Tamaño de la animación ajustado */
+    height: 300%; /* Tamaño de la animación ajustado */
+    background: #1f65b7;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.boton-regresar button:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.boton-regresar button:hover {
+    color: white;
+}
+
+.boton-regresar button span {
+    position: relative;
+    z-index: 1;
 }
 
 /* Estilos para la tabla */

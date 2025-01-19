@@ -5,32 +5,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Ajustes</title>
-    <link rel="stylesheet" href="styles/ajustes.css">
+<meta charset="UTF-8">
+<title>Ajustes</title>
+<link rel="stylesheet" href="styles/ajustes.css">
 </head>
 <header>
-    <div class="titulo-ajustes">
-        <h1>Ajustes</h1>
-    </div>
+	<div class="titulo-ajustes">
+		<h1>Ajustes</h1>
+	</div>
 </header>
 <body>
-    <div class="barra-ajustes">
-                <div class="boton-cuenta" onclick="cargarContenido('GestionarCuentaController?action=listar', this)">
-            <h2>Cuenta</h2>
-        </div>
-                <div class="boton-categoria" onclick="cargarContenido('GestionarCategoriaController?action=listar', this)">
-            <h2>Categoría</h2>
-        </div>
-    </div>
-    <div id="contenedor-dinamico" class="contenedor-dinamico">
-        <!-- Contenido dinámico -->
-    </div>
-    <div id="contenedor-regresar" class="contenedor-regresar">
-        <div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ver'">Regresar</div>
-    </div>
+	<div class="barra-ajustes">
+		<div class="boton-cuenta"
+			onclick="cargarContenido('GestionarCuentaController?action=listar', this)">
+			<h2>Cuenta</h2>
+		</div>
+		<div class="boton-categoria"
+			onclick="cargarContenido('GestionarCategoriaController?action=listar', this)">
+			<h2>Categoría</h2>
+		</div>
+	</div>
+	<div id="contenedor-dinamico" class="contenedor-dinamico">
+		<!-- Contenido dinámico -->
+	</div>
 
-    <script>
+	<div id="contenedor-regresar" class="contenedor-regresar">
+    <div class="boton-regresar">
+        <button onclick="location.href='VerTableroController?ruta=ver'">
+            <span>Regresar</span>
+        </button>
+    </div>
+</div>
+
+	<script>
         function cargarContenido(url, boton) {
             const contenidoDinamico = document.getElementById('contenedor-dinamico');
             const contenedorRegresar = document.getElementById('contenedor-regresar');
