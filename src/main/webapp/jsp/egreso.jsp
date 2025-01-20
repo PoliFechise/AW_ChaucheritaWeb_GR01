@@ -27,7 +27,7 @@
 								<h2>Cuenta: ${param.numero}</h2>
 							</div>
 							<div class="formulario">
-								<form action="RegistrarEgresoController" method="POST">
+								<form >
 									<div>
 										<label for="valor">Valor:</label> <input type="number"
 											id="valor" name="valor"
@@ -60,11 +60,9 @@
 									<input type="hidden" id="destino" name="numeroCuenta"
 										value="${param.numero}">
 									<div class="botones">
-										<button type="submit" class="btn-guardar" id="btnGuardar" >
+										<button type="submit" class="btn-guardar" id="btnGuardar">
 											<p>Guardar</p>
 										</button>
-										<!--  TODO: Navegación entre tablero y cuenta, según de cuál viene -->
-
 										<div class="btn-cancelar" id="btnCancelar">
 											<p>Cancelar</p>
 										</div>
