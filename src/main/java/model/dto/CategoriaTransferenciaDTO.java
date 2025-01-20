@@ -38,4 +38,13 @@ public class CategoriaTransferenciaDTO {
     public void setSumaValor(BigDecimal sumaValor) {
         this.sumaValor = sumaValor;
     }
+    
+    @Override
+    public String toString() {
+        return "CategoriaTransferenciaDTO{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", sumaValor=" + sumaValor +
+                '}';
+    }
 }
