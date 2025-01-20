@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
@@ -10,108 +11,85 @@
 <link rel="stylesheet" href="styles/transferencia-styles.css">
 </head>
 <body>
-<header>
-
-    </header>
-    <main>
-        <div class="main">
-            <div class="fondo">
-            </div>
-            <div class="transferencia">
-                <div class="titulo">
-                    <img src="${pageContext.request.contextPath}/img/Transferencia.png" alt="egreso">
-                </div>
-                <div class="content">
-                    <div class="left-side">
-                        <div class="ls-content">
-                            <div class="cuenta">
-                                <h2>Cuenta: Cuenta de ejemplo</h2>
-                            </div>
-                            <div class="formulario">
-                                <form action="">
-                                    <div>
-                                        <label for="valor">Valor:</label>
-                                        <input type="number" id="valor" name="valor"
-                                            placeholder="Ingrese el valor del ingreso">
-                                    </div>
-                                    <div>
-                                        <label for="concepto">Concepto:</label>
-                                        <input type="text" id="concepto" name="concepto"
-                                            placeholder="Ingrese una descripcion del ingreso">
-                                    </div>
-                                    <div>
-                                        <label for="origen">Origen:</label>
-                                        <input type="text" id="origen" name="origen" placeholder="Cuenta de ejemplo"
-                                            disabled>
-                                    </div>
-                                    <div>
-                                        <label for="destino">Destino:</label>
-                                        <input type="text" id="destino" name="destino" placeholder="Cuenta de ejemplo">
-                                    </div>
-                                    <div>
-                                        <label for="categoria">Categoría:</label>
-                                        <select name="categoria" id="categoria">
-                                            <option value="categoria-1">Categoria 1</option>
-                                            <option value="categoria-2">Categoria 2</option>
-                                            <option value="default">Elige una categoria</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="fecha">Fecha:</label>
-                                        <input type="date" id="fecha" name="fecha">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-side">
-                        <div class="saldo">
-                            <p>$ 10000.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="botones">
-                    <div class="btn-guardar" id="btnGuardar">
-                        <p>Guardar</p>
-                    </div>
-                    <div class="btn-cancelar" id="btnCancelar">
-                        <p>Cancelar</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer>
-
-    </footer>
-    <script>
-        // Get the 'from' parameter from the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const from = urlParams.get('from');
-
-        // Set up the cancel button
-        const btnCancelar = document.getElementById('btnCancelar');
-        btnCancelar.addEventListener('click', () => {
-            if (from === 'tablero') {
-                window.location.href = 'tablero.html';
-            } else if (from === 'cuentaMovimiento') {
-                window.location.href = 'cuentaMovimiento.html';
-            } else {
-                window.history.back(); // Default to going back if no parameter is found
-            }
-        });
-
-        // Set up the guardar button
-        const btnGuardar = document.getElementById('btnGuardar');
-        btnGuardar.addEventListener('click', () => {
-            if (from === 'tablero') {
-                window.location.href = 'tablero.html';
-            } else if (from === 'cuentaMovimiento') {
-                window.location.href = 'cuentaMovimiento.html';
-            } else {
-                window.history.back(); // Default to going back if no parameter is found
-            }
-        });
+	<header> </header>
+	<main>
+		<div class="main">
+			<div class="fondo"></div>
+			<div class="transferencia">
+				<div class="titulo">
+					<img src="${pageContext.request.contextPath}/img/Transferencia.png"
+						alt="egreso">
+				</div>
+				<div class="content">
+					<div class="left-side">
+						<div class="ls-content">
+							<div class="cuenta">
+								<h2>Cuenta: ${param.numero}</h2>
+							</div>
+							<div class="formulario">
+								<form action="RegistrarTransferenciaController" method="POST">
+									<div>
+										<label for="valor">Valor:</label> <input type="number"
+											id="valor" name="valor"
+											placeholder="Ingrese el valor de la transferencia">
+									</div>
+									<div>
+										<label for="concepto">Concepto:</label> <input type="text"
+											id="concepto" name="concepto"
+											placeholder="Ingrese una descripcion de la transferencia">
+									</div>
+									<div>
+										<label for="origen">Origen:</label> <input type="text"
+											id="origen" name="origen" placeholder="${param.numero}"
+											disabled>
+									</div>
+									<div>
+										<label for="destino">Destino:</label> <input type="text"
+											id="destino" name="destino" placeholder="Cuenta de destino">
+									</div>
+									<div>
+										<label for="categoria">Categoría:</label> <select
+											name="categoria" id="categoria" required>
+											<option value="" selected disabled>Seleccione una
+												categoría</option>
+											<c:forEach var="categoria" items="${categoriasTransferencia}">
+												<option value="${categoria.id}">${categoria.nombre}</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div>
+										<label for="fecha">Fecha:</label> <input type="date"
+											id="fecha" name="fecha">
+									</div>
+									<input type="hidden" id="destino" name="numeroCuenta"
+										value="${param.numero}">
+									<div class="botones">
+										<button type="submit" class="btn-guardar" id="btnGuardar">
+											<p>Guardar</p>
+										</button>
+										<button class="btn-cancelar" id="btnCancelar">
+											<p>Cancelar</p>
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="right-side">
+						<div class="saldo">
+							<p>$ ${saldoCuenta}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer> </footer>
+	<script>
+	const btnCancelar = document.getElementById('btnCancelar');
+    btnCancelar.addEventListener('click', () => {
+        window.history.back(); // Regresar a la página anterior
+    });
     </script>
 
 </body>

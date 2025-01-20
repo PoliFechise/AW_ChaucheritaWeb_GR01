@@ -73,7 +73,7 @@
                                 <div class="actions-group">
                                     <button onclick="location.href='RegistrarIngresoController?ruta=ingreso&numero=${cuenta.numero}'"><span>Registrar ingreso</span></button>
                                     <button onclick="location.href='RegistrarEgresoController?ruta=egreso&numero=${cuenta.numero}'"><span>Registrar egreso</span></button>
-                                    <button onclick="location.href='RegistrarTransferenciaController?ruta=trasnferencia&numero=${cuenta.numero}'"><span>Registrar transferencia</span></button>
+                                    <button onclick="location.href='RegistrarTransferenciaController?ruta=transferencia&numero=${cuenta.numero}'"><span>Registrar transferencia</span></button>
                                 </div>
                             </td>
                         </tr>

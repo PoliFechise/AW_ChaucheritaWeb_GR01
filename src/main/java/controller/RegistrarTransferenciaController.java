@@ -21,11 +21,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import orm.entities.*;
 import model.dao.CategoriaDAO;
 import model.dao.CuentaDAO;
+import model.dao.EgresoDAO;
 import model.dao.IngresoDAO;
 import model.dao.MovimientoDAO;
+import model.dao.TransferenciaDAO;
 
-@WebServlet("/RegistrarIngresoController")
-public class RegistrarIngresoController extends HttpServlet {
+@WebServlet("/RegistrarTransferenciaController")
+public class RegistrarTransferenciaController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,45 +40,52 @@ public class RegistrarIngresoController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		Ingreso ingreso = new Ingreso();
+
+		Transferencia transferencia = new Transferencia();
 		Movimiento movimiento = new Movimiento();
-		Cuenta cuenta = new Cuenta();
-		CatIngreso catIngreso = new CatIngreso();
-		
+		Cuenta cuentaOrigen = new Cuenta();
+		Cuenta cuentaDestino = new Cuenta();
+		CatTransferencia catTransferencia = new CatTransferencia();
+
 		movimiento.setConcepto(request.getParameter("concepto"));
-		
+
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDateTime dateTime = LocalDate.parse(request.getParameter("fecha"), format).atStartOfDay();
 		movimiento.setFecha(dateTime);
-		
+
 		CuentaDAO cuentaDAO = new CuentaDAO();
-		cuenta = cuentaDAO.encontrarPorNumero(request.getParameter("numeroCuenta"));
-		movimiento.setCuenta(cuenta);
+		cuentaOrigen = cuentaDAO.encontrarPorNumero(request.getParameter("numeroCuenta"));
+		movimiento.setCuenta(cuentaOrigen);
 		
+		cuentaDestino = cuentaDAO.encontrarPorNumero(request.getParameter("destino"));
+
 		movimiento.setValor(BigDecimal.valueOf(Double.parseDouble(request.getParameter("valor"))));
-		
+
 		MovimientoDAO movimientoDAO = new MovimientoDAO();
 		movimientoDAO.guardarMovimiento(movimiento);
+
+		catTransferencia.setNombre(request.getParameter("categoria"));
+		transferencia.setCategoria(catTransferencia);
+
+		transferencia.setOrigen(cuentaOrigen);
 		
-		catIngreso.setNombre(request.getParameter("categoria"));
-		ingreso.setOrigen(catIngreso);
+		transferencia.setDestino(cuentaDestino);
+
+		transferencia.setMovimiento(movimiento);
+
+		TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
+		transferenciaDAO.guardarTransferencia(transferencia);
+
+		BigDecimal nuevoBalance = cuentaOrigen.getSaldo().add(movimiento.getValor().negate());
+		cuentaOrigen.setSaldo(nuevoBalance);
+
+		cuentaDAO.update(cuentaOrigen);
 		
-		ingreso.setDestino(cuenta);
-		
-		ingreso.setMovimiento(movimiento);
-		
-		System.out.println(movimiento.getConcepto() + " - " + movimiento.getFecha() + " - " + movimiento.getValor() + " - " 
-				+ movimiento.getCuenta().getNombre() + " - " + movimiento.getCuenta().getNumero() + " - " + catIngreso.getNombre());
-		
-		IngresoDAO ingresoDAO = new IngresoDAO();
-		ingresoDAO.guardarIngreso(ingreso);
-		
-		BigDecimal nuevoBalance = movimiento.getValor().add(cuenta.getSaldo());
-		cuenta.setSaldo(nuevoBalance);
-		
-		cuentaDAO.update(cuenta);
-		
+		nuevoBalance = cuentaDestino.getSaldo().add(movimiento.getValor());
+		cuentaDestino.setSaldo(nuevoBalance);
+
+		cuentaDAO.update(cuentaDestino);
+
 		response.sendRedirect("VerTableroController");
 	}
 
@@ -85,20 +94,13 @@ public class RegistrarIngresoController extends HttpServlet {
 		String ruta = (request.getParameter("ruta") == null) ? "listar" : request.getParameter("ruta");
 
 		switch (ruta) {
-		case "ingreso":
+		case "transferencia":
 			this.prepararIngreso(request, response);
 			break;
-		case "registrar-ingreso":
-			this.registrarIngreso(request, response);
 		default:
 			response.sendRedirect("ingreso.jsp");
 			break;
 		}
-	}
-
-	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response) {
-			
-		
 	}
 
 	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
@@ -106,23 +108,23 @@ public class RegistrarIngresoController extends HttpServlet {
 		try {
 			// Obtener categorías de ingreso
 			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			List<Categoria> categoriasIngreso = categoriaDAO.obtenerCategoriasIngreso();
+			List<Categoria> categoriasTransferencia = categoriaDAO.obtenerCategoriasTransferencia();
 
 			// Obtener saldo de la cuenta
 			String numeroCuenta = request.getParameter("numero");
-            CuentaDAO cuentaDAO = new CuentaDAO();
-            BigDecimal saldoCuenta = cuentaDAO.encontrarPorNumero(numeroCuenta).getSaldo();
+			CuentaDAO cuentaDAO = new CuentaDAO();
+			BigDecimal saldoCuenta = cuentaDAO.encontrarPorNumero(numeroCuenta).getSaldo();
 
 			// Pasar las categorías como atributo
-			request.setAttribute("categoriasIngreso", categoriasIngreso);
-            request.setAttribute("saldoCuenta", saldoCuenta);
+			request.setAttribute("categoriasTransferencia", categoriasTransferencia);
+			request.setAttribute("saldoCuenta", saldoCuenta);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("mensajeError", "Error al cargar las categorías: " + e.getMessage());
 		}
 
-		// Redirigir a ingreso.jsp
-		getServletContext().getRequestDispatcher("/jsp/ingreso.jsp").forward(request, response);
+		// Redirigir a transferencia.jsp
+		getServletContext().getRequestDispatcher("/jsp/transferencia.jsp").forward(request, response);
 	}
 }

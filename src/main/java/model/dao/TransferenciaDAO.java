@@ -43,4 +43,14 @@ public class TransferenciaDAO {
             throw new RuntimeException("Error al obtener las transferencias por categoría en DAO: " + e.getMessage(), e);
         }
     }
+
+	public void guardarTransferencia(Transferencia transferencia) {
+		
+		em.getTransaction().begin();
+		
+		em.persist(transferencia);
+		
+		em.getTransaction().commit();
+		
+	}
 }

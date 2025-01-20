@@ -19,7 +19,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import orm.entities.*;
-import model.bdd.BddConnection;
 import model.dao.CategoriaDAO;
 import model.dao.CuentaDAO;
 import model.dao.EgresoDAO;
@@ -87,16 +86,10 @@ public class RegistrarEgresoController extends HttpServlet {
 		case "egreso":
 			this.prepararIngreso(request, response);
 			break;
-		case "registrar-egreso":
-			this.registrarIngreso(request, response);
 		default:
 			response.sendRedirect("ingreso.jsp");
 			break;
 		}
-	}
-
-	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response) {
-
 	}
 
 	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
@@ -120,7 +113,7 @@ public class RegistrarEgresoController extends HttpServlet {
 			request.setAttribute("mensajeError", "Error al cargar las categorías: " + e.getMessage());
 		}
 
-		// Redirigir a ingreso.jsp
+		// Redirigir a egreso.jsp
 		getServletContext().getRequestDispatcher("/jsp/egreso.jsp").forward(request, response);
 	}
 }
