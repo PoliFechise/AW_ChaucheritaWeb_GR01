@@ -71,7 +71,7 @@ public class RegistrarEgresoController extends HttpServlet {
 		EgresoDAO egresoDAO = new EgresoDAO();
 		egresoDAO.guardarEgreso(egreso);
 
-		BigDecimal nuevoBalance = movimiento.getValor().add(cuenta.getSaldo().negate());
+		BigDecimal nuevoBalance = cuenta.getSaldo().add(movimiento.getValor().negate());
 		cuenta.setSaldo(nuevoBalance);
 
 		cuentaDAO.update(cuenta);

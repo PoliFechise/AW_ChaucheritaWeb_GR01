@@ -146,7 +146,7 @@
                         <tr>
                             <td>${status.index + 1}</td>
                             <td>${categoria.nombre}</td>
-                            <td>${categoria.totalEgreso}</td>
+                            <td>${categoria.sumaValor}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
