@@ -100,31 +100,31 @@
         </div>
 
         <!-- Tabla de Ingresos -->
-        <div class="section">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 10%;">N°</th>
-                        <th style="width: 45%;">Categoría</th>
-                        <th style="width: 45%;">Total Ingreso</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:if test="${empty tableroDTO.categoriasIngreso}">
-                        <tr>
-                            <td colspan="3" style="text-align: center;">No hay categorías de ingreso disponibles.</td>
-                        </tr>
-                    </c:if>
-                    <c:forEach items="${tableroDTO.categoriasIngreso}" var="categoria" varStatus="status">
-                        <tr>
-                            <td>${status.index + 1}</td>
-                            <td>${categoria.nombre}</td>
-                            <td>${categoria.sumaValor}</td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
+<div class="section">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 10%;">N°</th>
+                <th style="width: 45%;">Categoría</th>
+                <th style="width: 45%;">Total Ingreso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:if test="${empty tableroDTO.categoriasIngreso}">
+                <tr>
+                    <td colspan="3" style="text-align: center;">No hay categorías de ingreso disponibles.</td>
+                </tr>
+            </c:if>
+            <c:forEach items="${tableroDTO.categoriasIngreso}" var="categoria" varStatus="status">
+                <tr>
+                    <td>${status.index + 1}</td>
+                    <td>${categoria.nombre}</td>
+                    <td>${categoria.sumaValor}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
 
         <!-- Tabla de Gastos -->
         <div class="section">

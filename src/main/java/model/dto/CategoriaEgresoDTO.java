@@ -39,4 +39,13 @@ public class CategoriaEgresoDTO {
     public void setSumaValor(BigDecimal sumaValor) {
         this.sumaValor = sumaValor;
     }
+    
+    @Override
+    public String toString() {
+        return "CategoriaEgresoDTO{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", sumaValor=" + sumaValor +
+                '}';
+    }
 }

@@ -9,8 +9,6 @@ public class TableroDTO {
     private List<CategoriaIngresoDTO> categoriasIngreso;
     private List<CategoriaTransferenciaDTO> categoriasTransferencia;
     private List<Cuenta> cuentas;
-    private BigDecimal totalIngresos;
-    private BigDecimal totalTransferencias;
 
     // Getters y setters
 
@@ -44,21 +42,5 @@ public class TableroDTO {
 
     public void setCuentas(List<Cuenta> cuentas) {
         this.cuentas = cuentas;
-    }
-
-    public BigDecimal getTotalIngresos() {
-        return totalIngresos;
-    }
-
-    public void setTotalIngresos(BigDecimal totalIngresos) {
-        this.totalIngresos = totalIngresos;
-    }
-
-    public BigDecimal getTotalTransferencias() {
-        return totalTransferencias;
-    }
-
-    public void setTotalTransferencias(BigDecimal totalTransferencias) {
-        this.totalTransferencias = totalTransferencias;
     }
 }

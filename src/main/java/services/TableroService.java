@@ -23,14 +23,17 @@ public class TableroService {
         // Obtener categorías de egreso
         List<CategoriaEgresoDTO> categoriasEgreso = obtenerCategoriasEgreso();
         tableroDTO.setCategoriasEgreso(categoriasEgreso);
+        System.out.println("Categorías de Egreso: " + categoriasEgreso); // Log de categorías de egreso
         
         // Obtener categorías de ingreso
         List<CategoriaIngresoDTO> categoriasIngreso = obtenerCategoriasIngreso();
         tableroDTO.setCategoriasIngreso(categoriasIngreso);
+        System.out.println("Categorías de Ingreso: " + categoriasIngreso);
 
         // Obtener categorías de transferencia
         List<CategoriaTransferenciaDTO> categoriasTransferencia = obtenerCategoriasTransferencia();
         tableroDTO.setCategoriasTransferencia(categoriasTransferencia);
+        System.out.println("Categorías de Transferencia: " + categoriasTransferencia);
 
         // Obtener cuentas
         List<Cuenta> cuentas = obtenerCuentas();
@@ -100,16 +103,19 @@ public class TableroService {
         }
     }
 
-    private List<CategoriaIngresoDTO> obtenerCategoriasIngreso() throws SQLException {
+    public List<CategoriaIngresoDTO> obtenerCategoriasIngreso() throws SQLException {
         try {
-            String jpql = "SELECT new model.dto.CategoriaIngresoDTO(c.id, c.nombre, SUM(m.valor)) " +
+            String jpql = "SELECT new model.dto.CategoriaIngresoDTO(ci.id, ci.nombre, SUM(m.valor)) " +
                           "FROM Ingreso i " +
-                          "JOIN i.destino c " +
+                          "JOIN i.origen ci " +
                           "JOIN i.movimiento m " +
-                          "GROUP BY c.id, c.nombre " +
+                          "GROUP BY ci.id, ci.nombre " +
                           "ORDER BY SUM(m.valor) DESC";
-
+            
             Query query = em.createQuery(jpql);
+            List<CategoriaIngresoDTO> resultado = query.getResultList();
+            System.out.println("Resultado de la consulta JPQL: " + resultado);
+
             return query.getResultList();
         } catch (Exception e) {
             throw new SQLException("Error al obtener las categorías de ingreso: " + e.getMessage(), e);
@@ -118,12 +124,12 @@ public class TableroService {
 
     private List<CategoriaIngresoDTO> obtenerCategoriasIngresoPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) throws SQLException {
         try {
-            String jpql = "SELECT new model.dto.CategoriaIngresoDTO(c.id, c.nombre, SUM(m.valor)) " +
+            String jpql = "SELECT new model.dto.CategoriaIngresoDTO(ci.id, ci.nombre, SUM(m.valor)) " +
                           "FROM Ingreso i " +
-                          "JOIN i.destino c " +
+                          "JOIN i.origen ci " +
                           "JOIN i.movimiento m " +
                           "WHERE m.fecha BETWEEN :fechaInicio AND :fechaFin " +
-                          "GROUP BY c.id, c.nombre " +
+                          "GROUP BY ci.id, ci.nombre " +
                           "ORDER BY SUM(m.valor) DESC";
 
             Query query = em.createQuery(jpql);
@@ -137,11 +143,11 @@ public class TableroService {
 
     private List<CategoriaTransferenciaDTO> obtenerCategoriasTransferencia() throws SQLException {
         try {
-            String jpql = "SELECT new model.dto.CategoriaTransferenciaDTO(c.id, c.nombre, SUM(m.valor)) " +
+            String jpql = "SELECT new model.dto.CategoriaTransferenciaDTO(ct.id, ct.nombre, SUM(m.valor)) " +
                           "FROM Transferencia t " +
-                          "JOIN t.destino c " +
+                          "JOIN t.categoria ct " +
                           "JOIN t.movimiento m " +
-                          "GROUP BY c.id, c.nombre " +
+                          "GROUP BY ct.id, ct.nombre " +
                           "ORDER BY SUM(m.valor) DESC";
 
             Query query = em.createQuery(jpql);
@@ -153,12 +159,12 @@ public class TableroService {
 
     private List<CategoriaTransferenciaDTO> obtenerCategoriasTransferenciaPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) throws SQLException {
         try {
-            String jpql = "SELECT new model.dto.CategoriaTransferenciaDTO(c.id, c.nombre, SUM(m.valor)) " +
+            String jpql = "SELECT new model.dto.CategoriaTransferenciaDTO(ct.id, ct.nombre, SUM(m.valor)) " +
                           "FROM Transferencia t " +
-                          "JOIN t.destino c " +
+                          "JOIN t.categoria ct " +
                           "JOIN t.movimiento m " +
                           "WHERE m.fecha BETWEEN :fechaInicio AND :fechaFin " +
-                          "GROUP BY c.id, c.nombre " +
+                          "GROUP BY ct.id, ct.nombre " +
                           "ORDER BY SUM(m.valor) DESC";
 
             Query query = em.createQuery(jpql);
