@@ -43,4 +43,14 @@ public class EgresoDAO {
             throw new RuntimeException("Error al obtener los egresos por categoría en DAO: " + e.getMessage(), e);
         }
     }
+    
+    public void guardarEgreso(Egreso egreso) {
+
+		em.getTransaction().begin();
+
+		em.persist(egreso);
+
+		em.getTransaction().commit();
+
+	}
 }

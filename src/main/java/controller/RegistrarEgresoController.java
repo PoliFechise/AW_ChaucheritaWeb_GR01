@@ -22,11 +22,12 @@ import orm.entities.*;
 import model.bdd.BddConnection;
 import model.dao.CategoriaDAO;
 import model.dao.CuentaDAO;
+import model.dao.EgresoDAO;
 import model.dao.IngresoDAO;
 import model.dao.MovimientoDAO;
 
-@WebServlet("/RegistrarIngresoController")
-public class RegistrarIngresoController extends HttpServlet {
+@WebServlet("/RegistrarEgresoController")
+public class RegistrarEgresoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,45 +40,42 @@ public class RegistrarIngresoController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		Ingreso ingreso = new Ingreso();
+
+		Egreso egreso = new Egreso();
 		Movimiento movimiento = new Movimiento();
 		Cuenta cuenta = new Cuenta();
-		CatIngreso catIngreso = new CatIngreso();
-		
+		CatEgreso catEgreso = new CatEgreso();
+
 		movimiento.setConcepto(request.getParameter("concepto"));
-		
+
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDateTime dateTime = LocalDate.parse(request.getParameter("fecha"), format).atStartOfDay();
 		movimiento.setFecha(dateTime);
-		
+
 		CuentaDAO cuentaDAO = new CuentaDAO();
 		cuenta = cuentaDAO.encontrarPorNumero(request.getParameter("numeroCuenta"));
 		movimiento.setCuenta(cuenta);
-		
+
 		movimiento.setValor(BigDecimal.valueOf(Double.parseDouble(request.getParameter("valor"))));
-		
+
 		MovimientoDAO movimientoDAO = new MovimientoDAO();
 		movimientoDAO.guardarMovimiento(movimiento);
-		
-		catIngreso.setNombre(request.getParameter("categoria"));
-		ingreso.setOrigen(catIngreso);
-		
-		ingreso.setDestino(cuenta);
-		
-		ingreso.setMovimiento(movimiento);
-		
-		System.out.println(movimiento.getConcepto() + " - " + movimiento.getFecha() + " - " + movimiento.getValor() + " - " 
-				+ movimiento.getCuenta().getNombre() + " - " + movimiento.getCuenta().getNumero() + " - " + catIngreso.getNombre());
-		
-		IngresoDAO ingresoDAO = new IngresoDAO();
-		ingresoDAO.guardarIngreso(ingreso);
-		
-		BigDecimal nuevoBalance = movimiento.getValor().add(cuenta.getSaldo());
+
+		catEgreso.setNombre(request.getParameter("categoria"));
+		egreso.setDestino(catEgreso);
+
+		egreso.setOrigen(cuenta);
+
+		egreso.setMovimiento(movimiento);
+
+		EgresoDAO egresoDAO = new EgresoDAO();
+		egresoDAO.guardarEgreso(egreso);
+
+		BigDecimal nuevoBalance = cuenta.getSaldo().add(movimiento.getValor().negate());
 		cuenta.setSaldo(nuevoBalance);
-		
+
 		cuentaDAO.update(cuenta);
-		
+
 		response.sendRedirect("VerTableroController");
 	}
 
@@ -86,10 +84,10 @@ public class RegistrarIngresoController extends HttpServlet {
 		String ruta = (request.getParameter("ruta") == null) ? "listar" : request.getParameter("ruta");
 
 		switch (ruta) {
-		case "ingreso":
+		case "egreso":
 			this.prepararIngreso(request, response);
 			break;
-		case "registrar-ingreso":
+		case "registrar-egreso":
 			this.registrarIngreso(request, response);
 		default:
 			response.sendRedirect("ingreso.jsp");
@@ -98,8 +96,7 @@ public class RegistrarIngresoController extends HttpServlet {
 	}
 
 	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response) {
-			
-		
+
 	}
 
 	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
@@ -107,16 +104,16 @@ public class RegistrarIngresoController extends HttpServlet {
 		try {
 			// Obtener categorías de ingreso
 			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			List<Categoria> categoriasIngreso = categoriaDAO.obtenerCategoriasIngreso();
+			List<Categoria> categoriasEgreso = categoriaDAO.obtenerCategoriasEgreso();
 
 			// Obtener saldo de la cuenta
 			String numeroCuenta = request.getParameter("numero");
-            CuentaDAO cuentaDAO = new CuentaDAO();
-            BigDecimal saldoCuenta = cuentaDAO.encontrarPorNumero(numeroCuenta).getSaldo();
+			CuentaDAO cuentaDAO = new CuentaDAO();
+			BigDecimal saldoCuenta = cuentaDAO.encontrarPorNumero(numeroCuenta).getSaldo();
 
 			// Pasar las categorías como atributo
-			request.setAttribute("categoriasIngreso", categoriasIngreso);
-            request.setAttribute("saldoCuenta", saldoCuenta);
+			request.setAttribute("categoriasEgreso", categoriasEgreso);
+			request.setAttribute("saldoCuenta", saldoCuenta);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -124,6 +121,6 @@ public class RegistrarIngresoController extends HttpServlet {
 		}
 
 		// Redirigir a ingreso.jsp
-		getServletContext().getRequestDispatcher("/jsp/ingreso.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/jsp/egreso.jsp").forward(request, response);
 	}
 }
