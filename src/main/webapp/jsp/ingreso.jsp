@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Registrar Ingreso</title>
-<link rel="stylesheet" href="../styles/ingreso-styles.css">
+<link rel="stylesheet" href="styles/ingreso-styles.css">
 </head>
 <body>
 	<main>

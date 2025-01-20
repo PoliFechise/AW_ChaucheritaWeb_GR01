@@ -66,9 +66,6 @@ public class RegistrarIngresoController extends HttpServlet {
 		
 		ingreso.setMovimiento(movimiento);
 		
-		System.out.println(movimiento.getConcepto() + " - " + movimiento.getFecha() + " - " + movimiento.getValor() + " - " 
-				+ movimiento.getCuenta().getNombre() + " - " + movimiento.getCuenta().getNumero() + " - " + catIngreso.getNombre());
-		
 		IngresoDAO ingresoDAO = new IngresoDAO();
 		ingresoDAO.guardarIngreso(ingreso);
 		
@@ -88,17 +85,10 @@ public class RegistrarIngresoController extends HttpServlet {
 		case "ingreso":
 			this.prepararIngreso(request, response);
 			break;
-		case "registrar-ingreso":
-			this.registrarIngreso(request, response);
 		default:
 			response.sendRedirect("ingreso.jsp");
 			break;
 		}
-	}
-
-	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response) {
-			
-		
 	}
 
 	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)

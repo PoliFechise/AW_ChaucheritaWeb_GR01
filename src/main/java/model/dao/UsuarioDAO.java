@@ -10,7 +10,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import orm.entities.*;
-import model.bdd.BddConnection;
 
 public class UsuarioDAO {
 
