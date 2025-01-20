@@ -64,7 +64,7 @@ public class GestionarCuentaController extends HttpServlet {
     }
 
     private void listarCuentas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Cuenta> cuentas = cuentaDAO.findAll();
+        List<Cuenta> cuentas = cuentaDAO.obtenerCuentas();
         request.setAttribute("cuentas", cuentas);
         getServletContext().getRequestDispatcher("/jsp/cuenta.jsp").forward(request, response);
     }
@@ -80,7 +80,7 @@ public class GestionarCuentaController extends HttpServlet {
         Cuenta cuenta = new Cuenta(null, nombre, numero, saldo);
 
         try {
-            cuentaDAO.create(cuenta);
+            cuentaDAO.guardar(cuenta);
             response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&mensaje=guardado");
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,7 +96,7 @@ public class GestionarCuentaController extends HttpServlet {
             return;
         }
 
-        List<Cuenta> cuentas = cuentaDAO.findAll();
+        List<Cuenta> cuentas = cuentaDAO.obtenerCuentas();
         Cuenta cuenta = cuentas.stream()
                 .filter(c -> c.getNumero().equals(numero))
                 .findFirst()
@@ -116,7 +116,7 @@ public class GestionarCuentaController extends HttpServlet {
         String numero = request.getParameter("numero");
         BigDecimal saldo = new BigDecimal(request.getParameter("saldo"));
 
-        List<Cuenta> cuentas = cuentaDAO.findAll();
+        List<Cuenta> cuentas = cuentaDAO.obtenerCuentas();
         Cuenta cuenta = cuentas.stream()
                 .filter(c -> c.getNumero().equals(numero))
                 .findFirst()
@@ -140,7 +140,7 @@ public class GestionarCuentaController extends HttpServlet {
 
         try {
             if (numero != null && !numero.isEmpty()) {
-                cuentaDAO.deleteByNumero(numero);
+                cuentaDAO.borrarPorNumero(numero);
                 response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&cuenta=eliminado");
             } else {
                 response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&eliminado=fallido");

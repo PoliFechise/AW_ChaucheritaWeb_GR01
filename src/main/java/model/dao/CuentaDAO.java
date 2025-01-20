@@ -14,7 +14,7 @@ public class CuentaDAO {
         this.em = emf.createEntityManager();
     }
 
-    public void create(Cuenta cuenta) {
+    public void guardar(Cuenta cuenta) {
         try {
             em.getTransaction().begin();
             em.persist(cuenta);
@@ -24,11 +24,11 @@ public class CuentaDAO {
             e.printStackTrace();
         }
     }
-
+    
     public Cuenta findById(Integer id) {
         return em.find(Cuenta.class, id);
     }
-    
+
  // Nuevo método para encontrar por número de cuenta
     public Cuenta encontrarPorNumero(String numero) {
         try {
@@ -44,7 +44,7 @@ public class CuentaDAO {
         }
     }
 
-    public List<Cuenta> findAll() {
+    public List<Cuenta> obtenerCuentas() {
         return em.createQuery("SELECT c FROM Cuenta c", Cuenta.class).getResultList();
     }
 
@@ -73,7 +73,7 @@ public class CuentaDAO {
         }
     }
     
-    public void deleteByNumero(String numero) {
+    public void borrarPorNumero(String numero) {
         try {
             em.getTransaction().begin();
             Cuenta cuenta = em.createQuery("SELECT c FROM Cuenta c WHERE c.numero = :numero", Cuenta.class)
