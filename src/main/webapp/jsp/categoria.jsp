@@ -44,7 +44,7 @@
 							<td>${categoria.nombre}</td>
 							<td>
 								<div class="acciones">
-									<div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.jsp'">
+									<div class="boton-actualizar" onclick="location.href='GestionarCategoriaController?ruta=actualizar&id=${categoria.id}&nombre=${categoria.nombre}'">
 										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
 									</div>
 									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
@@ -87,7 +87,7 @@
 							<td>${categoria.nombre}</td>
 							<td>
 								<div class="acciones">
-									<div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.html'">
+									<div class="boton-actualizar" onclick="location.href='GestionarCategoriaController?ruta=actualizar&id=${categoria.id}&nombre=${categoria.nombre}'">
 										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
 									</div>
 									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
@@ -130,7 +130,7 @@
 							<td>${categoria.nombre}</td>
 							<td>
 								<div class="acciones">
-									<div class="boton-actualizar" onclick="location.href='formularioActualizacionCategoria.html'">
+									<div class="boton-actualizar" onclick="location.href='GestionarCategoriaController?ruta=actualizar&id=${categoria.id}&nombre=${categoria.nombre}'">
 										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
 									</div>
 									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->

@@ -127,41 +127,32 @@ public class GestionarCategoriaController extends HttpServlet {
 
 	private void actualizarCategoria(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("jsp/formularioActualizarCategoria.jsp").forward(request, response);
+		String idParam = request.getParameter("id");
+		String nombre = request.getParameter("nombre");
+		
+		if (idParam == null || idParam.trim().isEmpty()) {
+			response.sendRedirect("VerTableroController?ruta=ajustes&section=categoria");
+			return;
+		}
 
+		int id = Integer.parseInt(idParam);
+		request.setAttribute("categoriaId", id);
+		request.setAttribute("nombre", nombre);
+		request.getRequestDispatcher("jsp/formularioActualizarCategoria.jsp").forward(request, response);
 	}
 
 	private void cambiarCategoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// 1. Obtener parámetros
-		int id = Integer.parseInt(request.getParameter("id"));
+		String idParam = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
-		String tipo = request.getParameter("tipo");
 
-		// Validar si los parámetros son nulos o vacíos
-		if (nombre == null || nombre.trim().isEmpty() || tipo == null || tipo.trim().isEmpty()) {
+		if (idParam == null || idParam.trim().isEmpty() || nombre == null || nombre.trim().isEmpty()) {
+			response.sendRedirect("VerTableroController?ruta=ajustes&section=categoria");
 			return;
 		}
 
-		// 2. Hablar con el dominio
-		Categoria categoria;
-
-		switch (tipo.toLowerCase()) {
-		case "ingreso":
-			categoria = new CatIngreso(nombre);
-			break;
-		case "egreso":
-			categoria = new CatEgreso(nombre);
-			break;
-		case "transferencia":
-			categoria = new CatTransferencia(nombre);
-			break;
-		default:
-			return;
-		}
-
-		// 3. Hablar con la vista
+		int id = Integer.parseInt(idParam);
 		CategoriaDAO categoriaDAO = new CategoriaDAO();
-		categoriaDAO.actualizar(categoria);
+		categoriaDAO.actualizar(id, nombre);
 		response.sendRedirect("VerTableroController?ruta=ajustes&section=categoria");
 	}
 
