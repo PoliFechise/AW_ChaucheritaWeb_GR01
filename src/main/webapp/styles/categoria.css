@@ -49,13 +49,13 @@ h2, h3 {
     color: black;
     width: 140px;
     font-size: 20px;
-    margin-right: 10px; /* Añadir espacio entre los botones */
-    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
-    font-weight: bold; /* Asegura que el texto esté en negrita */
+    margin-right: 10px;
+    font-family: 'Arial Black', Gadget, sans-serif;
+    font-weight: bold;
 }
 
 .boton-crear::before {
-    background: #ff8c00; /* Naranja de énfasis */
+    background: #ff8c00;
 }
 
 .boton-crear:hover::before {
@@ -73,12 +73,12 @@ h2, h3 {
     height: 30px;
     width: 140px;
     font-size: 18px;
-    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
-    font-weight: bold; /* Asegura que el texto esté en negrita */
+    font-family: 'Arial Black', Gadget, sans-serif;
+    font-weight: bold;
 }
 
 .boton-regresar::before {
-    background: #1f65b7; /* Azul de énfasis */
+    background: #1f65b7;
 }
 
 .boton-regresar:hover::before {
@@ -90,48 +90,27 @@ h2, h3 {
     cursor: pointer;
 }
 
-.boton-actualizar {
-    background-color: #F6F88E;
-    color: black;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
-    font-weight: bold; /* Asegura que el texto esté en negrita */
+/* Botones de Actualizar y Eliminar */
+.boton-actualizar, .boton-eliminar {
+    background-color: transparent; /* Sin color de fondo */
+    border: none; /* Sin borde */
+    padding: 0; /* Quita el relleno */
+    margin: 0 5px; /* Espacio entre botones */
+    display: inline-block; /* Mantiene el tamaño ajustado */
+    cursor: pointer; /* Apunta como un botón */
 }
 
-.boton-actualizar::before {
-    background: #ff69b4; /* Rosado de énfasis */
+.boton-actualizar img, .boton-eliminar img {
+    width: 24px; /* Tamaño del ícono */
+    height: 24px; /* Proporcional al ancho */
+    display: block;
+    margin: auto;
 }
 
-.boton-actualizar:hover::before {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
-}
-
-.boton-actualizar:hover {
-    color: white;
-    cursor: pointer;
-}
-
-.boton-eliminar {
-    background-color: #FF0000;
-    color: black;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
-    font-weight: bold; /* Asegura que el texto esté en negrita */
-}
-
-.boton-eliminar::before {
-    background: #9370db; /* Morado de énfasis */
-}
-
-.boton-eliminar:hover::before {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
-}
-
-.boton-eliminar:hover {
-    color: white;
-    cursor: pointer;
+/* Hover para los botones */
+.boton-actualizar:hover, .boton-eliminar:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
 .contenedor-regresar {
@@ -204,9 +183,10 @@ h2, h3 {
     display: flex;
     align-items: center;
     padding: 0;
-    width: 100%;
+    justify-content: center; /* Alinea los botones al centro */
 }
 
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -263,12 +243,15 @@ h2, h3 {
 
 .modal-botones button:hover {
     background-color: #f5a500;
+    color: white;
 }
 
 .modal-botones #btnNo {
     background-color: #6c757d;
+    color: white;
 }
 
 .modal-botones #btnNo:hover {
     background-color: #5a6268;
+    color: white;
 }

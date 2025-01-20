@@ -11,10 +11,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import orm.entities.*;
+
 import model.dao.CategoriaDAO;
-import model.dao.CuentaDAO;
-import model.dto.CategoriaEgresoDTO;
+import orm.entities.CatEgreso;
+import orm.entities.CatIngreso;
+import orm.entities.CatTransferencia;
+import orm.entities.Categoria;
 
 @WebServlet("/GestionarCategoriaController")
 public class GestionarCategoriaController extends HttpServlet {
@@ -45,44 +47,38 @@ public class GestionarCategoriaController extends HttpServlet {
 			this.listarCategorias(request, response);
 			break;
 		case "crear":
-			this.presentarFormularioCrear(request, response);
+			this.crearCategoria(request, response);
 			break;
 		case "guardar":
 			this.guardarCategoria(request, response);
 			break;
 		case "eliminar":
-			this.eliminarCategoria(request, response); // Nueva ruta para eliminar
+			this.eliminarCategoria(request, response);
 			break;
-		case "actualizar": // Nueva ruta para actualizar
-            this.presentarFormularioActualizar(request, response);
-            break;
-		case "cambiar": // Nueva ruta para actualizar
-            this.cambiarCategoria(request, response);
-            break;
+		case "actualizar":
+			this.actualizarCategoria(request, response);
+			break;
+		case "cambiar":
+			this.cambiarCategoria(request, response);
+			break;
 		default:
-			response.sendRedirect("ajustes.jsp");
+			response.sendRedirect("VerTableroController?ruta=ajustes");
 			break;
 		}
 	}
 
-	private void cambiarCategoria(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	private void listarCategorias(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Categoria> categoriasIngreso;
-		List<Categoria> categoriasEgreso;
-		List<Categoria> categoriasTransferencia;
+		// 1. Obtener parámetros
 
+		// 2. Hablar con el dominio
 		CategoriaDAO categoriaDAO = new CategoriaDAO();
 
-		categoriasIngreso = categoriaDAO.obtenerCategoriasIngreso();
-		categoriasEgreso = categoriaDAO.obtenerCategoriasEgreso();
-		categoriasTransferencia = categoriaDAO.obtenerCategoriasTransferencia();
+		List<Categoria> categoriasIngreso = categoriaDAO.obtenerCategoriasIngreso();
+		List<Categoria> categoriasEgreso = categoriaDAO.obtenerCategoriasEgreso();
+		List<Categoria> categoriasTransferencia = categoriaDAO.obtenerCategoriasTransferencia();
 
-		// Enviar datos a la vista
+		// 3. Hablar con la vista
 		request.setAttribute("categoriasIngreso", categoriasIngreso);
 		request.setAttribute("categoriasEgreso", categoriasEgreso);
 		request.setAttribute("categoriasTransferencia", categoriasTransferencia);
@@ -90,16 +86,10 @@ public class GestionarCategoriaController extends HttpServlet {
 		getServletContext().getRequestDispatcher("/jsp/categoria.jsp").forward(request, response);
 	}
 
-	private void presentarFormularioCrear(HttpServletRequest request, HttpServletResponse response)
+	private void crearCategoria(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("jsp/formularioCreacionCategoria.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/formularioCrearCategoria.jsp").forward(request, response);
 	}
-	
-	private void presentarFormularioActualizar(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
-	    getServletContext().getRequestDispatcher("/jsp/formularioActualizacionCategoria.jsp").forward(request, response);
-	}
-
 
 	private void guardarCategoria(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -112,52 +102,79 @@ public class GestionarCategoriaController extends HttpServlet {
 			return;
 		}
 
-		// Validar el tipo
-		if (!tipo.equals("ingreso") && !tipo.equals("egreso") && !tipo.equals("transferencia")) {
+		// 2. Hablar con el dominio
+		Categoria categoria;
+
+		switch (tipo.toLowerCase()) {
+		case "ingreso":
+			categoria = new CatIngreso(nombre);
+			break;
+		case "egreso":
+			categoria = new CatEgreso(nombre);
+			break;
+		case "transferencia":
+			categoria = new CatTransferencia(nombre);
+			break;
+		default:
+			return;
+		}
+
+		// 3. Hablar con la vista
+		CategoriaDAO categoriaDAO = new CategoriaDAO();
+		categoriaDAO.guardar(categoria);
+		response.sendRedirect("VerTableroController?ruta=ajustes&section=categoria");
+	}
+
+	private void actualizarCategoria(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("jsp/formularioActualizarCategoria.jsp").forward(request, response);
+
+	}
+
+	private void cambiarCategoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 1. Obtener parámetros
+		int id = Integer.parseInt(request.getParameter("id"));
+		String nombre = request.getParameter("nombre");
+		String tipo = request.getParameter("tipo");
+
+		// Validar si los parámetros son nulos o vacíos
+		if (nombre == null || nombre.trim().isEmpty() || tipo == null || tipo.trim().isEmpty()) {
 			return;
 		}
 
 		// 2. Hablar con el dominio
-		Categoria categoria = new Categoria();
-		categoria.setNombre(nombre);
-		//categoria.setTipo(tipo.toLowerCase());
+		Categoria categoria;
 
-		// 3. Hablar con la vista
-		try {
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			categoriaDAO.guardar(categoria);
-			response.sendRedirect("GestionarCategoriaController?ruta=listar");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void eliminarCategoria(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// Obtener los parámetros id y tipo para la eliminación
-		String idCategoria = request.getParameter("id");
-		String tipoCategoria = request.getParameter("tipo");
-
-		if (idCategoria == null || idCategoria.trim().isEmpty() || tipoCategoria == null
-				|| tipoCategoria.trim().isEmpty()) {
-			request.setAttribute("error", "ID de categoría o tipo no proporcionado.");
-			response.sendRedirect("GestionarCategoriaController?ruta=listar");
+		switch (tipo.toLowerCase()) {
+		case "ingreso":
+			categoria = new CatIngreso(nombre);
+			break;
+		case "egreso":
+			categoria = new CatEgreso(nombre);
+			break;
+		case "transferencia":
+			categoria = new CatTransferencia(nombre);
+			break;
+		default:
 			return;
 		}
 
-		try {
-			int id = Integer.parseInt(idCategoria);
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
-
-			// Llamamos al método de eliminación de la categoría
-			categoriaDAO.eliminar(id);
-
-			// Redirigir al listado después de eliminar
-			response.sendRedirect("GestionarCategoriaController?ruta=listar");
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			request.setAttribute("error", "Error al eliminar la categoría: " + e.getMessage());
-			getServletContext().getRequestDispatcher("/jsp/error.jsp").forward(request, response);
-		}
+		// 3. Hablar con la vista
+		CategoriaDAO categoriaDAO = new CategoriaDAO();
+		categoriaDAO.actualizar(categoria);
+		response.sendRedirect("VerTableroController?ruta=ajustes&section=categoria");
 	}
+
+	private void eliminarCategoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 1. Obtener parámetros
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		// 2. Hablar con el dominio
+		CategoriaDAO categoriaDAO = new CategoriaDAO();
+		categoriaDAO.eliminar(id);
+
+		// 3. Hablar con la vista
+		response.sendRedirect("VerTableroController?ruta=ajustes&section=categoria");
+	}
+
 }

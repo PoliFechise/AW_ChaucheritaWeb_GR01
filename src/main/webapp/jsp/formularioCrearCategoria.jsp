@@ -17,7 +17,7 @@
 <body>
 	<div class="Contenido">
 
-		<form action="GestionarCategoriaController?ruta=guardar" method="POST">
+		<form action="GestionarCategoriaController?ruta=guardar&section=categoria" method="POST">
 			<div class="Caja-nombre">
 				<label class="negrita-negra">Nombre:</label> 
 				<input type="text" name="nombre" class="ItemFormulario1" required />
