@@ -16,7 +16,7 @@ public class Egreso implements Serializable {
 	@JoinColumn(name = "origen", nullable = false)
 	private Cuenta origen;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "destino", nullable = false)
 	private CatEgreso destino;
 
