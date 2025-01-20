@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="contenedor-regresar">
-		<div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ajustes'">Regresar</div>
+		<div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ajustes'"><span>Regresar</span></div>
 	</div>
 
 	<div class="contenedor-recuadros">
@@ -25,7 +25,7 @@
 
 			<div class="contenedor-crear">
 				<div class="boton-crear" onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=ingreso'">
-					Crear
+					<span>Crear</span>
 				</div>
 			</div>
 
@@ -68,7 +68,7 @@
 
 			<div class="contenedor-crear">
 				<div class="boton-crear" onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=egreso'">
-					Crear
+					<span>Crear</span>
 				</div>
 			</div>
 
@@ -111,7 +111,7 @@
 
 			<div class="contenedor-crear">
 				<div class="boton-crear" onclick="location.href='GestionarCategoriaController?ruta=crear&tipo=transferencia'">
-					Crear
+					<span>Crear</span>
 				</div>
 			</div>
 
