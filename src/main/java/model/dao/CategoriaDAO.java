@@ -67,9 +67,25 @@ public class CategoriaDAO {
 
 	// Método para eliminar una categoría
 	public void eliminar(int id) {
-		em.getTransaction().begin();
-		Categoria categoria = em.find(Categoria.class, id);
-		em.remove(categoria);
-		em.getTransaction().commit();
+	    em.getTransaction().begin();
+	    Categoria categoria = em.find(Categoria.class, id);
+
+	    // Eliminar referencias en la tabla egreso
+	    Query queryEgreso = em.createQuery("DELETE FROM Egreso e WHERE e.destino.id = :categoriaId");
+	    queryEgreso.setParameter("categoriaId", id);
+	    queryEgreso.executeUpdate();
+
+	    // Eliminar referencias en la tabla transferencia
+	    Query queryTransferencia = em.createQuery("DELETE FROM Transferencia t WHERE t.destino.id = :categoriaId");
+	    queryTransferencia.setParameter("categoriaId", id);
+	    queryTransferencia.executeUpdate();
+
+	    // Eliminar referencias en la tabla ingreso
+	    Query queryIngreso = em.createQuery("DELETE FROM Ingreso i WHERE i.origen.id = :categoriaId");
+	    queryIngreso.setParameter("categoriaId", id);
+	    queryIngreso.executeUpdate();
+
+	    em.remove(categoria);
+	    em.getTransaction().commit();
 	}
 }
