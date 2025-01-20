@@ -26,7 +26,7 @@
 				value="com.mysql.cj.jdbc.Driver" />
 
 			<property name="eclipselink.ddl-generation"
-				value="none" />
+				value="none" /> <!-- create-tables -->	
 		</properties>
 	</persistence-unit>
 </persistence>

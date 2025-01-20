@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="contenedor-regresar">
-		<div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ajustes'"><span>Regresar</span></div>
+		<div class="boton-regresar" onclick="location.href='VerTableroController?ruta=ver'"><span>Regresar</span></div>
 	</div>
 
 	<div class="contenedor-recuadros">
