@@ -97,6 +97,7 @@ button {
     font-size: 23px;
     width: 200px;
     font-family: 'Angel Club';
+    border: none;
 }
 
 button:hover {

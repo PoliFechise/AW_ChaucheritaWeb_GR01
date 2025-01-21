@@ -15,10 +15,21 @@ h2, h3 {
 }
 
 /* Botones */
-.boton-crear, .boton-regresar, .boton-actualizar, .boton-eliminar {
+.boton-crear, .boton-regresar  {
     position: relative;
     overflow: hidden;
     border-radius: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    transition: color 0.4s ease;
+}
+
+.boton-actualizar, .boton-eliminar {
+	position: relative;
+    overflow: hidden;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -104,12 +115,16 @@ h2, h3 {
     width: 24px; /* Tamaño del ícono */
     height: 24px; /* Proporcional al ancho */
     display: block;
-    margin: auto;
 }
 
 /* Hover para los botones */
-.boton-actualizar:hover, .boton-eliminar:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.boton-actualizar:hover{
+    background-color: #f7f57f;
+    border-radius: 5px;
+}
+
+.boton-eliminar:hover {
+    background-color: red;
     border-radius: 5px;
 }
 
@@ -170,6 +185,7 @@ h2, h3 {
     color: white;
     font-size: 20px;
     border: 1px solid black;
+    text-align: center; /* Centra el texto en los encabezados */
 }
 
 .contenedor-tabla-categorias td {
@@ -177,6 +193,7 @@ h2, h3 {
     border: 1px solid black;
     background-color: white;
     padding: 0;
+    text-align: center; /* Centra el texto en las celdas */
 }
 
 .acciones {

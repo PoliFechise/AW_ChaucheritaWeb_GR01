@@ -97,6 +97,7 @@ header {
     height: 50px;
     margin-top: 25px;
     margin-bottom: 25px;
+    border: none;
 }
 
 .BtnCancelar {
@@ -107,6 +108,7 @@ header {
     height: 50px;
     margin-top: 25px;
     margin-bottom: 25px;
+    border: none;
 }
 
 button.btn-guardar {
@@ -117,7 +119,8 @@ button.btn-guardar {
     cursor: pointer;  
     font-size: 23px;  
     width: 200px;  
-    font-family: 'Angel Club';  
+    font-family: 'Angel Club'; 
+	border: none;
 }
 
 button.btn-guardar:hover {
@@ -132,7 +135,8 @@ button.btn-cancelar {
     cursor: pointer;  
     font-size: 23px;  
     width: 200px;  
-    font-family: 'Angel Club';  
+    font-family: 'Angel Club';
+    border: none;
 }
 
 button.btn-cancelar:hover {

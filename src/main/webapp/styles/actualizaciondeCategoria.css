@@ -77,34 +77,20 @@ header {
     width: 100%;
 }
 
-/* Estilos del botón */
-.BtnCrear, .BtnCancelar {
+/* Estilos del contenedor de botones */
+.Botones {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: center; /* Centra horizontalmente los botones */
     align-items: center;
-    width: 100%;
-    height: 50px;
+    gap: 20px; /* Espacio entre los botones */
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-button.btn-cancelar {
-	background-color: #e74c3c;
-	color: rgb(0, 0, 0);
-	border-radius: 8px;
-	padding: 10px 20px;
-	cursor: pointer;
-	font-size: 23px;
-	width: 200px;
-	font-family: 'Angel Club';
-}
-
-button.btn-cancelar:hover {
-	background-color: #c0392b;
-}
-
-button {
-    background-color: #e1ff5d;
+/* Estilos de los botones */
+button.BtnCancelar, button.BtnActualizar {
+    background-color: #e74c3c; /* Color inicial del botón Cancelar */
     color: rgb(0, 0, 0);
     border-radius: 8px;
     padding: 10px 20px;
@@ -112,9 +98,23 @@ button {
     font-size: 23px;
     width: 200px;
     font-family: 'Angel Club';
+    text-align: center;
+    border: none; /* Elimina el borde predeterminado */
 }
 
-button:hover {
+button.BtnCancelar {
+    background-color: #e74c3c; /* Color del botón Cancelar */
+}
+
+button.BtnCancelar:hover {
+    background-color: #c0392b;
+}
+
+button.BtnActualizar {
+    background-color: #e1ff5d; /* Color del botón Crear */
+}
+
+button.BtnActualizar:hover {
     background-color: #9fac09;
 }
 

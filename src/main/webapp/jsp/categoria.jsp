@@ -32,33 +32,32 @@
 			<div class="subtitulo-categorias-actuales">Categorías actuales</div>
 
 			<div class="contenedor-tabla-categorias">
-				<table>
-					<tr>
-						<th>No.</th>
-						<th>Nombre</th>
-						<th>Acciones</th>
-					</tr>
-					<c:forEach items="${categoriasIngreso}" var="categoria">
-						<tr>
-							<td>${categoria.id}</td>
-							<td>${categoria.nombre}</td>
-							<td>
-								<div class="acciones">
-									<div class="boton-actualizar" onclick="location.href='GestionarCategoriaController?ruta=actualizar&id=${categoria.id}&nombre=${categoria.nombre}'">
-										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
-									</div>
-									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
-									<div class="boton-eliminar">
-										<a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}">
-											<img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
-										</a>
-									</div>
-								</div>
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
+                <table>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <c:forEach items="${categoriasIngreso}" var="categoria" varStatus="status">
+                        <tr>
+                            <td>${status.index + 1}</td>
+                            <td>${categoria.nombre}</td>
+                            <td>
+                                <div class="acciones">
+                                    <div class="boton-actualizar" onclick="location.href='GestionarCategoriaController?ruta=actualizar&id=${categoria.id}&nombre=${categoria.nombre}'">
+                                        <img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
+                                    </div>
+                                    <div class="boton-eliminar">
+                                        <a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}">
+                                            <img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
 		</div>
 
 		<div class="recuadro-movimiento">
@@ -75,33 +74,32 @@
 			<div class="subtitulo-categorias-actuales">Categorías actuales</div>
 
 			<div class="contenedor-tabla-categorias">
-				<table>
-					<tr>
-						<th>No.</th>
-						<th>Nombre</th>
-						<th>Acciones</th>
-					</tr>
-					<c:forEach items="${categoriasEgreso}" var="categoria">
-						<tr>
-							<td>${categoria.id}</td>
-							<td>${categoria.nombre}</td>
-							<td>
-								<div class="acciones">
-									<div class="boton-actualizar" onclick="location.href='GestionarCategoriaController?ruta=actualizar&id=${categoria.id}&nombre=${categoria.nombre}'">
-										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
-									</div>
-									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
-									<div class="boton-eliminar">
-										<a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}">
-											<img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
-										</a>
-									</div>
-								</div>
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
+                <table>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <c:forEach items="${categoriasEgreso}" var="categoria" varStatus="status">
+                        <tr>
+                            <td>${status.index + 1}</td>
+                            <td>${categoria.nombre}</td>
+                            <td>
+                                <div class="acciones">
+                                    <div class="boton-actualizar" onclick="location.href='GestionarCategoriaController?ruta=actualizar&id=${categoria.id}&nombre=${categoria.nombre}'">
+                                        <img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
+                                    </div>
+                                    <div class="boton-eliminar">
+                                        <a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}">
+                                            <img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
 		</div>
 
 		<div class="recuadro-movimiento">
@@ -118,33 +116,32 @@
 			<div class="subtitulo-categorias-actuales">Categorías actuales</div>
 
 			<div class="contenedor-tabla-categorias">
-				<table>
-					<tr>
-						<th>No.</th>
-						<th>Nombre</th>
-						<th>Acciones</th>
-					</tr>
-					<c:forEach items="${categoriasTransferencia}" var="categoria">
-						<tr>
-							<td>${categoria.id}</td>
-							<td>${categoria.nombre}</td>
-							<td>
-								<div class="acciones">
-									<div class="boton-actualizar" onclick="location.href='GestionarCategoriaController?ruta=actualizar&id=${categoria.id}&nombre=${categoria.nombre}'">
-										<img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
-									</div>
-									<!-- Botón de eliminación actualizado para redirigir al controlador de eliminación -->
-									<div class="boton-eliminar">
-										<a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}">
-											<img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
-										</a>
-									</div>
-								</div>
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
+                <table>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <c:forEach items="${categoriasTransferencia}" var="categoria" varStatus="status">
+                        <tr>
+                            <td>${status.index + 1}</td>
+                            <td>${categoria.nombre}</td>
+                            <td>
+                                <div class="acciones">
+                                    <div class="boton-actualizar" onclick="location.href='GestionarCategoriaController?ruta=actualizar&id=${categoria.id}&nombre=${categoria.nombre}'">
+                                        <img src="${pageContext.request.contextPath}/img/IconoLapiz.png" alt="">
+                                    </div>
+                                    <div class="boton-eliminar">
+                                        <a href="GestionarCategoriaController?ruta=eliminar&id=${categoria.id}">
+                                            <img src="${pageContext.request.contextPath}/img/IconoBasurero.png" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
 		</div>
 	</div>
 

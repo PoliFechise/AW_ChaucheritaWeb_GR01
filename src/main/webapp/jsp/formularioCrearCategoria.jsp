@@ -8,30 +8,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Crear Categoría</title>
 <link rel="stylesheet" href="styles/creacionCategoria.css">
 </head>
 <header>
-	<span class="Titulo">Creación Categoría</span>
+	<span class="Titulo">Crear Categoría</span>
 </header>
 <body>
 	<div class="Contenido">
-
-		<form action="GestionarCategoriaController?ruta=guardar&section=categoria" method="POST">
-			<div class="Caja-nombre">
-				<label class="negrita-negra">Nombre:</label> 
-				<input type="text" name="nombre" class="ItemFormulario1" required />
-			</div>
-			<input type="hidden" name="tipo" value="${param.tipo}" />
-			<!-- Tipo oculto -->
-			<div class="BtnCrear" id="btnCrear">
-				<button type="submit">Crear</button>
-			</div>
-			<div class="BtnCancelar" id="btnCancelar">
+		<div class="Formulario">
+			<form
+				action="GestionarCategoriaController?ruta=guardar&section=categoria"
+				method="POST">
+				<div class="Caja-nombre">
+					<label class="negrita-negra">Nombre:</label> <input type="text"
+						name="nombre" class="ItemFormulario1" required />
+				</div>
+				<input type="hidden" name="tipo" value="${param.tipo}" />
+				<!-- Tipo oculto -->
+				<div class="BtnCrear" id="btnCrear">
+					<button type="submit">Crear</button>
+				</div>
+				<div class="BtnCancelar" id="btnCancelar">
 					<button type="button" class="btn-cancelar"
 						onclick="window.location.href='VerTableroController?ruta=ajustes&section=categoria'">Cancelar</button>
 				</div>
-		</form>
+			</form>
+		</div>
 
 	</div>
 </body>

@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <h2 class="Titulo">Actualización de Categoría</h2>
+        <h2 class="Titulo">Actualizar Categoría</h2>
     </header>
     <div class="Contenido">
         <form action="GestionarCategoriaController" method="post">
@@ -36,7 +36,7 @@
 
                     <!-- Botones de acción -->
                     <div class="Botones">
-                        <button type="submit" class="BtnCrear">Actualizar</button>
+                        <button type="submit" class="BtnActualizar">Actualizar</button>
                         <button type="button" class="BtnCancelar" onclick="window.location.href='VerTableroController?ruta=ajustes&section=categoria'">
                             Cancelar
                         </button>
