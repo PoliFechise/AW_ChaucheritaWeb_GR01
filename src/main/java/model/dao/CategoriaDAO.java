@@ -92,4 +92,30 @@ public class CategoriaDAO {
 		em.remove(categoria);
 		em.getTransaction().commit();
 	}
+	
+	//Metodos para obtener la categoria por su id
+	
+	public CatIngreso encontrarCategoriaIngresoPorId(Integer id) {
+	    try {
+	        return em.find(CatIngreso.class, id);
+	    } finally {
+	        em.close();
+	    }
+	}
+	
+	public CatEgreso encontrarCategoriaEgresoPorId(Integer id) {
+	    try {
+	        return em.find(CatEgreso.class, id);
+	    } finally {
+	        em.close();
+	    }
+	}
+	
+	public CatTransferencia encontrarCategoriaTransferenciaPorId(Integer id) {
+	    try {
+	        return em.find(CatTransferencia.class, id);
+	    } finally {
+	        em.close();
+	    }
+	}
 }

@@ -26,7 +26,7 @@
 								<h2>Cuenta: ${param.numero}</h2>
 							</div>
 							<div class="formulario">
-								<form>
+								<form action="RegistrarEgresoController" method="POST">
 									<div>
 										<label for="valor">Valor:</label> <input type="number"
 											id="valor" name="valor"
