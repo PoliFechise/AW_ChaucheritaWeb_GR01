@@ -15,7 +15,6 @@ public class IngresoDAO {
 	public IngresoDAO() {
 	}
 
-	// Método para obtener todos los ingresos con relaciones cargadas
 	public List<Ingreso> obtenerIngresos() {
 		try {
 			String jpql = "SELECT i FROM Ingreso i JOIN FETCH i.origen JOIN FETCH i.movimiento";
@@ -27,7 +26,6 @@ public class IngresoDAO {
 		}
 	}
 
-	// Método para obtener ingresos filtrados por categoría
 	public List<Ingreso> obtenerIngresosPorCategoria(String categoria) {
 		try {
 			String jpql = "SELECT i FROM Ingreso i JOIN FETCH i.origen JOIN FETCH i.movimiento WHERE i.origen.nombre = :categoria";
@@ -40,13 +38,35 @@ public class IngresoDAO {
 		}
 	}
 
+	public List<Ingreso> obtenerIngresosPorCuenta(String numeroCuenta) {
+		try {
+			String jpql = "SELECT i FROM Ingreso i JOIN FETCH i.origen JOIN FETCH i.movimiento WHERE i.destino.numero = :numeroCuenta";
+			Query query = em.createQuery(jpql);
+			query.setParameter("numeroCuenta", numeroCuenta);
+			List<Ingreso> ingresos = query.getResultList();
+			return ingresos;
+		} catch (Exception e) {
+			throw new RuntimeException("Error al obtener los ingresos por cuenta en DAO: " + e.getMessage(), e);
+		}
+	}
+
+	public List<Ingreso> obtenerIngresosPorCuentaYCategoria(String numeroCuenta, String categoria) {
+		try {
+			String jpql = "SELECT i FROM Ingreso i JOIN FETCH i.origen JOIN FETCH i.movimiento WHERE i.destino.numero = :numeroCuenta AND i.origen.nombre = :categoria";
+			Query query = em.createQuery(jpql);
+			query.setParameter("numeroCuenta", numeroCuenta);
+			query.setParameter("categoria", categoria);
+			List<Ingreso> ingresos = query.getResultList();
+			return ingresos;
+		} catch (Exception e) {
+			throw new RuntimeException("Error al obtener los ingresos por cuenta y categoría en DAO: " + e.getMessage(),
+					e);
+		}
+	}
+
 	public void guardarIngreso(Ingreso ingreso) {
-
 		em.getTransaction().begin();
-
 		em.persist(ingreso);
-
 		em.getTransaction().commit();
-
 	}
 }

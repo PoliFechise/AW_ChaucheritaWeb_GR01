@@ -15,7 +15,6 @@ public class TransferenciaDAO {
     public TransferenciaDAO() {
     }
 
-    // Método para obtener todas las transferencias con relaciones cargadas
     public List<Transferencia> obtenerTransferencias() {
         try {
             String jpql = "SELECT t FROM Transferencia t JOIN FETCH t.origen JOIN FETCH t.destino JOIN FETCH t.categoria JOIN FETCH t.movimiento";
@@ -27,7 +26,6 @@ public class TransferenciaDAO {
         }
     }
 
- // Método para obtener transferencias filtradas por categoría
     public List<Transferencia> obtenerTransferenciasPorCategoria(String categoria) {
         try {
             String jpql = "SELECT t FROM Transferencia t JOIN FETCH t.origen JOIN FETCH t.destino JOIN FETCH t.categoria JOIN FETCH t.movimiento WHERE t.categoria.nombre = :categoria";
@@ -43,14 +41,35 @@ public class TransferenciaDAO {
             throw new RuntimeException("Error al obtener las transferencias por categoría en DAO: " + e.getMessage(), e);
         }
     }
+    
+    public List<Transferencia> obtenerTransferenciasPorCuenta(String numeroCuenta) {
+        try {
+            String jpql = "SELECT t FROM Transferencia t JOIN FETCH t.origen JOIN FETCH t.destino JOIN FETCH t.categoria JOIN FETCH t.movimiento WHERE t.origen.numero = :numeroCuenta OR t.destino.numero = :numeroCuenta";
+            Query query = em.createQuery(jpql);
+            query.setParameter("numeroCuenta", numeroCuenta);
+            List<Transferencia> transferencias = query.getResultList();
+            return transferencias;
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener las transferencias por cuenta en DAO: " + e.getMessage(), e);
+        }
+    }
+
+    public List<Transferencia> obtenerTransferenciasPorCuentaYCategoria(String numeroCuenta, String categoria) {
+        try {
+            String jpql = "SELECT t FROM Transferencia t JOIN FETCH t.origen JOIN FETCH t.destino JOIN FETCH t.categoria JOIN FETCH t.movimiento WHERE (t.origen.numero = :numeroCuenta OR t.destino.numero = :numeroCuenta) AND t.categoria.nombre = :categoria";
+            Query query = em.createQuery(jpql);
+            query.setParameter("numeroCuenta", numeroCuenta);
+            query.setParameter("categoria", categoria);
+            List<Transferencia> transferencias = query.getResultList();
+            return transferencias;
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener las transferencias por cuenta y categoría en DAO: " + e.getMessage(), e);
+        }
+    }
 
 	public void guardarTransferencia(Transferencia transferencia) {
-		
 		em.getTransaction().begin();
-		
 		em.persist(transferencia);
-		
 		em.getTransaction().commit();
-		
 	}
 }

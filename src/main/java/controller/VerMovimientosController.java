@@ -51,27 +51,27 @@ public class VerMovimientosController extends HttpServlet {
 
     private void inspeccionar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	// 1.- Obtener parámetros
+        // 1.- Obtener parámetros
         String numero = request.getParameter("numero");
 
-    	// 2.- Hablar con el modelo
+        // 2.- Hablar con el modelo
         CuentaDAO cuentaDAO = new CuentaDAO();
         Cuenta cuenta = cuentaDAO.encontrarPorNumero(numero);
 
         IngresoDAO ingresoDAO = new IngresoDAO();
-        List<Ingreso> ingresos = ingresoDAO.obtenerIngresos();
+        List<Ingreso> ingresos = ingresoDAO.obtenerIngresosPorCuenta(numero);
 
         EgresoDAO egresoDAO = new EgresoDAO();
-        List<Egreso> egresos = egresoDAO.obtenerEgresos();
+        List<Egreso> egresos = egresoDAO.obtenerEgresosPorCuenta(numero);
 
         TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
-        List<Transferencia> transferencias = transferenciaDAO.obtenerTransferencias();
+        List<Transferencia> transferencias = transferenciaDAO.obtenerTransferenciasPorCuenta(numero);
 
         // Obtener todas las categorías
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        List<Categoria> categorias = categoriaDAO.obtenerCategoriasIngreso(); 
+        List<Categoria> categorias = categoriaDAO.obtenerCategoriasIngreso();
 
-    	// 3.- Hablar con la vista
+        // 3.- Hablar con la vista
         request.setAttribute("cuenta", cuenta);
         request.setAttribute("ingresos", ingresos);
         request.setAttribute("egresos", egresos);
@@ -83,12 +83,12 @@ public class VerMovimientosController extends HttpServlet {
 
     private void filtrarPorCategoria(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	// 1.- Obtener parámetros
-    	String numero = request.getParameter("numero");
+        // 1.- Obtener parámetros
+        String numero = request.getParameter("numero");
         String tipoCategoria = request.getParameter("tipoCategoria");
         String categoria = request.getParameter("categoria");
 
-    	// 2.- Hablar con el modelo
+        // 2.- Hablar con el modelo
         CuentaDAO cuentaDAO = new CuentaDAO();
         Cuenta cuenta = cuentaDAO.encontrarPorNumero(numero);
 
@@ -107,34 +107,34 @@ public class VerMovimientosController extends HttpServlet {
 
         if ("Ingreso".equals(tipoCategoria)) {
             if (categoria == null || categoria.isEmpty()) {
-                ingresos = ingresoDAO.obtenerIngresos();
+                ingresos = ingresoDAO.obtenerIngresosPorCuenta(numero);
             } else {
-                ingresos = ingresoDAO.obtenerIngresosPorCategoria(categoria);
+                ingresos = ingresoDAO.obtenerIngresosPorCuentaYCategoria(numero, categoria);
             }
             categorias = categoriaDAO.obtenerCategoriasIngreso();
         } else if ("Egreso".equals(tipoCategoria)) {
             if (categoria == null || categoria.isEmpty()) {
-                egresos = egresoDAO.obtenerEgresos();
+                egresos = egresoDAO.obtenerEgresosPorCuenta(numero);
             } else {
-                egresos = egresoDAO.obtenerEgresosPorCategoria(categoria);
+                egresos = egresoDAO.obtenerEgresosPorCuentaYCategoria(numero, categoria);
             }
             categorias = categoriaDAO.obtenerCategoriasEgreso();
         } else if ("Transferencia".equals(tipoCategoria)) {
             if (categoria == null || categoria.isEmpty()) {
-                transferencias = transferenciaDAO.obtenerTransferencias();
+                transferencias = transferenciaDAO.obtenerTransferenciasPorCuenta(numero);
             } else {
-                transferencias = transferenciaDAO.obtenerTransferenciasPorCategoria(categoria);
+                transferencias = transferenciaDAO.obtenerTransferenciasPorCuentaYCategoria(numero, categoria);
             }
             categorias = categoriaDAO.obtenerCategoriasTransferencia();
         } else {
             // Si no se selecciona un tipo de categoría, obtener todas las categorías y todos los movimientos
             categorias = categoriaDAO.obtenerCategoriasIngreso();  // o mezcla de todas las categorías si es necesario
-            ingresos = ingresoDAO.obtenerIngresos();
-            egresos = egresoDAO.obtenerEgresos();
-            transferencias = transferenciaDAO.obtenerTransferencias();
+            ingresos = ingresoDAO.obtenerIngresosPorCuenta(numero);
+            egresos = egresoDAO.obtenerEgresosPorCuenta(numero);
+            transferencias = transferenciaDAO.obtenerTransferenciasPorCuenta(numero);
         }
 
-    	// 3.- Hablar con la vista
+        // 3.- Hablar con la vista
         request.setAttribute("cuenta", cuenta);
         request.setAttribute("ingresos", ingresos);
         request.setAttribute("egresos", egresos);
