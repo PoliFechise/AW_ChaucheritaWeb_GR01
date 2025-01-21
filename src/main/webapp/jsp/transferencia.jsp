@@ -16,13 +16,11 @@
 		<div class="main">
 			<div class="fondo"></div>
 			<div class="transferencia">
-				<div class="titulo">
-					<img src="${pageContext.request.contextPath}/img/Transferencia.png"
-						alt="egreso">
-				</div>
+
 				<div class="content">
 					<div class="left-side">
 						<div class="ls-content">
+							<div class="titulo">Transferencia</div>
 							<div class="cuenta">
 								<h2>Cuenta: ${param.numero}</h2>
 							</div>

@@ -72,8 +72,6 @@ header {
     background-color: rgb(174, 171, 171);
     height: 40px;
     border-radius: 8px;
-    display: flex;
-    align-items: center; /* Asegura que el contenido esté centrado verticalmente */
 }
 
 .item-formulario {
@@ -82,6 +80,8 @@ header {
 
 .item-formulario1 {
     width: 100%;
+    display: flex;
+    align-items: center; /* Asegura que el contenido esté centrado verticalmente */
 }
 
 .item-formulario1 input {
@@ -95,10 +95,14 @@ header {
     font-family: inherit; /* Hereda la fuente del contenedor */
 }
 
+.caja-nombre {
+    margin-top: 10px;
+}
+
 .botones {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Cambiado de center */
+    justify-content: space-between; 
     align-items: center;
     width: 100%;
     margin-top: 25px;
@@ -108,29 +112,29 @@ button.btn {
     border: none;
     border-radius: 8px;
     padding: 10px 20px;
-    margin: 10px 0px 10px 0px; /* Añadido */
+    margin: 10px 0px 10px 0px; 
     cursor: pointer;
     font-size: 23px;
-    width: 150px; /* Cambiado de 200px */
+    width: 150px; 
     font-family: 'Angel Club';
-    background-size: 200% 200%; /* Nueva línea */
-    transition: background-position 0.5s ease; /* Nueva línea */
+    background-size: 200% 200%; 
+    transition: background-position 0.5s ease; 
 }
 
 button.btn-guardar {
-    background-image: linear-gradient(45deg, #37f332 50%, #0eb10a 50%); /* Cambiado */
+    background-image: linear-gradient(45deg, #20af2e 50%, #03751f 50%); 
 }
 
 button.btn-guardar:hover {
-    animation: colorChange 2s ease infinite; /* Nueva línea */
+    animation: colorChange 2s ease infinite; 
 }
 
 button.btn-cancelar {
-    background-image: linear-gradient(45deg, #e74c3c 50%, #c0392b 50%); /* Cambiado */
+    background-image: linear-gradient(45deg, #e74c3c 50%, #c0392b 50%); 
 }
 
 button.btn-cancelar:hover {
-    animation: colorChange 2s ease infinite; /* Nueva línea */
+    animation: colorChange 2s ease infinite; 
 }
 
 .negrita-negra {

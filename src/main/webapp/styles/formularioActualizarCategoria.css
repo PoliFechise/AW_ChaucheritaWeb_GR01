@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Angel Club';
+    src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf');
+}
 
 body {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url('../img/Fondo.png');
@@ -25,14 +29,13 @@ header {
     margin-top: 30px;
 }
 
-.Titulo {
+.titulo {
     font-size: 60px;
     color: rgb(255, 255, 255);
-   
     font-family: 'Angel Club';
 }
 
-.Contenido {
+.contenido {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,8 +43,7 @@ header {
     width: 100%;
 }
 
-/* Estilo del formulario */
-.Formulario {
+.formulario {
     width: 325px;
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
@@ -53,83 +55,72 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
-/* Contenedor de campos del formulario */
-.Campos {
+.campos {
     display: flex;
     flex-direction: column;
-    gap: 15px;
     width: 100%;
 }
 
-/* Estilo de los campos */
-.ItemFormulario,
-.ItemFormulario1 {
+.item-formulario,
+.item-formulario1 {
     background-color: rgb(174, 171, 171);
     height: 40px;
     border-radius: 8px;
 }
 
-.ItemFormulario {
+.item-formulario {
     width: 25%;
 }
 
-.ItemFormulario1 {
+.item-formulario1 {
     width: 100%;
 }
 
-/* Estilos del contenedor de botones */
-.Botones {
+.botones {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra horizontalmente los botones */
+    justify-content: space-between;
     align-items: center;
-    gap: 20px; /* Espacio entre los botones */
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
-/* Estilos de los botones */
-button.BtnCancelar, button.BtnActualizar {
-    background-color: #e74c3c; /* Color inicial del botón Cancelar */
-    color: rgb(0, 0, 0);
+button.btn {
+    border: none;
     border-radius: 8px;
     padding: 10px 20px;
+    margin: 10px 0px 10px 0px;
     cursor: pointer;
     font-size: 23px;
-    width: 200px;
+    width: 150px;
     font-family: 'Angel Club';
-    text-align: center;
-    border: none; /* Elimina el borde predeterminado */
+    background-size: 200% 200%; 
+    transition: background-position 0.5s ease; 
 }
 
-button.BtnCancelar {
-    background-color: #e74c3c; /* Color del botón Cancelar */
+button.btn-actualizar {
+    background-image: linear-gradient(45deg, #ffff53 50%, #d7d700 50%);
 }
 
-button.BtnCancelar:hover {
-    background-color: #c0392b;
+button.btn-actualizar:hover {
+    animation: colorChange 2s ease infinite; 
 }
 
-button.BtnActualizar {
-    background-color: #e1ff5d; /* Color del botón Crear */
+button.btn-cancelar {
+    background-image: linear-gradient(45deg, #e74c3c 50%, #c0392b 50%);/
 }
 
-button.BtnActualizar:hover {
-    background-color: #9fac09;
+button.btn-cancelar:hover {
+    animation: colorChange 2s ease infinite; 
 }
 
 .negrita-negra {
     color: black;
-    
     font-size: 23px;
     font-family: 'Angel Club';
 }
-@font-face {
-    font-family: 'Angel Club';
-    src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf');
-}
 
-.FilaFormulario {
+.fila-formulario {
     display: flex;
     align-items: center;
     justify-content: space-between; 
@@ -137,8 +128,7 @@ button.BtnActualizar:hover {
     margin-bottom: 10px;
 }
 
-
-.FilaFormulario label {
+.fila-formulario label {
     display: flex;
     align-items: center; 
     font-size: 23px;
@@ -146,8 +136,7 @@ button.BtnActualizar:hover {
     line-height: 1; 
 }
 
-
-.ItemFormulario {
+.item-formulario {
     display: flex;
     align-items: center; 
     justify-content: center; 
@@ -161,9 +150,18 @@ button.BtnActualizar:hover {
     background-color: rgb(174, 171, 171);
 }
 
-.ItemFormulario.Tipo {
-    width: 60%; 
-}
-.caja-nombre{
+.caja-nombre {
     margin-top: 10px;
+}
+
+@keyframes colorChange {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

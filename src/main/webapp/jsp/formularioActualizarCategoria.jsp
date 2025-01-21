@@ -7,37 +7,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Categoría</title>
-    <link rel="stylesheet" href="styles/actualizaciondeCategoria.css">
+    <link rel="stylesheet" href="styles/formularioActualizarCategoria.css">
 </head>
 <body>
     <header>
-        <h2 class="Titulo">Actualizar Categoría</h2>
+        <span class="titulo">Actualizar Categoría</span>
     </header>
-    <div class="Contenido">
+    <div class="contenido">
         <form action="GestionarCategoriaController" method="post">
             <!-- Campo oculto para definir la ruta -->
             <input type="hidden" name="ruta" value="cambiar">
             <!-- Campo oculto para enviar el ID de la categoría -->
             <input type="hidden" name="id" value="${categoriaId}">
 
-            <div class="Formulario">
-                <div class="Campos">
+            <div class="formulario">
+                <div class="campos">
                     <!-- Mostrar el ID de la categoría -->
-                    <div class="FilaFormulario">
+                    <div class="fila-formulario">
                         <label class="negrita-negra">No:</label>
-                        <div class="ItemFormulario">${categoriaId}</div>
+                        <div class="item-formulario">${categoriaId}</div>
                     </div>
 
                     <!-- Campo de entrada para editar el nombre de la categoría -->
-                    <div class="Caja-nombre">
+                    <div class="caja-nombre">
                         <label class="negrita-negra" for="nombre">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="ItemFormulario1" value="${nombre}" required>
+                        <input type="text" id="nombre" name="nombre" class="item-formulario1" value="${nombre}" required>
                     </div>
 
                     <!-- Botones de acción -->
-                    <div class="Botones">
-                        <button type="submit" class="BtnActualizar">Actualizar</button>
-                        <button type="button" class="BtnCancelar" onclick="window.location.href='VerTableroController?ruta=ajustes&section=categoria'">
+                    <div class="botones">
+                        <button type="submit" class="btn btn-actualizar">Actualizar</button>
+                        <button type="button" class="btn btn-cancelar" onclick="window.location.href='VerTableroController?ruta=ajustes&section=categoria'">
                             Cancelar
                         </button>
                     </div>

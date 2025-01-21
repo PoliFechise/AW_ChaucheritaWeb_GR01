@@ -13,13 +13,10 @@
 	<main>
 		<div class="main">
 			<div class="ingreso">
-				<div class="titulo">
-					<img src="${pageContext.request.contextPath}/img/Ingreso.png"
-						alt="ingreso">
-				</div>
 				<div class="content">
 					<div class="left-side">
 						<div class="ls-content">
+							<div class="titulo">Ingreso</div>
 							<div class="cuenta">
 								<h2>Cuenta: ${param.numero}</h2>
 							</div>

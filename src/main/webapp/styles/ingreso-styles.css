@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Smothy Bubble';
+    src: url('../fonts/Smothy\ Bubble\ -\ \(Demo\)\ hanscostudio.com.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Angel Club';
+	src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf');
+}
+
 .main {
     display: flex;
     align-items: center;
@@ -26,10 +36,17 @@ body {
     position: absolute;
     background-color: #ffffff;
     display: flex;
-    width: 80%;
-    height: 80%;
-    border-radius: 15px;
     flex-direction: column;
+    width: 80%;
+    height: auto; 
+    border-radius: 15px;
+    padding: 20px; 
+}
+
+.main .ingreso .titulo {
+	font-family: 'Smothy Bubble', Arial, sans-serif;
+    font-size: 90px; 
+    color: #ffc107;
 }
 
 .main .ingreso .titulo img {
@@ -53,7 +70,7 @@ body {
 }
 
 .main .ingreso .left-side .ls-content .cuenta {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Angel Club";
     font-size: 35px;
 }
 
@@ -82,7 +99,7 @@ body {
     width: 300px;
     border-radius: 15px;
     background-color: #BEBBBB;
-    border: 1px solid black;
+    border: none;
 }
 .main .ingreso .left-side .ls-content .formulario input:hover, .main .ingreso .left-side .ls-content .formulario select:hover {
     background-color: #bebbbbbb;
@@ -95,50 +112,82 @@ body {
 }
 
 .main .ingreso .saldo {
+	font-family: "Angel Club";
     height: max-content;
     background-color: #ffcc00;
     padding: 20px 30px;
-    border: 1px solid black;
+    border: none;
     border-radius: 15px;
     font-size: 30px;
+    animation: pulso 2s ease-in-out infinite;
+    animation-delay: 3s;
 }
 
 .main .ingreso .botones {
     display: flex;
-    justify-content: flex-end;
-    padding-right: 60px;
-    padding-bottom: 40px;
+    padding: 0px 60px 40px 0px;
+    margin-top: 30px;
     gap: 20px; 
+    flex-wrap: wrap;
 }
 
-
-.main .ingreso .btn-guardar {
-    display: flex;
-    align-items: center;
-    padding: 10px 40px;
-    background-color: #59C241;
-    border: 1px solid black;
-    border-radius: 15px;
-    font-size: 25px;
-    font-weight: bold;
-}
-.main .ingreso .btn-guardar:hover {
-    background-color: #48a034;
-    cursor: pointer;
-}
+.main .ingreso .btn-guardar,
 .main .ingreso .btn-cancelar {
     display: flex;
     align-items: center;
-    background-color: #F83737;
     padding: 10px 40px;
-    border: 1px solid black;
+    border: none;
     border-radius: 15px;
     font-size: 25px;
     font-weight: bold;
-}
-.main .ingreso .btn-cancelar:hover {
-    background-color: #db3232;
-    cursor: pointer;
+    max-width: 200px;
+    background-size: 200% 200%;
+    transition: background-position 0.5s ease;
 }
 
+/* Estilos específicos para cada botón */
+.main .ingreso .btn-guardar {
+    background-image: linear-gradient(45deg, #59C241 50%, #48a034 50%);
+}
+
+.main .ingreso .btn-cancelar {
+    background-image: linear-gradient(45deg, #E74C3C 50%, #C0392B 50%); /* Nuevo tono de rojo */
+}
+
+/* Animación al pasar el mouse */
+.main .ingreso .btn-guardar:hover,
+.main .ingreso .btn-cancelar:hover {
+    cursor: pointer;
+    animation: colorChange 2s ease infinite;
+}
+
+/* Mantener colores en hover */
+.main .ingreso .btn-guardar:hover {
+    background-image: linear-gradient(45deg, #48a034 50%, #59C241 50%);
+}
+
+.main .ingreso .btn-cancelar:hover {
+    background-image: linear-gradient(45deg, #C0392B 50%, #E74C3C 50%); /* Nuevo tono de rojo */
+}
+
+@keyframes pulso {
+    0%, 100% {
+        transform: scale(1); 
+    }
+    50% {
+        transform: scale(1.1); 
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 

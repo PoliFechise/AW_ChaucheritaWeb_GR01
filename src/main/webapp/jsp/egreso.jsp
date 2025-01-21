@@ -16,18 +16,17 @@
 		<div class="main">
 			<div class="fondo"></div>
 			<div class="egreso">
-				<div class="titulo">
-					<img src="${pageContext.request.contextPath}/img/Egreso.png"
-						alt="egreso">
-				</div>
 				<div class="content">
 					<div class="left-side">
 						<div class="ls-content">
+							<div class="titulo">
+								Egreso
+							</div>
 							<div class="cuenta">
 								<h2>Cuenta: ${param.numero}</h2>
 							</div>
 							<div class="formulario">
-								<form >
+								<form>
 									<div>
 										<label for="valor">Valor:</label> <input type="number"
 											id="valor" name="valor"
@@ -63,9 +62,9 @@
 										<button type="submit" class="btn-guardar" id="btnGuardar">
 											<p>Guardar</p>
 										</button>
-										<div class="btn-cancelar" id="btnCancelar">
+										<button class="btn-cancelar" id="btnCancelar">
 											<p>Cancelar</p>
-										</div>
+										</button>
 									</div>
 								</form>
 							</div>
