@@ -12,7 +12,7 @@ public class Ingreso implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "origen", nullable = false)
 	private CatIngreso origen;
 

@@ -64,7 +64,8 @@ public class RegistrarTransferenciaController extends HttpServlet {
 		MovimientoDAO movimientoDAO = new MovimientoDAO();
 		movimientoDAO.guardarMovimiento(movimiento);
 
-		catTransferencia.setNombre(request.getParameter("categoria"));
+		CategoriaDAO categoriaDAO = new CategoriaDAO();
+		catTransferencia = categoriaDAO.encontrarCategoriaTransferenciaPorId(Integer.parseInt(request.getParameter("categoria")));
 		transferencia.setCategoria(catTransferencia);
 
 		transferencia.setOrigen(cuentaOrigen);

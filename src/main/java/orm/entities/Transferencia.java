@@ -22,7 +22,7 @@ public class Transferencia implements Serializable {
     @JoinColumn(name = "destino", nullable = false)
     private Cuenta destino;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "categoria", nullable = false)
     private CatTransferencia categoria;
 

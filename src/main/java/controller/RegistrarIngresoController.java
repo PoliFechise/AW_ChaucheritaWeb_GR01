@@ -59,9 +59,10 @@ public class RegistrarIngresoController extends HttpServlet {
 		MovimientoDAO movimientoDAO = new MovimientoDAO();
 		movimientoDAO.guardarMovimiento(movimiento);
 		
-		catIngreso.setNombre(request.getParameter("categoria"));
+		CategoriaDAO categoriaDAO = new CategoriaDAO();
+		catIngreso = categoriaDAO.encontrarCategoriaIngresoPorId(Integer.parseInt(request.getParameter("categoria")));
 		ingreso.setOrigen(catIngreso);
-		
+
 		ingreso.setDestino(cuenta);
 		
 		ingreso.setMovimiento(movimiento);

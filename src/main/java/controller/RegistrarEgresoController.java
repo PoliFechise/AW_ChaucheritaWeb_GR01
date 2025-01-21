@@ -60,7 +60,8 @@ public class RegistrarEgresoController extends HttpServlet {
 		MovimientoDAO movimientoDAO = new MovimientoDAO();
 		movimientoDAO.guardarMovimiento(movimiento);
 
-		catEgreso.setNombre(request.getParameter("categoria"));
+		CategoriaDAO categoriaDAO = new CategoriaDAO();
+		catEgreso = categoriaDAO.encontrarCategoriaEgresoPorId(Integer.parseInt(request.getParameter("categoria")));
 		egreso.setDestino(catEgreso);
 
 		egreso.setOrigen(cuenta);
