@@ -5,13 +5,13 @@
 }
 
 @font-face {
-    font-family: 'Smothy Bubble'; /* Nueva línea */
-    src: url('../fonts/Smothy\ Bubble\ -\ \(Demo\)\ hanscostudio.com.otf') format('opentype'); /* Nueva línea */
+    font-family: 'Smothy Bubble'; 
+    src: url('../fonts/Smothy\ Bubble\ -\ \(Demo\)\ hanscostudio.com.otf') format('opentype'); 
 }
 
 @font-face {
-    font-family: 'Angel Club'; /* Nueva línea */
-    src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf'); /* Nueva línea */
+    font-family: 'Angel Club';
+    src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf');
 }
 
 .main {
