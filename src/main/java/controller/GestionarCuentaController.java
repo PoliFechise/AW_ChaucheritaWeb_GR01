@@ -126,7 +126,7 @@ public class GestionarCuentaController extends HttpServlet {
             if (cuenta != null) {
                 cuenta.setNombre(nombre);
                 cuenta.setSaldo(saldo);
-                cuentaDAO.update(cuenta);
+                cuentaDAO.actualizar(cuenta);
             }
             response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&mensaje=modificado");
         } catch (Exception e) {
@@ -158,6 +158,6 @@ public class GestionarCuentaController extends HttpServlet {
 
     @Override
     public void destroy() {
-        cuentaDAO.close();
+        cuentaDAO.cerrar();
     }
 }

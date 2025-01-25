@@ -25,10 +25,7 @@ public class CuentaDAO {
         }
     }
     
-    public Cuenta findById(Integer id) {
-        return em.find(Cuenta.class, id);
-    }
-
+    
  // Nuevo método para encontrar por número de cuenta
     public Cuenta encontrarPorNumero(String numero) {
         try {
@@ -48,24 +45,10 @@ public class CuentaDAO {
         return em.createQuery("SELECT c FROM Cuenta c", Cuenta.class).getResultList();
     }
 
-    public void update(Cuenta cuenta) {
+    public void actualizar(Cuenta cuenta) {
         try {
             em.getTransaction().begin();
             em.merge(cuenta);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
-        }
-    }
-
-    public void delete(Integer id) {
-        try {
-            em.getTransaction().begin();
-            Cuenta cuenta = em.find(Cuenta.class, id);
-            if (cuenta != null) {
-                em.remove(cuenta);
-            }
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -90,7 +73,7 @@ public class CuentaDAO {
     }
 
 
-    public void close() {
+    public void cerrar() {
         em.close();
     }
 }

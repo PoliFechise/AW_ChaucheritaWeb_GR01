@@ -73,7 +73,7 @@ public class RegistrarIngresoController extends HttpServlet {
 		BigDecimal nuevoBalance = movimiento.getValor().add(cuenta.getSaldo());
 		cuenta.setSaldo(nuevoBalance);
 		
-		cuentaDAO.update(cuenta);
+		cuentaDAO.actualizar(cuenta);
 		
 		response.sendRedirect("VerTableroController");
 	}

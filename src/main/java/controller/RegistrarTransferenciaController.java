@@ -80,12 +80,12 @@ public class RegistrarTransferenciaController extends HttpServlet {
 		BigDecimal nuevoBalance = cuentaOrigen.getSaldo().add(movimiento.getValor().negate());
 		cuentaOrigen.setSaldo(nuevoBalance);
 
-		cuentaDAO.update(cuentaOrigen);
+		cuentaDAO.actualizar(cuentaOrigen);
 		
 		nuevoBalance = cuentaDestino.getSaldo().add(movimiento.getValor());
 		cuentaDestino.setSaldo(nuevoBalance);
 
-		cuentaDAO.update(cuentaDestino);
+		cuentaDAO.actualizar(cuentaDestino);
 
 		response.sendRedirect("VerTableroController");
 	}
