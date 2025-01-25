@@ -25,6 +25,15 @@ public class GestionarCuentaController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ruteador(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ruteador(request, response);
+    }
+
+    private void ruteador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ruta = (request.getParameter("ruta") == null) ? "listar" : request.getParameter("ruta");
 
         switch (ruta) {
@@ -34,31 +43,23 @@ public class GestionarCuentaController extends HttpServlet {
             case "crear":
                 crearCuenta(request, response);
                 break;
-            case "actualizar":
-                presentarFormularioActualizar(request, response);
-                break;
-            case "eliminar":
-                eliminarCuenta(request, response);
-                break;
-            default:
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Acción no encontrada");
-                break;
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ruta = (request.getParameter("ruta") == null) ? "" : request.getParameter("ruta");
-
-        switch (ruta) {
             case "guardar":
                 guardarCuenta(request, response);
                 break;
             case "actualizar":
+                presentarFormularioActualizar(request, response);
+                break;
+            case "modificar":
                 actualizarCuenta(request, response);
+                break;
+            case "eliminar":
+                eliminarCuenta(request, response);
                 break;
             case "cancelar":
                 cancelarAccion(request, response);
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ruta no encontrada");
                 break;
         }
     }
