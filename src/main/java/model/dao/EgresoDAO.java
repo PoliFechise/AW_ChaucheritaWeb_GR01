@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import orm.entities.Cuenta;
 import orm.entities.Egreso;
 import orm.entities.Ingreso;
 
@@ -42,7 +43,8 @@ public class EgresoDAO {
 		}
 	}
 
-	public List<Egreso> obtenerEgresosPorCuenta(String numeroCuenta) {
+	public List<Egreso> obtenerEgresosPorCuenta(Cuenta cuenta) {
+		String numeroCuenta = cuenta.getNumero();
 		try {
 			String jpql = "SELECT e FROM Egreso e JOIN FETCH e.origen JOIN FETCH e.destino JOIN FETCH e.movimiento WHERE e.origen.numero = :numeroCuenta";
 			Query query = em.createQuery(jpql);
@@ -54,7 +56,8 @@ public class EgresoDAO {
 		}
 	}
 
-	public List<Egreso> obtenerEgresosPorCuentaYCategoria(String numeroCuenta, String categoria) {
+	public List<Egreso> obtenerEgresosPorCuentaYCategoria(Cuenta cuenta, String categoria) {
+		String numeroCuenta = cuenta.getNumero();
 		try {
 			String jpql = "SELECT e FROM Egreso e JOIN FETCH e.origen JOIN FETCH e.destino JOIN FETCH e.movimiento WHERE e.origen.numero = :numeroCuenta AND e.destino.nombre = :categoria";
 			Query query = em.createQuery(jpql);

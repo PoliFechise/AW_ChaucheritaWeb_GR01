@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import orm.entities.Cuenta;
 import orm.entities.Egreso;
 import orm.entities.Transferencia;
 
@@ -42,7 +43,8 @@ public class TransferenciaDAO {
         }
     }
     
-    public List<Transferencia> obtenerTransferenciasPorCuenta(String numeroCuenta) {
+    public List<Transferencia> obtenerTransferenciasPorCuenta(Cuenta cuenta) {
+		String numeroCuenta = cuenta.getNumero();
         try {
             String jpql = "SELECT t FROM Transferencia t JOIN FETCH t.origen JOIN FETCH t.destino JOIN FETCH t.categoria JOIN FETCH t.movimiento WHERE t.origen.numero = :numeroCuenta OR t.destino.numero = :numeroCuenta";
             Query query = em.createQuery(jpql);
@@ -54,7 +56,8 @@ public class TransferenciaDAO {
         }
     }
 
-    public List<Transferencia> obtenerTransferenciasPorCuentaYCategoria(String numeroCuenta, String categoria) {
+    public List<Transferencia> obtenerTransferenciasPorCuentaYCategoria(Cuenta cuenta, String categoria) {
+		String numeroCuenta = cuenta.getNumero();
         try {
             String jpql = "SELECT t FROM Transferencia t JOIN FETCH t.origen JOIN FETCH t.destino JOIN FETCH t.categoria JOIN FETCH t.movimiento WHERE (t.origen.numero = :numeroCuenta OR t.destino.numero = :numeroCuenta) AND t.categoria.nombre = :categoria";
             Query query = em.createQuery(jpql);

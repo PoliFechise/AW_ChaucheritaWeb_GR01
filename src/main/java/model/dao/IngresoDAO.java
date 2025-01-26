@@ -38,7 +38,8 @@ public class IngresoDAO {
 		}
 	}
 
-	public List<Ingreso> obtenerIngresosPorCuenta(String numeroCuenta) {
+	public List<Ingreso> obtenerIngresosPorCuenta(Cuenta cuenta) {
+		String numeroCuenta = cuenta.getNumero();
 		try {
 			String jpql = "SELECT i FROM Ingreso i JOIN FETCH i.origen JOIN FETCH i.movimiento WHERE i.destino.numero = :numeroCuenta";
 			Query query = em.createQuery(jpql);
@@ -50,7 +51,8 @@ public class IngresoDAO {
 		}
 	}
 
-	public List<Ingreso> obtenerIngresosPorCuentaYCategoria(String numeroCuenta, String categoria) {
+	public List<Ingreso> obtenerIngresosPorCuentaYCategoria(Cuenta cuenta, String categoria) {
+		String numeroCuenta = cuenta.getNumero();
 		try {
 			String jpql = "SELECT i FROM Ingreso i JOIN FETCH i.origen JOIN FETCH i.movimiento WHERE i.destino.numero = :numeroCuenta AND i.origen.nombre = :categoria";
 			Query query = em.createQuery(jpql);

@@ -8,14 +8,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cuenta y Movimiento</title>
 <link rel="stylesheet" href="styles/cuentaMovimiento.css">
+<script src="js/cuentaMovimiento.js"></script>
+<script>
+    // Pasar las listas de categorías a JavaScript
+    window.categoriasIngreso = [<c:forEach var="cat" items="${categoriasIngreso}">"${cat.nombre}",</c:forEach>];
+    window.categoriasEgreso = [<c:forEach var="cat" items="${categoriasEgreso}">"${cat.nombre}",</c:forEach>];
+    window.categoriasTransferencia = [<c:forEach var="cat" items="${categoriasTransferencia}">"${cat.nombre}",</c:forEach>];
+    window.categoriaSeleccionada = "${categoriaSeleccionada}";
+</script>
 </head>
 <body>
 
     <!-- Header -->
     <header class="header">
-        <div class="titulo-ChW">
-            Chaucherita Web
-        </div>
+        <div class="titulo-ChW">Chaucherita Web</div>
         <div class="opciones-header">
             <div class="btn-regresar" onclick="location.href='VerTableroController?ruta=ver'">
                 <span>Regresar</span>
@@ -54,19 +60,28 @@
             <form method="get" action="VerMovimientosController">
                 <input type="hidden" name="ruta" value="filtrarPorCategoria">
                 <input type="hidden" name="numero" value="${cuenta.numero}">
-                <select name="tipoCategoria" onchange="this.form.submit()">
+                <label class="nombres-filtro" for="tipoCategoria">Tipo de Categoría:</label>
+                <select name="tipoCategoria" id="tipoCategoria" onchange="resetCategoria();">
                     <option value="" ${tipoCategoriaSeleccionada == '' ? 'selected' : ''}>Todos los tipos</option>
                     <option value="Ingreso" ${tipoCategoriaSeleccionada == 'Ingreso' ? 'selected' : ''}>Ingreso</option>
                     <option value="Egreso" ${tipoCategoriaSeleccionada == 'Egreso' ? 'selected' : ''}>Egreso</option>
                     <option value="Transferencia" ${tipoCategoriaSeleccionada == 'Transferencia' ? 'selected' : ''}>Transferencia</option>
                 </select>
-                <select name="categoria" onchange="this.form.submit()">
+                
+                <label class="nombres-filtro" for="categoria">Categoría:</label>
+                <select name="categoria" id="categoria" onchange="autoSelectTipoCategoria();">
                     <option value="">Todas las categorías</option>
-                    <c:forEach var="categoria" items="${categorias}">
+                    <c:forEach var="categoria" items="${categoriasIngreso}">
+                        <option value="${categoria.nombre}" ${categoriaSeleccionada == categoria.nombre ? 'selected' : ''}>${categoria.nombre}</option>
+                    </c:forEach>
+                    <c:forEach var="categoria" items="${categoriasEgreso}">
+                        <option value="${categoria.nombre}" ${categoriaSeleccionada == categoria.nombre ? 'selected' : ''}>${categoria.nombre}</option>
+                    </c:forEach>
+                    <c:forEach var="categoria" items="${categoriasTransferencia}">
                         <option value="${categoria.nombre}" ${categoriaSeleccionada == categoria.nombre ? 'selected' : ''}>${categoria.nombre}</option>
                     </c:forEach>
                 </select>
-                <c:if test="${empty categorias}">
+                <c:if test="${empty categoriasIngreso && empty categoriasEgreso && empty categoriasTransferencia}">
                     <div class="mensaje-error">No hay categorías disponibles para el tipo seleccionado.</div>
                 </c:if>
             </form>
@@ -121,7 +136,7 @@
                         </tr>
                         <c:set var="index" value="${index + 1}" />
                     </c:forEach>
-                    <c:if test="${empty egresos && (tipoCategoriaSeleccionada == 'Egreso')}">
+                    <c:if test="${empty egresos && tipoCategoriaSeleccionada == 'Egreso'}">
                         <tr>
                             <td colspan="7" style="text-align: center;">No hay egresos registrados.</td>
                         </tr>
@@ -140,7 +155,7 @@
                         </tr>
                         <c:set var="index" value="${index + 1}" />
                     </c:forEach>
-                    <c:if test="${empty transferencias && (tipoCategoriaSeleccionada == 'Transferencia')}">
+                    <c:if test="${empty transferencias && tipoCategoriaSeleccionada == 'Transferencia'}">
                         <tr>
                             <td colspan="7" style="text-align: center;">No hay transferencias registradas.</td>
                         </tr>

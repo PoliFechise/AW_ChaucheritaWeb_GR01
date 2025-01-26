@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
 import model.dto.CategoriaEgresoDTO;
+import model.dto.CategoriaIngresoDTO;
+import model.dto.CategoriaTransferenciaDTO;
 import orm.entities.*;
 
 public class CategoriaDAO {
@@ -118,4 +121,112 @@ public class CategoriaDAO {
 	        em.close();
 	    }
 	}
+	
+	public List<CategoriaEgresoDTO> obtenerCategoriasEgresoYSumaValor() throws SQLException {
+        try {
+            String jpql = "SELECT new model.dto.CategoriaEgresoDTO(c.id, c.nombre, SUM(m.valor)) " +
+                          "FROM Egreso e " +
+                          "JOIN e.destino c " +
+                          "JOIN e.movimiento m " +
+                          "GROUP BY c.id, c.nombre " +
+                          "ORDER BY SUM(m.valor) DESC";
+
+            Query query = em.createQuery(jpql);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new SQLException("Error al obtener las categorías de egreso: " + e.getMessage(), e);
+        }
+    }
+
+	public List<CategoriaEgresoDTO> obtenerCategoriasEgresoYSumaValorPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) throws SQLException {
+        try {
+            String jpql = "SELECT new model.dto.CategoriaEgresoDTO(c.id, c.nombre, SUM(m.valor)) " +
+                          "FROM Egreso e " +
+                          "JOIN e.destino c " +
+                          "JOIN e.movimiento m " +
+                          "WHERE m.fecha BETWEEN :fechaInicio AND :fechaFin " +
+                          "GROUP BY c.id, c.nombre " +
+                          "ORDER BY SUM(m.valor) DESC";
+
+            Query query = em.createQuery(jpql);
+            query.setParameter("fechaInicio", fechaInicio);
+            query.setParameter("fechaFin", fechaFin);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new SQLException("Error al obtener las categorías de egreso por fechas: " + e.getMessage(), e);
+        }
+    }
+
+    public List<CategoriaIngresoDTO> obtenerCategoriasIngresoYSumaValor() throws SQLException {
+        try {
+            String jpql = "SELECT new model.dto.CategoriaIngresoDTO(ci.id, ci.nombre, SUM(m.valor)) " +
+                          "FROM Ingreso i " +
+                          "JOIN i.origen ci " +
+                          "JOIN i.movimiento m " +
+                          "GROUP BY ci.id, ci.nombre " +
+                          "ORDER BY SUM(m.valor) DESC";
+            
+            Query query = em.createQuery(jpql);
+            List<CategoriaIngresoDTO> resultado = query.getResultList();
+            System.out.println("Resultado de la consulta JPQL: " + resultado);
+
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new SQLException("Error al obtener las categorías de ingreso: " + e.getMessage(), e);
+        }
+    }
+
+    public List<CategoriaIngresoDTO> obtenerCategoriasIngresoYSumaValorPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) throws SQLException {
+        try {
+            String jpql = "SELECT new model.dto.CategoriaIngresoDTO(ci.id, ci.nombre, SUM(m.valor)) " +
+                          "FROM Ingreso i " +
+                          "JOIN i.origen ci " +
+                          "JOIN i.movimiento m " +
+                          "WHERE m.fecha BETWEEN :fechaInicio AND :fechaFin " +
+                          "GROUP BY ci.id, ci.nombre " +
+                          "ORDER BY SUM(m.valor) DESC";
+
+            Query query = em.createQuery(jpql);
+            query.setParameter("fechaInicio", fechaInicio);
+            query.setParameter("fechaFin", fechaFin);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new SQLException("Error al obtener las categorías de ingreso por fechas: " + e.getMessage(), e);
+        }
+    }
+
+    public List<CategoriaTransferenciaDTO> obtenerCategoriasTransferenciaYSumaValor() throws SQLException {
+        try {
+            String jpql = "SELECT new model.dto.CategoriaTransferenciaDTO(ct.id, ct.nombre, SUM(m.valor)) " +
+                          "FROM Transferencia t " +
+                          "JOIN t.categoria ct " +
+                          "JOIN t.movimiento m " +
+                          "GROUP BY ct.id, ct.nombre " +
+                          "ORDER BY SUM(m.valor) DESC";
+
+            Query query = em.createQuery(jpql);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new SQLException("Error al obtener las categorías de transferencia: " + e.getMessage(), e);
+        }
+    }
+
+    public List<CategoriaTransferenciaDTO> obtenerCategoriasTransferenciaYSumaValorPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) throws SQLException {
+        try {
+            String jpql = "SELECT new model.dto.CategoriaTransferenciaDTO(ct.id, ct.nombre, SUM(m.valor)) " +
+                          "FROM Transferencia t " +
+                          "JOIN t.categoria ct " +
+                          "JOIN t.movimiento m " +
+                          "WHERE m.fecha BETWEEN :fechaInicio AND :fechaFin " +
+                          "GROUP BY ct.id, ct.nombre " +
+                          "ORDER BY SUM(m.valor) DESC";
+
+            Query query = em.createQuery(jpql);
+            query.setParameter("fechaInicio", fechaInicio);
+            query.setParameter("fechaFin", fechaFin);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new SQLException("Error al obtener las categorías de transferencia por fechas: " + e.getMessage(), e);
+        }
+    }
 }

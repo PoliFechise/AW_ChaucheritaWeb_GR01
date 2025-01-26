@@ -1,287 +1,301 @@
 /* General */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 /* Importar Fuentes */
 @font-face {
-    font-family: 'Angel Club';
-    src: url('../fonts/Angel\ Club\ -\ \(Demo\)\ hanscostudio.com.ttf') format('truetype');
+	font-family: 'Angel Club';
+	src: url('../fonts/Angel\ Club\ -\ \(Demo\)\ hanscostudio.com.ttf')
+		format('truetype');
 }
 
 @font-face {
-    font-family: 'Smothy Bubble';
-    src: url('../fonts/Smothy\ Bubble\ -\ \(Demo\)\ hanscostudio.com.otf') format('opentype');
+	font-family: 'Smothy Bubble';
+	src: url('../fonts/Smothy\ Bubble\ -\ \(Demo\)\ hanscostudio.com.otf')
+		format('opentype');
 }
 
 body {
-    background: #f0f0f0; /* Fondo claro sin imagen */
-    color: #000;
-    font-family: Arial, sans-serif; /* Aseguramos la misma fuente para todo */
+	background: #f0f0f0; /* Fondo claro sin imagen */
+	color: #000;
+	font-family: Arial, sans-serif;
+	/* Aseguramos la misma fuente para todo */
 }
 
 /* Barra del Inicio */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Todos los elementos centrados verticalmente */
-    background-color: #1f65b7;
-    height: 60px;
-    padding: 0 20px; /* Añadir algo de padding a los lados */
+	display: flex;
+	justify-content: space-between;
+	align-items: center; /* Todos los elementos centrados verticalmente */
+	background-color: #1f65b7;
+	height: 60px;
+	padding: 0 20px; /* Añadir algo de padding a los lados */
 }
 
 .titulo-ChW {
-    font-family: 'Smothy Bubble', Arial, sans-serif;
-    font-size: 36px; /* Tamaño de fuente más grande */
-    color: white; /* Color del texto */
+	font-family: 'Smothy Bubble', Arial, sans-serif;
+	font-size: 36px; /* Tamaño de fuente más grande */
+	color: white; /* Color del texto */
 }
 
 .opciones-header {
-    display: flex;
-    gap: 10px;
-    align-items: center; /* Asegurar que los elementos dentro también estén centrados */
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	/* Asegurar que los elementos dentro también estén centrados */
 }
 
 .btn-regresar {
-    background-color: #ffc107;
-    border: none;
-    padding: 8px 16px; /* Reducir el padding */
-    border-radius: 15px;
-    cursor: pointer;
-    font-weight: bold;
-    color: black;
-    display: flex;
-    align-items: center;
-    font-family: 'Arial Black', Gadget, sans-serif; /* Fuente más robusta */
-    font-size: 14px; /* Reducir tamaño de fuente */
-    position: relative;
-    overflow: hidden;
-    transition: color 0.4s ease;
+	background-color: #ffc107;
+	border: none;
+	padding: 8px 16px; /* Reducir el padding */
+	border-radius: 15px;
+	cursor: pointer;
+	font-weight: bold;
+	color: black;
+	display: flex;
+	align-items: center;
+	font-family: 'Arial Black', Gadget, sans-serif;
+	/* Fuente más robusta */
+	font-size: 14px; /* Reducir tamaño de fuente */
+	position: relative;
+	overflow: hidden;
+	transition: color 0.4s ease;
 }
 
 .btn-regresar::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 800%;
-    height: 800%;
-    background: #1f65b7;
-    transform: translate(-50%, -50%) rotate(45deg) scale(0);
-    transition: transform 0.5s ease;
-    z-index: 0;
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 800%;
+	height: 800%;
+	background: #1f65b7;
+	transform: translate(-50%, -50%) rotate(45deg) scale(0);
+	transition: transform 0.5s ease;
+	z-index: 0;
 }
 
 .btn-regresar:hover::before {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+	transform: translate(-50%, -50%) rotate(45deg) scale(1);
 }
 
 .btn-regresar:hover {
-    color: white;
+	color: white;
 }
 
 .btn-regresar span {
-    position: relative;
-    z-index: 1;
+	position: relative;
+	z-index: 1;
 }
 
 /* Contenedor Principal */
 .container {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+	background-color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* Sombra sutil para profundidad */
 }
 
 /* Información de la cuenta y saldo */
 .container-info {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 0;
+	align-items: center;
 }
 
 .cuenta {
-    font-size: 36px;
-    font-family: 'Angel Club', sans-serif;
-    color: #2977bd;
+	font-size: 36px;
+	font-family: 'Angel Club', sans-serif;
+	color: #2977bd;
 }
 
 .titulo-seccion {
-    font-size: 30px;
-    font-family: 'Angel Club', sans-serif;
-    color: #2977bd;
+	font-size: 30px;
+	font-family: 'Angel Club', sans-serif;
+	color: #2977bd;
 }
 
 .numero-cuenta {
-    font-size: 25px;
-    font-family: 'Angel Club', sans-serif;
-    padding: 0 40px;
-    color: #343a40;
+	font-size: 25px;
+	font-family: 'Angel Club', sans-serif;
+	padding: 0 40px;
+	color: #343a40;
 }
 
 .registro-txt {
-    font-size: 30px;
-    font-family: 'Angel Club', sans-serif;
-    padding: 20px 0;
-    color: #2977bd;
+	font-size: 30px;
+	font-family: 'Angel Club', sans-serif;
+	padding: 20px 0;
+	color: #2977bd;
 }
 
 .saldo {
-    background-color: #ffc000;
-    width: 150px;
-    height: 55px;
-    font-family: 'Arial', sans-serif;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    border-radius: 15px;
+	background-color: #ffc000;
+	width: 150px;
+	height: 55px;
+	font-family: 'Arial', sans-serif;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	border-radius: 15px;
 }
 
 /* Botones */
 .container-botones {
-    display: flex;
-    padding-bottom: 10px;
+	display: flex;
+	padding-bottom: 10px;
 }
 
 .boton {
-    background-color: #ffc000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    border-radius: 15px;
-    cursor: pointer;
-    padding: 15px;
-    margin-right: 10px;
-    position: relative;
-    overflow: hidden;
-    transition: color 0.4s ease;
-    font-family: 'Arial Black', Gadget, sans-serif;
+	background-color: #ffc000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	border-radius: 15px;
+	cursor: pointer;
+	padding: 15px;
+	margin-right: 10px;
+	position: relative;
+	overflow: hidden;
+	transition: color 0.4s ease;
+	font-family: 'Arial Black', Gadget, sans-serif;
 }
 
 .boton::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 800%;
-    height: 800%;
-    background: #1f65b7;
-    transform: translate(-50%, -50%) rotate(45deg) scale(0);
-    transition: transform 0.5s ease;
-    z-index: 0;
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 800%;
+	height: 800%;
+	background: #1f65b7;
+	transform: translate(-50%, -50%) rotate(45deg) scale(0);
+	transition: transform 0.5s ease;
+	z-index: 0;
 }
 
 .boton:hover::before {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+	transform: translate(-50%, -50%) rotate(45deg) scale(1);
 }
 
 .boton:hover {
-    color: white;
+	color: white;
 }
 
 .boton span {
-    position: relative;
-    z-index: 1;
+	position: relative;
+	z-index: 1;
 }
 
 /* Filtrar Movimientos */
 .container-filtro {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	background-color: #f9f9f9;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .container-filtro .titulo-seccion {
-    font-size: 24px;
-    font-family: 'Angel Club', sans-serif;
-    color: #2977bd;
-    margin-bottom: 10px;
+	font-size: 24px;
+	font-family: 'Angel Club', sans-serif;
+	color: #2977bd;
+	margin-bottom: 10px;
 }
 
 .container-filtro form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 
 .container-filtro select {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #d1d1d1;
-    border-radius: 5px;
-    background-color: #ffffff;
-    font-family: 'Arial', sans-serif;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #d1d1d1;
+	border-radius: 5px;
+	background-color: #ffffff;
+	font-family: 'Arial', sans-serif;
+	cursor: pointer;
+	transition: border-color 0.3s ease;
 }
 
 .container-filtro select:focus {
-    border-color: #2977bd;
+	border-color: #2977bd;
 }
 
 .container-filtro select option {
-    font-size: 16px;
-    padding: 10px;
+	font-size: 16px;
+	padding: 10px;
 }
 
 /* Tabla Dinamica */
 .container-tabla {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0;
-    overflow-x: auto; /* Para manejar tablas anchas en dispositivos pequeños */
+	display: flex;
+	flex-direction: column;
+	padding: 20px 0;
+	overflow-x: auto;
+	/* Para manejar tablas anchas en dispositivos pequeños */
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse; /* Eliminar espacios entre celdas */
-    background-color: #fff; /* Fondo blanco para la tabla */
-    border: 1px solid #343a40; /* Bordes oscuros */
-    border-radius: 8px; /* Bordes redondeados para un toque moderno */
-    overflow: hidden; /* Para aplicar el borde redondeado a toda la tabla */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+	width: 100%;
+	border-collapse: collapse; /* Eliminar espacios entre celdas */
+	background-color: #fff; /* Fondo blanco para la tabla */
+	border: 1px solid #343a40; /* Bordes oscuros */
+	border-radius: 8px; /* Bordes redondeados para un toque moderno */
+	overflow: hidden;
+	/* Para aplicar el borde redondeado a toda la tabla */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* Sombra sutil para profundidad */
 }
 
 th, td {
-    border: 1px solid #343a40; /* Bordes oscuros */
-    text-align: center;
-    padding: 10px;
+	border: 1px solid #343a40; /* Bordes oscuros */
+	text-align: center;
+	padding: 10px;
 }
 
 th {
-    background-color: #1f65b7;
-    color: #fff;
-    font-weight: bold;
-    border: 1px solid #343a40; /* Bordes oscuros */
+	background-color: #1f65b7;
+	color: #fff;
+	font-weight: bold;
+	border: 1px solid #343a40; /* Bordes oscuros */
 }
 
 td {
-    background-color: #fff; /* Fondo blanco para las celdas */
-    color: #343a40; /* Texto oscuro para contraste */
-    border: 1px solid #343a40; /* Bordes oscuros */
+	background-color: #fff; /* Fondo blanco para las celdas */
+	color: #343a40; /* Texto oscuro para contraste */
+	border: 1px solid #343a40; /* Bordes oscuros */
 }
 
 tr:nth-child(even) td {
-    background-color: #f0f0f0; /* Zebra striping para filas */
+	background-color: #f0f0f0; /* Zebra striping para filas */
 }
 
 .mensaje-error {
-        display: inline-block;
-        vertical-align: middle;
-        color: red;
-        margin-left: 10px;
-        font-size: 14px;
-        align-content: center;
-    }
+	display: inline-block;
+	vertical-align: middle;
+	color: red;
+	margin-left: 10px;
+	font-size: 14px;
+	align-content: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.nombres-filtro {
+	align-content: center;
+}

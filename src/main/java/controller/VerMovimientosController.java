@@ -12,6 +12,7 @@ import model.dao.TransferenciaDAO;
 import model.dao.CategoriaDAO;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import orm.entities.Cuenta;
 import orm.entities.Ingreso;
@@ -59,24 +60,28 @@ public class VerMovimientosController extends HttpServlet {
         Cuenta cuenta = cuentaDAO.encontrarPorNumero(numero);
 
         IngresoDAO ingresoDAO = new IngresoDAO();
-        List<Ingreso> ingresos = ingresoDAO.obtenerIngresosPorCuenta(numero);
+        List<Ingreso> ingresos = ingresoDAO.obtenerIngresosPorCuenta(cuenta);
 
         EgresoDAO egresoDAO = new EgresoDAO();
-        List<Egreso> egresos = egresoDAO.obtenerEgresosPorCuenta(numero);
+        List<Egreso> egresos = egresoDAO.obtenerEgresosPorCuenta(cuenta);
 
         TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
-        List<Transferencia> transferencias = transferenciaDAO.obtenerTransferenciasPorCuenta(numero);
+        List<Transferencia> transferencias = transferenciaDAO.obtenerTransferenciasPorCuenta(cuenta);
 
         // Obtener todas las categorías
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        List<Categoria> categorias = categoriaDAO.obtenerCategoriasIngreso();
+        List<Categoria> categoriasIngreso = categoriaDAO.obtenerCategoriasIngreso();
+        List<Categoria> categoriasEgreso = categoriaDAO.obtenerCategoriasEgreso();
+        List<Categoria> categoriasTransferencia = categoriaDAO.obtenerCategoriasTransferencia();
 
         // 3.- Hablar con la vista
         request.setAttribute("cuenta", cuenta);
         request.setAttribute("ingresos", ingresos);
         request.setAttribute("egresos", egresos);
         request.setAttribute("transferencias", transferencias);
-        request.setAttribute("categorias", categorias);
+        request.setAttribute("categoriasIngreso", categoriasIngreso);
+        request.setAttribute("categoriasEgreso", categoriasEgreso);
+        request.setAttribute("categoriasTransferencia", categoriasTransferencia);
 
         getServletContext().getRequestDispatcher("/jsp/cuentaMovimiento.jsp").forward(request, response);
     }
@@ -103,35 +108,37 @@ public class VerMovimientosController extends HttpServlet {
 
         // Obtener las categorías según el tipo de movimiento seleccionado
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        List<Categoria> categorias = null;
+        List<Categoria> categoriasIngreso = categoriaDAO.obtenerCategoriasIngreso();
+        List<Categoria> categoriasEgreso = categoriaDAO.obtenerCategoriasEgreso();
+        List<Categoria> categoriasTransferencia = categoriaDAO.obtenerCategoriasTransferencia();
+        List<Categoria> categorias = new ArrayList<>();
+        categorias.addAll(categoriasIngreso);
+        categorias.addAll(categoriasEgreso);
+        categorias.addAll(categoriasTransferencia);
 
         if ("Ingreso".equals(tipoCategoria)) {
             if (categoria == null || categoria.isEmpty()) {
-                ingresos = ingresoDAO.obtenerIngresosPorCuenta(numero);
+                ingresos = ingresoDAO.obtenerIngresosPorCuenta(cuenta);
             } else {
-                ingresos = ingresoDAO.obtenerIngresosPorCuentaYCategoria(numero, categoria);
+                ingresos = ingresoDAO.obtenerIngresosPorCuentaYCategoria(cuenta, categoria);
             }
-            categorias = categoriaDAO.obtenerCategoriasIngreso();
         } else if ("Egreso".equals(tipoCategoria)) {
             if (categoria == null || categoria.isEmpty()) {
-                egresos = egresoDAO.obtenerEgresosPorCuenta(numero);
+                egresos = egresoDAO.obtenerEgresosPorCuenta(cuenta);
             } else {
-                egresos = egresoDAO.obtenerEgresosPorCuentaYCategoria(numero, categoria);
+                egresos = egresoDAO.obtenerEgresosPorCuentaYCategoria(cuenta, categoria);
             }
-            categorias = categoriaDAO.obtenerCategoriasEgreso();
         } else if ("Transferencia".equals(tipoCategoria)) {
             if (categoria == null || categoria.isEmpty()) {
-                transferencias = transferenciaDAO.obtenerTransferenciasPorCuenta(numero);
+                transferencias = transferenciaDAO.obtenerTransferenciasPorCuenta(cuenta);
             } else {
-                transferencias = transferenciaDAO.obtenerTransferenciasPorCuentaYCategoria(numero, categoria);
+                transferencias = transferenciaDAO.obtenerTransferenciasPorCuentaYCategoria(cuenta, categoria);
             }
-            categorias = categoriaDAO.obtenerCategoriasTransferencia();
         } else {
             // Si no se selecciona un tipo de categoría, obtener todas las categorías y todos los movimientos
-            categorias = categoriaDAO.obtenerCategoriasIngreso();  // o mezcla de todas las categorías si es necesario
-            ingresos = ingresoDAO.obtenerIngresosPorCuenta(numero);
-            egresos = egresoDAO.obtenerEgresosPorCuenta(numero);
-            transferencias = transferenciaDAO.obtenerTransferenciasPorCuenta(numero);
+            ingresos = ingresoDAO.obtenerIngresosPorCuenta(cuenta);
+            egresos = egresoDAO.obtenerEgresosPorCuenta(cuenta);
+            transferencias = transferenciaDAO.obtenerTransferenciasPorCuenta(cuenta);
         }
 
         // 3.- Hablar con la vista
@@ -139,6 +146,9 @@ public class VerMovimientosController extends HttpServlet {
         request.setAttribute("ingresos", ingresos);
         request.setAttribute("egresos", egresos);
         request.setAttribute("transferencias", transferencias);
+        request.setAttribute("categoriasIngreso", categoriasIngreso);
+        request.setAttribute("categoriasEgreso", categoriasEgreso);
+        request.setAttribute("categoriasTransferencia", categoriasTransferencia);
         request.setAttribute("categorias", categorias);
         request.setAttribute("tipoCategoriaSeleccionada", tipoCategoria);
         request.setAttribute("categoriaSeleccionada", categoria);
