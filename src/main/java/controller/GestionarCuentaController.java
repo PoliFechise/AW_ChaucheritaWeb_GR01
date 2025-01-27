@@ -46,17 +46,14 @@ public class GestionarCuentaController extends HttpServlet {
             case "guardar":
                 guardarCuenta(request, response);
                 break;
-            case "actualizar":
+            case "presentarFormularioActualizar":
                 presentarFormularioActualizar(request, response);
                 break;
-            case "modificar":
+            case "actualizar":
                 actualizarCuenta(request, response);
                 break;
             case "eliminar":
                 eliminarCuenta(request, response);
-                break;
-            case "cancelar":
-                cancelarAccion(request, response);
                 break;
             default:
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ruta no encontrada");
@@ -152,10 +149,7 @@ public class GestionarCuentaController extends HttpServlet {
         }
     }
 
-    private void cancelarAccion(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Redirigir a la vista principal de ajustes en sección cuenta
-        response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta");
-    }
+
 
     @Override
     public void destroy() {

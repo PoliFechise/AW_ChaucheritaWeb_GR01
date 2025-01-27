@@ -46,7 +46,7 @@
 						<td>$ ${cuenta.saldo}</td>
 						<td class="acciones">
 							<div class="boton-actualizar"
-								onclick="location.href='GestionarCuentaController?ruta=actualizar&numero=${cuenta.numero}'">
+								onclick="location.href='GestionarCuentaController?ruta=presentarFormularioActualizar&numero=${cuenta.numero}'">
 								<span>Actualizar</span>
 							</div>
 							<div class="boton-eliminar"
