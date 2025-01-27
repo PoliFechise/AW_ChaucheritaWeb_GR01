@@ -7,7 +7,6 @@ import orm.entities.Movimiento;
 
 public class IngresoRequest {
 	
-    private Ingreso ingreso;
     private Movimiento movimiento;
     private Cuenta cuenta;
     private CatIngreso catIngreso;
@@ -28,14 +27,6 @@ public class IngresoRequest {
 	public void setCatIngreso(CatIngreso catIngreso) {
 		this.catIngreso = catIngreso;
 	}
-
-	public Ingreso getIngreso() {
-        return ingreso;
-    }
-
-    public void setIngreso(Ingreso ingreso) {
-        this.ingreso = ingreso;
-    }
 
     public Movimiento getMovimiento() {
         return movimiento;

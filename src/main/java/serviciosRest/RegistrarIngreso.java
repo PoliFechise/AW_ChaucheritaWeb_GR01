@@ -40,7 +40,7 @@ public class RegistrarIngreso {
     	
         Movimiento movimiento = request.getMovimiento();
         Cuenta cuenta = request.getCuenta();
-        Ingreso ingreso = request.getIngreso();
+        Ingreso ingreso = new Ingreso();
         CatIngreso catIngreso = request.getCatIngreso();
         
         String fechaString = request.getFecha();
