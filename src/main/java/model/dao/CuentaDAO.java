@@ -56,20 +56,46 @@ public class CuentaDAO {
         }
     }
     
-    public void eliminar(String numero) {
+    public void eliminarPorNumero(String numero) {
         try {
             em.getTransaction().begin();
+
+            // Buscar la cuenta por su número
             Cuenta cuenta = em.createQuery("SELECT c FROM Cuenta c WHERE c.numero = :numero", Cuenta.class)
                               .setParameter("numero", numero)
                               .getSingleResult();
+
             if (cuenta != null) {
+                // Eliminar transferencias relacionadas con movimientos de la cuenta
+                em.createQuery("DELETE FROM Transferencia t WHERE t.movimiento.id IN (SELECT m.id FROM Movimiento m WHERE m.cuenta.id = :cuentaId)")
+                  .setParameter("cuentaId", cuenta.getId())
+                  .executeUpdate();
+
+                // Eliminar ingresos relacionados con movimientos de la cuenta
+                em.createQuery("DELETE FROM Ingreso i WHERE i.movimiento.id IN (SELECT m.id FROM Movimiento m WHERE m.cuenta.id = :cuentaId)")
+                  .setParameter("cuentaId", cuenta.getId())
+                  .executeUpdate();
+
+                // Eliminar egresos relacionados con movimientos de la cuenta
+                em.createQuery("DELETE FROM Egreso e WHERE e.movimiento.id IN (SELECT m.id FROM Movimiento m WHERE m.cuenta.id = :cuentaId)")
+                  .setParameter("cuentaId", cuenta.getId())
+                  .executeUpdate();
+
+                // Eliminar movimientos relacionados con la cuenta
+                em.createQuery("DELETE FROM Movimiento m WHERE m.cuenta.id = :cuentaId")
+                  .setParameter("cuentaId", cuenta.getId())
+                  .executeUpdate();
+
+                // Finalmente, eliminar la cuenta
                 em.remove(cuenta);
             }
+
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
             e.printStackTrace();
         }
     }
+
 
 }
