@@ -56,7 +56,7 @@ public class CuentaDAO {
         }
     }
     
-    public void borrarPorNumero(String numero) {
+    public void eliminar(String numero) {
         try {
             em.getTransaction().begin();
             Cuenta cuenta = em.createQuery("SELECT c FROM Cuenta c WHERE c.numero = :numero", Cuenta.class)
@@ -72,8 +72,4 @@ public class CuentaDAO {
         }
     }
 
-
-    public void cerrar() {
-        em.close();
-    }
 }

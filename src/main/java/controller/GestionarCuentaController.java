@@ -138,7 +138,7 @@ public class GestionarCuentaController extends HttpServlet {
 
         try {
             if (numero != null && !numero.isEmpty()) {
-                cuentaDAO.borrarPorNumero(numero);
+                cuentaDAO.eliminar(numero);
                 response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&cuenta=eliminado");
             } else {
                 response.sendRedirect("VerTableroController?ruta=ajustes&section=cuenta&eliminado=fallido");
@@ -149,10 +149,4 @@ public class GestionarCuentaController extends HttpServlet {
         }
     }
 
-
-
-    @Override
-    public void destroy() {
-        cuentaDAO.cerrar();
-    }
 }
