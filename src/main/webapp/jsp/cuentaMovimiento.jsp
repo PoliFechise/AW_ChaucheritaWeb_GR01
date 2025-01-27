@@ -43,13 +43,13 @@
 
         <!-- Botones -->
         <div class="container-botones">
-            <div class="boton" onclick="window.location.href='ingreso.html?from=cuentaMovimiento'">
+            <div class="boton" onclick="location.href='RegistrarIngresoController?ruta=ingreso&numero=${cuenta.numero}'">
                 <span>Registrar ingreso</span>
             </div>
-            <div class="boton" onclick="window.location.href='egreso.html?from=cuentaMovimiento'">
+            <div class="boton" onclick="location.href='RegistrarEgresoController?ruta=egreso&numero=${cuenta.numero}'">
                 <span>Registrar egreso</span>
             </div>
-            <div class="boton" onclick="window.location.href='transferencia.html?from=cuentaMovimiento'">
+            <div class="boton" onclick="location.href='RegistrarTransferenciaController?ruta=transferencia&numero=${cuenta.numero}'">
                 <span>Registrar transferencia</span>
             </div>
         </div>
