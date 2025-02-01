@@ -22,6 +22,18 @@
             mensajeError.style.display = 'none';
             return true;
         }
+        
+        window.onload = function() {
+            // Obtener el parámetro 'error' de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+
+            // Si el error es 'saldoInsuficiente', mostrar una alerta
+            if (error === 'saldoInsuficiente') {
+                alert('Error: Saldo insuficiente.');
+            }
+        };
+        
     </script>
 </head>
 <body>
