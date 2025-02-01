@@ -99,6 +99,7 @@ public class CategoriaDAO {
 	//Metodos para obtener la categoria por su id
 	
 	public CatIngreso encontrarCategoriaIngresoPorId(Integer id) {
+		em.clear();
 	    try {
 	        return em.find(CatIngreso.class, id);
 	    } finally {
@@ -107,6 +108,7 @@ public class CategoriaDAO {
 	}
 	
 	public CatEgreso encontrarCategoriaEgresoPorId(Integer id) {
+		em.clear();
 	    try {
 	        return em.find(CatEgreso.class, id);
 	    } finally {
@@ -115,6 +117,7 @@ public class CategoriaDAO {
 	}
 	
 	public CatTransferencia encontrarCategoriaTransferenciaPorId(Integer id) {
+		em.clear();
 	    try {
 	        return em.find(CatTransferencia.class, id);
 	    } finally {

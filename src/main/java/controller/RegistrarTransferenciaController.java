@@ -30,6 +30,17 @@ import model.dao.TransferenciaDAO;
 public class RegistrarTransferenciaController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	Transferencia transferencia = new Transferencia();
+	Movimiento movimiento = new Movimiento();
+	Cuenta cuentaOrigen = new Cuenta();
+	Cuenta cuentaDestino = new Cuenta();
+	CatTransferencia catTransferencia = new CatTransferencia();
+	
+	CuentaDAO cuentaDAO = new CuentaDAO();
+	MovimientoDAO movimientoDAO = new MovimientoDAO();
+	CategoriaDAO categoriaDAO = new CategoriaDAO();
+	TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,53 +52,41 @@ public class RegistrarTransferenciaController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Transferencia transferencia = new Transferencia();
-		Movimiento movimiento = new Movimiento();
-		Cuenta cuentaOrigen = new Cuenta();
-		Cuenta cuentaDestino = new Cuenta();
-		CatTransferencia catTransferencia = new CatTransferencia();
-
 		movimiento.setConcepto(request.getParameter("concepto"));
-
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDateTime dateTime = LocalDate.parse(request.getParameter("fecha"), format).atStartOfDay();
 		movimiento.setFecha(dateTime);
-
-		CuentaDAO cuentaDAO = new CuentaDAO();
 		cuentaOrigen = cuentaDAO.encontrarPorNumero(request.getParameter("numeroCuenta"));
 		movimiento.setCuenta(cuentaOrigen);
-		
-		cuentaDestino = cuentaDAO.encontrarPorNumero(request.getParameter("destino"));
-
 		movimiento.setValor(BigDecimal.valueOf(Double.parseDouble(request.getParameter("valor"))));
 
-		MovimientoDAO movimientoDAO = new MovimientoDAO();
-		movimientoDAO.guardarMovimiento(movimiento);
-
-		CategoriaDAO categoriaDAO = new CategoriaDAO();
 		catTransferencia = categoriaDAO.encontrarCategoriaTransferenciaPorId(Integer.parseInt(request.getParameter("categoria")));
 		transferencia.setCategoria(catTransferencia);
-
 		transferencia.setOrigen(cuentaOrigen);
-		
+		cuentaDestino = cuentaDAO.encontrarPorNumero(request.getParameter("destino"));
 		transferencia.setDestino(cuentaDestino);
-
 		transferencia.setMovimiento(movimiento);
 
-		TransferenciaDAO transferenciaDAO = new TransferenciaDAO();
-		transferenciaDAO.guardarTransferencia(transferencia);
+		BigDecimal nuevoBalanceOrigen = cuentaOrigen.getSaldo().add(movimiento.getValor().negate());
+		BigDecimal nuevoBalanceDestino = cuentaDestino.getSaldo().add(movimiento.getValor());
 
-		BigDecimal nuevoBalance = cuentaOrigen.getSaldo().add(movimiento.getValor().negate());
-		cuentaOrigen.setSaldo(nuevoBalance);
-
-		cuentaDAO.actualizar(cuentaOrigen);
+		if(!haySaldoSuficiente(cuentaOrigen.getSaldo(), movimiento.getValor())) {
+			response.sendRedirect("VerTableroController?error=saldoInsuficiente");
+			return;
+		}
 		
-		nuevoBalance = cuentaDestino.getSaldo().add(movimiento.getValor());
-		cuentaDestino.setSaldo(nuevoBalance);
-
+		movimientoDAO.guardarMovimiento(movimiento);
+		transferenciaDAO.guardarTransferencia(transferencia);
+		cuentaDestino.setSaldo(nuevoBalanceDestino);
 		cuentaDAO.actualizar(cuentaDestino);
+		cuentaOrigen.setSaldo(nuevoBalanceOrigen);
+		cuentaDAO.actualizar(cuentaOrigen);
 
 		response.sendRedirect("VerTableroController");
+	}
+	
+	private boolean haySaldoSuficiente(BigDecimal saldo, BigDecimal valor) {
+		return (saldo.add(valor.negate())).intValue() > 0;
 	}
 
 	private void ruteador(HttpServletRequest request, HttpServletResponse response)

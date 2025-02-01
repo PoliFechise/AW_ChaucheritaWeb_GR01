@@ -29,54 +29,60 @@ import model.dao.MovimientoDAO;
 public class RegistrarEgresoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	Egreso egreso = new Egreso();
+	Movimiento movimiento = new Movimiento();
+	Cuenta cuenta = new Cuenta();
+	CatEgreso catEgreso = new CatEgreso();
+	
+	CuentaDAO cuentaDAO = new CuentaDAO();
+	MovimientoDAO movimientoDAO = new MovimientoDAO();
+	CategoriaDAO categoriaDAO = new CategoriaDAO();
+	EgresoDAO egresoDAO = new EgresoDAO();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		this.ruteador(request, response);
+		
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Egreso egreso = new Egreso();
-		Movimiento movimiento = new Movimiento();
-		Cuenta cuenta = new Cuenta();
-		CatEgreso catEgreso = new CatEgreso();
-
 		movimiento.setConcepto(request.getParameter("concepto"));
-
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDateTime dateTime = LocalDate.parse(request.getParameter("fecha"), format).atStartOfDay();
 		movimiento.setFecha(dateTime);
-
-		CuentaDAO cuentaDAO = new CuentaDAO();
 		cuenta = cuentaDAO.encontrarPorNumero(request.getParameter("numeroCuenta"));
 		movimiento.setCuenta(cuenta);
-
 		movimiento.setValor(BigDecimal.valueOf(Double.parseDouble(request.getParameter("valor"))));
 
-		MovimientoDAO movimientoDAO = new MovimientoDAO();
-		movimientoDAO.guardarMovimiento(movimiento);
 
-		CategoriaDAO categoriaDAO = new CategoriaDAO();
 		catEgreso = categoriaDAO.encontrarCategoriaEgresoPorId(Integer.parseInt(request.getParameter("categoria")));
 		egreso.setDestino(catEgreso);
-
 		egreso.setOrigen(cuenta);
-
 		egreso.setMovimiento(movimiento);
 
-		EgresoDAO egresoDAO = new EgresoDAO();
-		egresoDAO.guardarEgreso(egreso);
-
 		BigDecimal nuevoBalance = cuenta.getSaldo().add(movimiento.getValor().negate());
-		cuenta.setSaldo(nuevoBalance);
+		
+		if(!haySaldoSuficiente(cuenta.getSaldo(), movimiento.getValor())) {
+			response.sendRedirect("VerTableroController?error=saldoInsuficiente");
+			return;
+		}
 
+		movimientoDAO.guardarMovimiento(movimiento);
+		egresoDAO.guardarEgreso(egreso);
+		cuenta.setSaldo(nuevoBalance);
 		cuentaDAO.actualizar(cuenta);
 
 		response.sendRedirect("VerTableroController");
+	}
+
+	private boolean haySaldoSuficiente(BigDecimal saldo, BigDecimal valor) {
+		return (saldo.add(valor.negate())).intValue() > 0;
 	}
 
 	private void ruteador(HttpServletRequest request, HttpServletResponse response)

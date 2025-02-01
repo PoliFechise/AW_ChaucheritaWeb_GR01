@@ -28,6 +28,16 @@ import model.dao.MovimientoDAO;
 public class RegistrarIngresoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	Ingreso ingreso = new Ingreso();
+	Movimiento movimiento = new Movimiento();
+	Cuenta cuenta = new Cuenta();
+	CatIngreso catIngreso = new CatIngreso();
+	
+	CuentaDAO cuentaDAO = new CuentaDAO();
+	IngresoDAO ingresoDAO = new IngresoDAO();
+	CategoriaDAO categoriaDAO = new CategoriaDAO();
+	MovimientoDAO movimientoDAO = new MovimientoDAO();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,42 +49,26 @@ public class RegistrarIngresoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Ingreso ingreso = new Ingreso();
-		Movimiento movimiento = new Movimiento();
-		Cuenta cuenta = new Cuenta();
-		CatIngreso catIngreso = new CatIngreso();
-		
 		movimiento.setConcepto(request.getParameter("concepto"));
-		
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDateTime dateTime = LocalDate.parse(request.getParameter("fecha"), format).atStartOfDay();
 		movimiento.setFecha(dateTime);
-		
-		CuentaDAO cuentaDAO = new CuentaDAO();
 		cuenta = cuentaDAO.encontrarPorNumero(request.getParameter("numeroCuenta"));
 		movimiento.setCuenta(cuenta);
-		
 		movimiento.setValor(BigDecimal.valueOf(Double.parseDouble(request.getParameter("valor"))));
 		
-		MovimientoDAO movimientoDAO = new MovimientoDAO();
-		movimientoDAO.guardarMovimiento(movimiento);
-		
-		CategoriaDAO categoriaDAO = new CategoriaDAO();
 		catIngreso = categoriaDAO.encontrarCategoriaIngresoPorId(Integer.parseInt(request.getParameter("categoria")));
 		ingreso.setOrigen(catIngreso);
-
 		ingreso.setDestino(cuenta);
-		
 		ingreso.setMovimiento(movimiento);
-		
-		IngresoDAO ingresoDAO = new IngresoDAO();
-		ingresoDAO.guardarIngreso(ingreso);
 		
 		BigDecimal nuevoBalance = movimiento.getValor().add(cuenta.getSaldo());
 		cuenta.setSaldo(nuevoBalance);
-		
+	
+		movimientoDAO.guardarMovimiento(movimiento);
 		cuentaDAO.actualizar(cuenta);
-		
+		ingresoDAO.guardarIngreso(ingreso);
+
 		response.sendRedirect("VerTableroController");
 	}
 
@@ -95,16 +89,13 @@ public class RegistrarIngresoController extends HttpServlet {
 	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			// Obtener categorías de ingreso
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
+			
 			List<Categoria> categoriasIngreso = categoriaDAO.obtenerCategoriasIngreso();
 
-			// Obtener saldo de la cuenta
 			String numeroCuenta = request.getParameter("numero");
             CuentaDAO cuentaDAO = new CuentaDAO();
             BigDecimal saldoCuenta = cuentaDAO.encontrarPorNumero(numeroCuenta).getSaldo();
 
-			// Pasar las categorías como atributo
 			request.setAttribute("categoriasIngreso", categoriasIngreso);
             request.setAttribute("saldoCuenta", saldoCuenta);
 
@@ -113,7 +104,6 @@ public class RegistrarIngresoController extends HttpServlet {
 			request.setAttribute("mensajeError", "Error al cargar las categorías: " + e.getMessage());
 		}
 
-		// Redirigir a ingreso.jsp
 		getServletContext().getRequestDispatcher("/jsp/ingreso.jsp").forward(request, response);
 	}
 }
