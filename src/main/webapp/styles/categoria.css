@@ -14,8 +14,8 @@ h2, h3 {
     font-family: "Angel Club";
 }
 
-/* Botones */
-.boton-crear, .boton-regresar  {
+/* --- BUTTONS (CON EFECTOS ANIMADOS RESTAURADOS) --- */
+.boton-crear, .boton-regresar {
     position: relative;
     overflow: hidden;
     border-radius: 15px;
@@ -24,114 +24,124 @@ h2, h3 {
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    transition: color 0.4s ease;
+    transition: color 0.4s ease, transform 0.3s ease;
+    padding: 10px;
+    width: 140px;
+    cursor: pointer;
 }
 
-.boton-actualizar, .boton-eliminar {
-	position: relative;
-    overflow: hidden;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    transition: color 0.4s ease;
-}
-
-.boton-crear::before, .boton-regresar::before, .boton-actualizar::before, .boton-eliminar::before {
+/* --- EFECTO ANIMADO PARA BOTONES --- */
+.boton-crear::before, .boton-regresar::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400%;
-    height: 400%;
+    width: 300%;
+    height: 300%;
+    background: inherit;
     transform: translate(-50%, -50%) rotate(45deg) scale(0);
     transition: transform 0.5s ease;
     z-index: 0;
 }
 
-.boton-crear span, .boton-regresar span, .boton-actualizar span, .boton-eliminar span {
+/* --- EFECTO HOVER PARA BOTONES --- */
+.boton-crear:hover::before, 
+.boton-regresar:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.boton-crear span, .boton-regresar span {
     position: relative;
     z-index: 1;
 }
 
+/* Updating button colors */
 .boton-crear {
     background-color: #59C241;
     color: black;
-    width: 140px;
-    font-size: 20px;
+    font-size: 18px;
     margin-right: 10px;
-    font-family: 'Arial Black', Gadget, sans-serif;
-    font-weight: bold;
 }
 
 .boton-crear::before {
     background: #ff8c00;
 }
 
-.boton-crear:hover::before {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
-}
-
 .boton-crear:hover {
     color: white;
-    cursor: pointer;
+    transform: scale(1.05);
 }
 
 .boton-regresar {
     background-color: #FFC000;
     color: black;
-    height: 30px;
-    width: 140px;
     font-size: 18px;
-    font-family: 'Arial Black', Gadget, sans-serif;
-    font-weight: bold;
 }
 
 .boton-regresar::before {
     background: #1f65b7;
 }
 
-.boton-regresar:hover::before {
+.boton-regresar:hover {
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Update & Delete Buttons */
+.boton-actualizar, .boton-eliminar {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0 5px;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- EFECTOS PARA BOTONES DE TABLA (ACTUALIZAR/ELIMINAR) --- */
+.boton-actualizar::before, .boton-eliminar::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: inherit;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.boton-actualizar:hover::before, .boton-eliminar:hover::before {
     transform: translate(-50%, -50%) rotate(45deg) scale(1);
 }
 
-.boton-regresar:hover {
-    color: white;
-    cursor: pointer;
-}
-
-/* Botones de Actualizar y Eliminar */
-.boton-actualizar, .boton-eliminar {
-    background-color: transparent; /* Sin color de fondo */
-    border: none; /* Sin borde */
-    padding: 0; /* Quita el relleno */
-    margin: 0 5px; /* Espacio entre botones */
-    display: inline-block; /* Mantiene el tamaño ajustado */
-    cursor: pointer; /* Apunta como un botón */
-}
-
 .boton-actualizar img, .boton-eliminar img {
-    width: 24px; /* Tamaño del ícono */
-    height: 24px; /* Proporcional al ancho */
+    width: 24px;
+    height: 24px;
     display: block;
+    position: relative;
+    z-index: 1;
 }
 
-/* Hover para los botones */
-.boton-actualizar:hover{
+.boton-actualizar:hover {
     background-color: #f7f57f;
     border-radius: 5px;
+    transform: scale(1.1);
 }
 
 .boton-eliminar:hover {
     background-color: red;
     border-radius: 5px;
+    transform: scale(1.1);
 }
 
+/* --- CONTAINER STYLES --- */
 .contenedor-regresar {
     width: calc(100% - 20px);
     display: flex;
-    justify-content: flex-end; /* Alinea el botón a la derecha */
+    justify-content: flex-end;
     margin: 10px;
     box-sizing: border-box;
 }
@@ -169,10 +179,12 @@ h2, h3 {
     font-weight: bold;
 }
 
+/* --- TABLE STYLES --- */
 .contenedor-tabla-categorias {
     width: calc(100% - 20px);
     margin: 10px;
     box-sizing: border-box;
+    overflow-x: auto; /* Makes table scrollable on small screens */
 }
 
 .contenedor-tabla-categorias table {
@@ -185,90 +197,71 @@ h2, h3 {
     color: white;
     font-size: 18px;
     border: 1px solid black;
-    text-align: center; /* Centra el texto en los encabezados */
+    text-align: center;
 }
 
 .contenedor-tabla-categorias td {
     font-size: 18px;
     border: 1px solid black;
     background-color: white;
-    padding: 0;
-    text-align: center; /* Centra el texto en las celdas */
+    padding: 10px;
+    text-align: center;
 }
 
 .acciones {
     display: flex;
     align-items: center;
     padding: 0;
-    justify-content: center; /* Alinea los botones al centro */
+    justify-content: center;
 }
 
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    border: 1px solid black;
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 1024px) {
+    .recuadro-movimiento {
+        width: calc(45% - 20px);
+    }
+
+    .contenedor-recuadros {
+        justify-content: center;
+    }
 }
 
-.modal-contenido {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+@media (max-width: 768px) {
+    .contenedor-recuadros {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .recuadro-movimiento {
+        width: 90%;
+    }
+
+    .contenedor-tabla-categorias {
+        overflow-x: auto;
+    }
+
+    .boton-crear,
+    .boton-regresar {
+        width: 100%;
+        max-width: 200px;
+        font-size: 16px;
+        padding: 10px;
+    }
 }
 
-.cerrar {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
+@media (max-width: 480px) {
+    .boton-crear,
+    .boton-regresar {
+        font-size: 14px;
+        padding: 8px;
+    }
 
-.cerrar:hover,
-.cerrar:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .titulo-categoria {
+        font-size: 22px;
+    }
 
-.modal-botones {
-    margin-top: 20px;
-}
-
-.modal-botones button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    cursor: pointer;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: #FFC000;
-    color: #000000;
-    font-size: 16px;
-}
-
-.modal-botones button:hover {
-    background-color: #f5a500;
-    color: white;
-}
-
-.modal-botones #btnNo {
-    background-color: #6c757d;
-    color: white;
-}
-
-.modal-botones #btnNo:hover {
-    background-color: #5a6268;
-    color: white;
+    .contenedor-tabla-categorias th,
+    .contenedor-tabla-categorias td {
+        font-size: 14px;
+    }
 }

@@ -1,6 +1,12 @@
-/* General */
+/* --- ESTILOS GENERALES --- */
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  /* height: 100vh;*/
+    flex-direction: row;
+    margin-top: 80px;
 }
 
 header {
@@ -14,24 +20,10 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 1000;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    height: 100vh;
-    flex-direction: row;
-    margin-top: 80px;
-    font-family: Arial, sans-serif;
-}
-
-h1, h2 {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-}
-
+/* Fuente personalizada */
 @font-face {
     font-family: 'Angel Club';
     src: url('../fonts/Angel Club - (Demo) hanscostudio.com.ttf');
@@ -41,17 +33,13 @@ h1, h2 {
     font-family: 'Angel Club';
 }
 
-.titulo-cuenta {
-    margin: 10px;
-    font-size: 25px;
-    font-family: "Angel Club";
-}
-
-.titulo-ajustes {
+/* --- TITULOS --- */
+.titulo-cuenta, .titulo-ajustes {
     margin: 10px 20px;
     font-size: 30px;
-    color: #ffffff;
+    color: #000000;
     font-family: 'Angel Club';
+    text-align: center;
 }
 
 .titulo-ajustes h1 {
@@ -60,6 +48,13 @@ h1, h2 {
     color: white;
 }
 
+.subtitulo-cuentas-actuales {
+    margin: 10px;
+    font-size: 28px;
+    font-family: "Angel Club";
+}
+
+/* --- SIDEBAR (AJUSTES) --- */
 .barra-ajustes {
     background-color: #D9D9D9;
     height: 100vh;
@@ -92,33 +87,7 @@ h1, h2 {
     cursor: default;
 }
 
-.contenedor-regresar {
-    width: 100%;
-    height: 9%;
-    margin: 10px;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-}
-
-.contenedor-botones {
-    display: flex;
-    justify-content: space-between; /* Espaciar los botones */
-    align-items: center;
-    margin: 10px 0; /* Añadir margen para separar del contenido superior */
-}
-
-.contenedor-dinamico {
-    flex-grow: 1;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #f5f5f5;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* Botones Crear y Regresar */
+/* --- BOTONES (CON EFECTOS RESTAURADOS) --- */
 .boton-crear, .boton-regresar, .boton-actualizar, .boton-eliminar {
     position: relative;
     overflow: hidden;
@@ -128,9 +97,10 @@ h1, h2 {
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    transition: color 0.4s ease;
+    transition: color 0.4s ease, transform 0.3s ease;
 }
 
+/* --- EFECTOS ANIMADOS EN BOTONES --- */
 .boton-crear::before, .boton-regresar::before, .boton-actualizar::before, .boton-eliminar::before {
     content: '';
     position: absolute;
@@ -138,9 +108,17 @@ h1, h2 {
     left: 50%;
     width: 300%;
     height: 300%;
+    background: inherit;
     transform: translate(-50%, -50%) rotate(45deg) scale(0);
     transition: transform 0.5s ease;
     z-index: 0;
+}
+
+.boton-crear:hover::before, 
+.boton-regresar:hover::before, 
+.boton-actualizar:hover::before, 
+.boton-eliminar:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
 }
 
 .boton-crear span, .boton-regresar span, .boton-actualizar span, .boton-eliminar span {
@@ -148,28 +126,19 @@ h1, h2 {
     z-index: 1;
 }
 
+/* --- COLORES DE BOTONES --- */
 .boton-crear {
     background-color: #59C241;
     color: black;
     height: 40px;
     width: 140px;
     font-size: 20px;
-    margin-right: 10px; /* Añadir espacio entre los botones */
-    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
-    font-weight: bold; /* Asegura que el texto esté en negrita */
+    font-family: 'Arial Black', Gadget, sans-serif;
+    font-weight: bold;
 }
 
 .boton-crear::before {
-    background: #ff8c00; /* Naranja de énfasis */
-}
-
-.boton-crear:hover::before {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
-}
-
-.boton-crear:hover {
-    color: white;
-    cursor: pointer;
+    background: #ff8c00;
 }
 
 .boton-regresar {
@@ -178,21 +147,12 @@ h1, h2 {
     height: 40px;
     width: 140px;
     font-size: 18px;
-    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
-    font-weight: bold; /* Asegura que el texto esté en negrita */
+    font-family: 'Arial Black', Gadget, sans-serif;
+    font-weight: bold;
 }
 
 .boton-regresar::before {
-    background: #1f65b7; /* Azul de énfasis */
-}
-
-.boton-regresar:hover::before {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
-}
-
-.boton-regresar:hover {
-    color: white;
-    cursor: pointer;
+    background: #1f65b7;
 }
 
 .boton-actualizar {
@@ -200,21 +160,10 @@ h1, h2 {
     color: black;
     padding: 10px 20px;
     font-size: 16px;
-    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
-    font-weight: bold; /* Asegura que el texto esté en negrita */
 }
 
 .boton-actualizar::before {
-    background: #ff69b4; /* Rosado de énfasis */
-}
-
-.boton-actualizar:hover::before {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
-}
-
-.boton-actualizar:hover {
-    color: white;
-    cursor: pointer;
+    background: #ff69b4;
 }
 
 .boton-eliminar {
@@ -222,28 +171,21 @@ h1, h2 {
     color: black;
     padding: 10px 20px;
     font-size: 16px;
-    font-family: 'Arial Black', Gadget, sans-serif; /* Usa Arial Black y fuente en negrita */
-    font-weight: bold; /* Asegura que el texto esté en negrita */
 }
 
 .boton-eliminar::before {
-    background: #9370db; /* Morado de énfasis */
+    background: #9370db;
 }
 
-.boton-eliminar:hover::before {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+/* --- TABLAS RESPONSIVAS --- */
+.contenedor-tabla-cuentas {
+    width: 100%;
+    overflow-x: auto;
 }
 
-.boton-eliminar:hover {
-    color: white;
-    cursor: pointer;
-}
-
-/* Estilos para la tabla */
 .table-cuentas {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 }
 
 .table-cuentas th, .table-cuentas td {
@@ -263,86 +205,54 @@ h1, h2 {
     font-size: 16px;
 }
 
+/* Ajustar botones dentro de la tabla */
 .table-cuentas .acciones {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Añade un espacio entre los botones */
+    gap: 10px;
 }
 
-.subtitulo-cuentas-actuales {
-    margin: 10px;
-    font-size: 28px;
-    font-family: "Angel Club";
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .barra-ajustes {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px 0;
+    }
+
+    .boton-crear, .boton-regresar {
+        width: 100%;
+        max-width: 200px;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .contenedor-botones {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .table-cuentas th, .table-cuentas td {
+        font-size: 14px;
+    }
 }
 
-.contenedor-tabla-cuentas {
-    width: 100%;
-    margin-top: 20px;
-}
+@media (max-width: 480px) {
+    .boton-crear, .boton-regresar {
+        font-size: 14px;
+        padding: 8px;
+    }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    border: 1px solid black;
-}
-
-.modal-contenido {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.cerrar {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.cerrar:hover,
-.cerrar:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-botones {
-    margin-top: 20px;
-}
-
-.modal-botones button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    cursor: pointer;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: #FFC000;
-    color: #000000;
-    font-size: 16px;
-}
-
-.modal-botones button:hover {
-    background-color: #f5a500;
-}
-
-.modal-botones #btnNo {
-    background-color: #6c757d;
-}
-
-.modal-botones #btnNo:hover {
-    background-color: #5a6268;
+    .table-cuentas th, .table-cuentas td {
+        font-size: 14px;
+    }
 }
