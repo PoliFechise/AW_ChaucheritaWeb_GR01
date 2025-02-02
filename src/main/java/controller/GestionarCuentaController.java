@@ -6,10 +6,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import orm.entities.Cuenta;
+import services.TableroService;
 import model.dao.CuentaDAO;
+import model.dto.TableroDTO;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/GestionarCuentaController")
@@ -38,7 +41,12 @@ public class GestionarCuentaController extends HttpServlet {
 
         switch (ruta) {
             case "listar":
-                listarCuentas(request, response);
+			try {
+				listarCuentas(request, response);
+			} catch (ServletException | IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
                 break;
             case "crear":
                 crearCuenta(request, response);
@@ -61,9 +69,11 @@ public class GestionarCuentaController extends HttpServlet {
         }
     }
 
-    private void listarCuentas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Cuenta> cuentas = cuentaDAO.obtenerCuentas();
-        request.setAttribute("cuentas", cuentas);
+    private void listarCuentas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        TableroService tableroService = new TableroService();
+
+    	 TableroDTO tableroDTO = tableroService.obtenerDatosTablero();
+         request.setAttribute("tableroDTO", tableroDTO);
         getServletContext().getRequestDispatcher("/jsp/cuenta.jsp").forward(request, response);
     }
 

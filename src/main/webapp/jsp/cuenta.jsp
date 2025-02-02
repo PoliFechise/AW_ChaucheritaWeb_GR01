@@ -38,9 +38,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="cuenta" items="${cuentas}">
+				<c:forEach var="cuenta" items="${tableroDTO.cuentas}">
 					<tr>
-						<td>${cuentas.indexOf(cuenta) + 1}</td>
+						<td>${tableroDTO.cuentas.indexOf(cuenta) + 1}</td>
 						<td>${cuenta.nombre}</td>
 						<td>${cuenta.numero}</td>
 						<td>$ ${cuenta.saldo}</td>
