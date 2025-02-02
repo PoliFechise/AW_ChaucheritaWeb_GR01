@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
@@ -74,26 +75,38 @@ public class CategoriaDAO {
 
 	// Método para eliminar una categoría
 	public void eliminar(int id) {
-		em.getTransaction().begin();
-		Categoria categoria = em.find(Categoria.class, id);
+	    EntityTransaction transaction = em.getTransaction();
+	    try {
+	        transaction.begin();
 
-		// Eliminar referencias en la tabla egreso
-		Query queryEgreso = em.createQuery("DELETE FROM Egreso e WHERE e.destino.id = :categoriaId");
-		queryEgreso.setParameter("categoriaId", id);
-		queryEgreso.executeUpdate();
+	        // Eliminar referencias en la tabla egreso
+	        Query queryEgreso = em.createQuery("DELETE FROM Egreso e WHERE e.destino.id = :categoriaId");
+	        queryEgreso.setParameter("categoriaId", id);
+	        queryEgreso.executeUpdate();
 
-		// Eliminar referencias en la tabla transferencia
-		Query queryTransferencia = em.createQuery("DELETE FROM Transferencia t WHERE t.destino.id = :categoriaId");
-		queryTransferencia.setParameter("categoriaId", id);
-		queryTransferencia.executeUpdate();
+	        // Eliminar referencias en la tabla transferencia
+	        Query queryTransferencia = em.createQuery("DELETE FROM Transferencia t WHERE t.categoria.id = :categoriaId");
+	        queryTransferencia.setParameter("categoriaId", id);
+	        queryTransferencia.executeUpdate();
 
-		// Eliminar referencias en la tabla ingreso
-		Query queryIngreso = em.createQuery("DELETE FROM Ingreso i WHERE i.origen.id = :categoriaId");
-		queryIngreso.setParameter("categoriaId", id);
-		queryIngreso.executeUpdate();
+	        // Eliminar referencias en la tabla ingreso
+	        Query queryIngreso = em.createQuery("DELETE FROM Ingreso i WHERE i.origen.id = :categoriaId");
+	        queryIngreso.setParameter("categoriaId", id);
+	        queryIngreso.executeUpdate();
 
-		em.remove(categoria);
-		em.getTransaction().commit();
+	        // Eliminar la categoría
+	        Categoria categoria = em.find(Categoria.class, id);
+	        if (categoria != null) {
+	            em.remove(categoria);
+	        }
+
+	        transaction.commit();
+	    } catch (Exception e) {
+	        if (transaction.isActive()) {
+	            transaction.rollback();
+	        }
+	        throw new RuntimeException("Error al eliminar la categoría", e);
+	    }
 	}
 
 	// Metodos para obtener la categoria por su id
