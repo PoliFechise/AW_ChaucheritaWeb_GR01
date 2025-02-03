@@ -299,3 +299,175 @@ tr:nth-child(even) td {
 .nombres-filtro {
 	align-content: center;
 }
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablets and Smaller Screens */
+@media (max-width: 1024px) {
+    .container {
+        width: 90%;
+    }
+
+    .titulo-ChW {
+        font-size: 30px;
+    }
+
+    .cuenta {
+        font-size: 28px;
+    }
+
+    .numero-cuenta {
+        font-size: 20px;
+        padding: 0 20px;
+    }
+
+    .registro-txt {
+        font-size: 24px;
+    }
+
+    .saldo {
+        width: 130px;
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .boton {
+        font-size: 12px;
+        padding: 10px;
+        margin-right: 5px;
+    }
+
+    .container-filtro .titulo-seccion {
+        font-size: 20px;
+    }
+
+    .container-filtro select {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .titulo-ChW {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .opciones-header {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .cuenta {
+        font-size: 24px;
+    }
+
+    .numero-cuenta {
+        font-size: 18px;
+        padding: 0 10px;
+    }
+
+    .registro-txt {
+        font-size: 20px;
+    }
+
+    .saldo {
+        width: 120px;
+        height: 45px;
+        font-size: 14px;
+    }
+
+    .boton {
+        font-size: 10px;
+        padding: 8px;
+        margin-right: 5px;
+    }
+
+    .container-filtro {
+        padding: 10px;
+    }
+
+    .container-filtro .titulo-seccion {
+        font-size: 18px;
+    }
+
+    .container-filtro select {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    table, th, td {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    tr:nth-child(even) td {
+        background-color: #f0f0f0; /* Zebra striping para filas */
+    }
+}
+
+/* Small Screens */
+@media (max-width: 480px) {
+    .titulo-ChW {
+        font-size: 20px;
+    }
+
+    .cuenta {
+        font-size: 20px;
+    }
+
+    .numero-cuenta {
+        font-size: 16px;
+        padding: 0 5px;
+    }
+
+    .registro-txt {
+        font-size: 18px;
+    }
+
+    .saldo {
+        width: 100px;
+        height: 40px;
+        font-size: 12px;
+    }
+
+    .boton {
+        font-size: 8px;
+        padding: 6px;
+        margin-right: 3px;
+    }
+
+    .container-filtro {
+        padding: 5px;
+    }
+
+    .container-filtro .titulo-seccion {
+        font-size: 16px;
+    }
+
+    .container-filtro select {
+        font-size: 10px;
+        padding: 4px;
+    }
+
+    table, th, td {
+        font-size: 10px;
+        padding: 4px;
+    }
+
+    tr:nth-child(even) td {
+        background-color: #f0f0f0; /* Zebra striping para filas */
+    }
+}

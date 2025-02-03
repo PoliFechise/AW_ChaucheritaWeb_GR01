@@ -207,3 +207,95 @@ body {
         background-position: 0% 50%;
     }
 }
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablets and Smaller Screens */
+@media (max-width: 1024px) {
+    .contenedor {
+        width: 80%;
+    }
+
+    .titulo {
+        font-size: 40px;
+    }
+
+    .frase {
+        font-size: 18px;
+    }
+
+    .campo input {
+        font-size: 16px;
+    }
+
+    .boton {
+        width: 180px;
+        font-size: 18px;
+    }
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: auto;
+        padding: 20px;
+    }
+
+    .contenedor {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .logo {
+        height: 120px;
+    }
+
+    .titulo {
+        font-size: 30px;
+    }
+
+    .frase {
+        font-size: 16px;
+    }
+
+    .campo {
+        width: 100%;
+    }
+
+    .campo input {
+        font-size: 16px;
+    }
+
+    .boton {
+        width: 160px;
+        font-size: 16px;
+    }
+}
+
+/* Small Screens */
+@media (max-width: 480px) {
+    .logo {
+        height: 100px;
+    }
+
+    .titulo {
+        font-size: 25px;
+    }
+
+    .frase {
+        font-size: 14px;
+    }
+
+    .campo input {
+        font-size: 14px;
+    }
+
+    .boton {
+        width: 140px;
+        font-size: 14px;
+        padding: 10px;
+    }
+}
