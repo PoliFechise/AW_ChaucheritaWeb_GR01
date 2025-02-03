@@ -66,9 +66,9 @@ public class RegistrarIngresoController extends HttpServlet {
 		cuenta.setSaldo(nuevoBalance);
 	
 		movimientoDAO.guardarMovimiento(movimiento);
-		cuentaDAO.actualizar(cuenta);
 		ingresoDAO.guardarIngreso(ingreso);
-
+		cuentaDAO.actualizar(cuenta);
+		
 		response.sendRedirect("VerTableroController");
 	}
 

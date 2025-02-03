@@ -91,7 +91,7 @@ public class RegistrarEgresoController extends HttpServlet {
 
 		switch (ruta) {
 		case "egreso":
-			this.prepararIngreso(request, response);
+			this.prepararEgreso(request, response);
 			break;
 		default:
 			response.sendRedirect("ingreso.jsp");
@@ -99,7 +99,7 @@ public class RegistrarEgresoController extends HttpServlet {
 		}
 	}
 
-	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
+	private void prepararEgreso(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
 			// Obtener categorías de ingreso

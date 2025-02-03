@@ -95,7 +95,7 @@ public class RegistrarTransferenciaController extends HttpServlet {
 
 		switch (ruta) {
 		case "transferencia":
-			this.prepararIngreso(request, response);
+			this.prepararTransferencia(request, response);
 			break;
 		default:
 			response.sendRedirect("ingreso.jsp");
@@ -103,7 +103,7 @@ public class RegistrarTransferenciaController extends HttpServlet {
 		}
 	}
 
-	private void prepararIngreso(HttpServletRequest request, HttpServletResponse response)
+	private void prepararTransferencia(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
 			// Obtener categorías de ingreso
