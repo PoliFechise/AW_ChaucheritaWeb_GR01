@@ -26,21 +26,21 @@ public class CategoriaDAO {
 
 	// Método para listar las categorías de egreso
 	public List<Categoria> obtenerCategoriasEgreso() {
-		String jpql = "SELECT c FROM CatEgreso catEgreso";
+		String jpql = "SELECT catEgreso FROM CatEgreso catEgreso";
 		Query query = em.createQuery(jpql);
 		return query.getResultList();
 	}
 
 	// Método para listar las categorías de ingreso
 	public List<Categoria> obtenerCategoriasIngreso() {
-		String jpql = "SELECT c FROM CatIngreso catIngreso";
+		String jpql = "SELECT catIngreso FROM CatIngreso catIngreso";
 		Query query = em.createQuery(jpql);
 		return query.getResultList();
 	}
 
 	// Método para listar las categorías de transferencia
 	public List<Categoria> obtenerCategoriasTransferencia() {
-		String jpql = "SELECT c FROM CatTransferencia catTransferencia";
+		String jpql = "SELECT catTransferencia FROM CatTransferencia catTransferencia";
 		Query query = em.createQuery(jpql);
 		return query.getResultList();
 	}
